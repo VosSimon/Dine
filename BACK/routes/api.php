@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::resource('products', 'ProductController', ['only' => ['index','show']]);
+Route::resource('categories', 'ProductController', ['except' => ['create','edit']]);
+// we have to add more of these routes but we must do some research on how to configure them
+// by research i mean watch more videos :P
