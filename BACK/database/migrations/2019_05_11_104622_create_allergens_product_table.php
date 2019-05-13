@@ -18,6 +18,16 @@ class CreateAllergensProductTable extends Migration
             $table->unsignedBigInteger('allergens_id');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
+
+            $table->foreign('allergens_id')
+            ->references('id')
+            ->on('allergens')
+            ->onDelete('cascade');
+
+            $table->foreign('product_id')
+            ->references('id')
+            ->on('products')
+            ->onDelete('cascade');
         });
     }
 
