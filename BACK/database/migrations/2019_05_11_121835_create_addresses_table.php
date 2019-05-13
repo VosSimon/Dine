@@ -21,6 +21,16 @@ class CreateAddressesTable extends Migration
             $table->date('birth_date');
             $table->string('btw')->nullable();// maybe this should go on orders table
             $table->timestamps();
+
+            $table->foreign('postcode_id')
+                ->references('id')
+                ->on('postcodes')
+                ->onDelete('cascade');
+
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('cities')
+                ->onDelete('cascade');
         });
     }
 

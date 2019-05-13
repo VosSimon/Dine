@@ -20,6 +20,11 @@ class CreateProfilesTable extends Migration
             $table->string('lname');
             $table->string('telephone');
             $table->timestamps();
+
+            $table->foreign('address_id')
+                ->references('id')
+                ->on('addresses')
+                ->onDelete('cascade');
         });
     }
 
