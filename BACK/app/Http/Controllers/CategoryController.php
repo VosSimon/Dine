@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::all();
+
+        return response()->json(['data' => $category], 200);
     }
 
     /**
@@ -35,7 +37,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $_POST["name"];
+        $desc = $_POST["desc"];
+        return Category::store();
     }
 
     /**
@@ -44,9 +48,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        return response()->json(['data' => $category], 200);
     }
 
     /**
