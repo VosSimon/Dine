@@ -37,9 +37,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $_POST["name"];
-        $desc = $_POST["desc"];
-        return Category::store();
+        $data = $request->all();
+        $category = Category::create($data);
+
+        return response()->json(['data' => $category], 201);
     }
 
     /**
@@ -73,9 +74,25 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        if ($request->has("name")) {
+            $category->name = $request->name;
+        }
+
+        if ($request->has("description")) {
+            $category->description = $request->description;
+        }
+
+        if (!$category->isDirty()){
+            return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
+        }
+            $category->save();
+
+            return response()->json(['data' => $category],200);
+
     }
 
     /**
@@ -84,8 +101,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->delete();
+
+        return response()->json(['data' => $category],200);
     }
 }

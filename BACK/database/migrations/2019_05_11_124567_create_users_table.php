@@ -20,9 +20,6 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('profile_id');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('telephone');
-            $table->string('company')->nullable();
-            $table->string('address')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

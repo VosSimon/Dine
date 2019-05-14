@@ -19,6 +19,9 @@ class CreateProfilesTable extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('telephone');
+            $table->date('birth_date');
+            $table->string('company')->nullable();
+            $table->string('btw')->nullable();// maybe this should go on orders table
             $table->timestamps();
 
             $table->foreign('address_id')

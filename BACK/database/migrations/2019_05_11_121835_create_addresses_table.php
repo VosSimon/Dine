@@ -18,10 +18,8 @@ class CreateAddressesTable extends Migration
             $table->unsignedBigInteger('postcode_id');
             $table->unsignedBigInteger('city_id');
             $table->string('address_field');
-            $table->date('birth_date');
-            $table->string('btw')->nullable();// maybe this should go on orders table
             $table->timestamps();
-
+            
             $table->foreign('postcode_id')
                 ->references('id')
                 ->on('postcodes')
