@@ -41,4 +41,11 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::dropIfExists('order_details');
     }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    
 }

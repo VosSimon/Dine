@@ -11,4 +11,9 @@ class Order extends Model
         'bruto',
         'netto'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

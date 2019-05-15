@@ -11,4 +11,14 @@ class OrderDetail extends Model
         'product_id',
         'quantity'
     ];
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
