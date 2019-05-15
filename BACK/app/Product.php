@@ -18,6 +18,11 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasOne(Category::class);
+    }
+
+    public function allergens()
+    {
+        return $this->belongsToMany(Allergen::class);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAllergensProductTable extends Migration
+class CreateAllergenProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAllergensProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('allergens_product', function (Blueprint $table) {
+        Schema::create('allergen_product', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('allergens_id');
+            $table->unsignedBigInteger('allergen_id');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
 
-            $table->foreign('allergens_id')
+            $table->foreign('allergen_id')
             ->references('id')
             ->on('allergens')
             ->onDelete('cascade');
@@ -38,6 +38,6 @@ class CreateAllergensProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('allergens_product');
+        Schema::dropIfExists('allergen_product');
     }
 }
