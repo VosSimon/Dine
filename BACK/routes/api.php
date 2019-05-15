@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::resource('products', 'ProductController', ['only' => ['index','show']]);
+Route::resource('products', 'ProductController', ['except' => ['create','edit']]);
 Route::resource('categories', 'CategoryController', ['except' => ['create','edit']]);
 Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
 // we have to add more of these routes but we must do some research on how to configure them
