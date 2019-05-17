@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Allergens extends Model
+class Allergen extends Model
 {
     protected $fillable = [
         'name',
