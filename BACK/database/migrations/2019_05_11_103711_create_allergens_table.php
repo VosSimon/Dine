@@ -13,7 +13,7 @@ class CreateAllergensTable extends Migration
      */
     public function up()
     {
-        Schema::create('allergens', function (Blueprint $table) {
+        Schema::create('allergen', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description');
