@@ -11,10 +11,13 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Auth::routes();
+Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/add', ['as' => 'add', 'uses' => 'addController@index']);
+Route::post('/add.product', ['as' => 'add.product.post', 'uses' => 'productController@store']);
+Route::post('/add.category', ['as' => 'add.category.post', 'uses' => 'categoryController@store']);
+Route::post('/add.allergens', ['as' => 'add.allergens.post', 'uses' => 'allergensController@store']);

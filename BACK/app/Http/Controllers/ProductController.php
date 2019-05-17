@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Allergen;
+use App\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -38,9 +40,21 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data["image"] = $request->image->store('');
+        // afbeelding opslaan in /public/img/random gegenereerde naam
+        // $data["image"] bevat gegenereerde naam voor in de database
         $product = Product::create($data);
+        $allergens = array_values(array_filter($data["allergens"]));
+        // id 0 uit array halen
+        if (count($allergens) > 0) {
+            $product->Allergens()->attach($allergens);
+        }
 
-        return response()->json(['data' => $product], 201);
+        // return response()->json(['data' => $product], 201);
+        // $allergens = Allergen::all();
+        // $categories = Category::all();
+        // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Product toegevoegd.']);
+        return redirect('/add')->with('message', 'Product toegevoegd.');
     }
 
     /**

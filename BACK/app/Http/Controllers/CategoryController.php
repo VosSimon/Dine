@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Allergen;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -40,7 +41,11 @@ class CategoryController extends Controller
         $data = $request->all();
         $category = Category::create($data);
 
-        return response()->json(['data' => $category], 201);
+        // return response()->json(['data' => $category], 201);
+        // $allergens = Allergen::all();
+        // $categories = Category::all();
+        // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Categorie toegevoegd.']);
+        return redirect('/add')->with('message', 'Categorie toegevoegd.');
     }
 
     /**

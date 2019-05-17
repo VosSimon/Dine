@@ -23,6 +23,6 @@ class Product extends Model
 
     public function allergens()
     {
-        return $this->belongsToMany(Allergen::class);
+        return $this->belongsToMany(Allergen::class)->withTimestamps();
     }
 }

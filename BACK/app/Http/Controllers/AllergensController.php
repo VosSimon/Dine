@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Allergens;
+use App\Allergen;
+use App\Category;
 use Illuminate\Http\Request;
 
 class AllergensController extends Controller
@@ -38,9 +39,13 @@ class AllergensController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $allergen = Allergens::create($data);
+        $allergen = Allergen::create($data);
 
-        return response()->json(['data' => $allergen], 201);
+        // return response()->json(['data' => $allergen], 201);
+        // $allergens = Allergen::all();
+        // $categories = Category::all();
+        // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Allergie toegevoegd.']);
+        return redirect('/add')->with('message', 'Allergie toegevoegd.');
     }
 
     /**
@@ -49,9 +54,11 @@ class AllergensController extends Controller
      * @param  \App\Allergens  $allergens
      * @return \Illuminate\Http\Response
      */
-    public function show(Allergens $allergens)
+    public function show($id)
     {
-        //
+        $allergen = Allergen::findOrFail($id);
+
+        return response()->json(['data' => $allergen], 200);
     }
 
     /**
@@ -72,9 +79,20 @@ class AllergensController extends Controller
      * @param  \App\Allergens  $allergens
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Allergens $allergens)
+    public function update(Request $request, $id)
     {
-        //
+        $allergen = Allergen::findOrFail($id);
+
+        if ($request->has("name")) {
+            $allergen->name = $request->name;
+        }
+
+        if (!$allergen->isDirty()){
+            return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
+        }
+            $allergen->save();
+
+            return response()->json(['data' => $allergen],200);
     }
 
     /**
@@ -83,8 +101,12 @@ class AllergensController extends Controller
      * @param  \App\Allergens  $allergens
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Allergens $allergens)
+    public function destroy($id)
     {
-        //
+        $allergen = Allergen::findOrFail($id);
+
+        $allergen->delete();
+
+        return response()->json(['data' => $allergen],200);
     }
 }
