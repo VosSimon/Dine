@@ -14,7 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::all();
+
+        return response()->json(['data' => $product], 200);
     }
 
     /**
@@ -47,9 +49,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        return response()->json(['data' => $product], 200);
     }
 
     /**
@@ -70,9 +74,36 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        if ($request->has("product_id")) {
+            $product->category_id = $request->product_id;
+        }
+
+        if ($request->has("name")) {
+            $product->name = $request->name;
+        }
+
+        if ($request->has("image")) {
+            $product->image = $request->image;
+        }
+
+        if ($request->has("price")) {
+            $product->price = $request->price;
+        }
+
+        if ($request->has("description")) {
+            $product->description = $request->description;
+        }
+
+        if (!$product->isDirty()){
+            return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
+        }
+            $product->save();
+
+            return response()->json(['data' => $product],200);
     }
 
     /**
@@ -81,8 +112,12 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->delete();
+
+        return response()->json(['data' => $product],200);
     }
 }

@@ -14,7 +14,9 @@ class AllergensController extends Controller
      */
     public function index()
     {
-        //
+        $allergen = Allergen::all();
+
+        return response()->json(['data' => $allergen], 200);
     }
 
     /**
@@ -35,7 +37,10 @@ class AllergensController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $allergen = Allergens::create($data);
+
+        return response()->json(['data' => $allergen], 201);
     }
 
     /**

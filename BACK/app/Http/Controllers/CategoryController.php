@@ -71,7 +71,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -98,8 +98,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param  \App\Category $category
+     * @return  \Illuminate\Http\Response
      */
     public function destroy($id)
     {

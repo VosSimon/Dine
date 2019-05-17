@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('client_type_id');
-            $table->unsignedBigInteger('profile_id');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -32,11 +31,6 @@ class CreateUsersTable extends Migration
             $table->foreign('client_type_id')
                 ->references('id')
                 ->on('client_types')
-                ->onDelete('cascade');
-
-            $table->foreign('profile_id')
-                ->references('id')
-                ->on('profiles')
                 ->onDelete('cascade');
         });
     }

@@ -9,4 +9,9 @@ class ClientType extends Model
     protected $fillable = [
         'type'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
