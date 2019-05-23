@@ -29,5 +29,3 @@ Route::post('/rem.category/{id}', ['as' => 'rem.category.post', 'uses' => 'categ
 Route::post('/add.allergens', ['as' => 'add.allergens.post', 'uses' => 'allergensController@store']);
 Route::post('/edit.allergen/{id}', ['as' => 'edit.allergen.post', 'uses' => 'allergensController@update']);
 Route::post('/rem.allergen/{id}', ['as' => 'rem.allergen.post', 'uses' => 'allergensController@destroy']);
-
-Route::get('/home', 'HomeController@index')->name('home');
