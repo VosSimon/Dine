@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('name');
             $table->string('image')->unique();
-            $table->string('price');
+            $table->decimal('price', 8, 2);
             $table->string('description')->nullable();
             $table->timestamps();
 
