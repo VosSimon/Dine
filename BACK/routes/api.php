@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 Route::resource('products', 'ProductController', ['except' => ['create','edit']]);
 Route::resource('categories', 'CategoryController', ['except' => ['create','edit']]);
+Route::resource('allergens', 'AllergensController', ['except' => ['create','edit']]);
 Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
 Route::resource('allergens', 'AllergensController', ['except' => ['create', 'edit']]);
 // we have to add more of these routes
