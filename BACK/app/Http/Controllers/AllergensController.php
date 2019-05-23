@@ -45,7 +45,7 @@ class AllergensController extends Controller
         // $allergens = Allergen::all();
         // $categories = Category::all();
         // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Allergie toegevoegd.']);
-        return redirect('/add')->with('message', 'Allergie toegevoegd.');
+        return redirect('/add')->with('message', 'Allergie: \''. $data["name"] .'\' toegevoegd.');
     }
 
     /**
@@ -90,9 +90,9 @@ class AllergensController extends Controller
         if (!$allergen->isDirty()){
             return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
         }
-            $allergen->save();
+        $allergen->save();
 
-            return response()->json(['data' => $allergen],200);
+        return redirect('/edit')->with('message', 'Allergie: \''. $request->name .'\' gewijzigd.');
     }
 
     /**
@@ -107,6 +107,6 @@ class AllergensController extends Controller
 
         $allergen->delete();
 
-        return response()->json(['data' => $allergen],200);
+        return redirect('/edit')->with('message', 'Allergie verwijderd.');
     }
 }

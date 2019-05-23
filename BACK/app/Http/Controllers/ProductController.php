@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
 use App\Product;
 use App\Allergen;
 use App\Category;
@@ -54,7 +57,7 @@ class ProductController extends Controller
         // $allergens = Allergen::all();
         // $categories = Category::all();
         // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Product toegevoegd.']);
-        return redirect('/add')->with('message', 'Product toegevoegd.');
+        return redirect('/add')->with('message', 'Product: \''. $data["name"] .'\' toegevoegd.');
     }
 
     /**
@@ -91,9 +94,8 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-
-        if ($request->has("product_id")) {
-            $product->category_id = $request->product_id;
+        if ($request->has("category_id")) {
+            $product->category_id = $request->category_id;
         }
 
         if ($request->has("name")) {
@@ -101,6 +103,7 @@ class ProductController extends Controller
         }
 
         if ($request->has("image")) {
+            $request->image = $request->image->store('');
             $product->image = $request->image;
         }
 
@@ -117,7 +120,8 @@ class ProductController extends Controller
         }
             $product->save();
 
-            return response()->json(['data' => $product],200);
+            // return redirect()->route('edit');
+            return redirect('/edit')->with('message', 'Product gewijzigd.');
     }
 
     /**
@@ -132,6 +136,23 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return response()->json(['data' => $product],200);
+        // $products = DB::table('products')
+        //     ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+        //     ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+        //     ->select('products.*', 'allergens.id AS allergen_id')
+        //     ->get();
+        // // return $products;
+        // $allergens = Allergen::all();
+        // $categories = Category::all();
+        // $message = 'Product Verwijderd.';
+        // return Response::view('edit', [
+        //     'allergens' => $allergens,
+        //     'categories' => $categories,
+        //     'products' => $products,
+        //     'message' => $message
+        //     ]);
+        // return response()->json('Product verwijderd.');
+        return redirect('/edit')->with('message', 'Product verwijderd.');
+        // return redirect()->route('add');
     }
 }

@@ -4,8 +4,8 @@
 /storage/*.key
 /vendor
 /public/img
-/virtualbox
-.vagrant
+virtualbox/
+.vagrant/
 .env
 .phpunit.result.cache
 Homestead.json

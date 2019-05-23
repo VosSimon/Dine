@@ -3,7 +3,7 @@
 @if(isset($message))
     <div class="message">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        {{ $message }}
+        {{ '$message' }}
     </div>
 @endif
 <fieldset>

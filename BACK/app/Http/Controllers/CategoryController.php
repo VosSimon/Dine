@@ -45,7 +45,8 @@ class CategoryController extends Controller
         // $allergens = Allergen::all();
         // $categories = Category::all();
         // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Categorie toegevoegd.']);
-        return redirect('/add')->with('message', 'Categorie toegevoegd.');
+        $message = 'Categorie: \''. $data["name"] .'\' toegevoegd.';
+        return redirect('/add')->with('message', $message);
     }
 
     /**
@@ -87,16 +88,13 @@ class CategoryController extends Controller
             $category->name = $request->name;
         }
 
-        if ($request->has("description")) {
-            $category->description = $request->description;
-        }
-
         if (!$category->isDirty()){
             return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
         }
-            $category->save();
+        $category->save();
 
-            return response()->json(['data' => $category],200);
+        $message = 'Categorie: \''. $request->name .'\' gewijzigd.';
+        return redirect('/edit')->with('message', $message);
 
     }
 
@@ -112,6 +110,6 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return response()->json(['data' => $category],200);
+        return redirect('/edit')->with('message', 'Categorie verwijderd.');
     }
 }
