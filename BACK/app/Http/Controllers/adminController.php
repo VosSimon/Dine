@@ -52,7 +52,7 @@ class adminController extends Controller
             'categories' => $categories,
             'products' => $products,
             'message' => $message
-            ]);
+        ]);
     }
 
     public function rem(Request $request)

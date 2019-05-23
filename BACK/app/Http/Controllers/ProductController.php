@@ -115,7 +115,7 @@ class ProductController extends Controller
             $product->description = $request->description;
         }
 
-        if (!$product->isDirty()){
+        if (!$product->isDirty()) {
             return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
         }
             $product->save();

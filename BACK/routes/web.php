@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -30,3 +30,4 @@ Route::post('/add.allergens', ['as' => 'add.allergens.post', 'uses' => 'allergen
 Route::post('/edit.allergen/{id}', ['as' => 'edit.allergen.post', 'uses' => 'allergensController@update']);
 Route::post('/rem.allergen/{id}', ['as' => 'rem.allergen.post', 'uses' => 'allergensController@destroy']);
 
+Route::get('/home', 'HomeController@index')->name('home');
