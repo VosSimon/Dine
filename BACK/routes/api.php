@@ -13,15 +13,27 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
-Route::resource('products', 'ProductController', ['except' => ['create','edit']]);
-Route::resource('categories', 'CategoryController', ['except' => ['create','edit']]);
-Route::resource('allergens', 'AllergensController', ['except' => ['create','edit']]);
-Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
-Route::resource('allergens', 'AllergensController', ['except' => ['create', 'edit']]);
-// we have to add more of these routes
-//but we must do some research on how to configure them
-// by research i mean watch more videos :P
+Route::post('login', 'PassportController@login');
+Route::post('register', 'PassportController@register');
+
+Route::middleware('auth:api')->group(
+    function () {
+        Route::get('user', 'PassportController@getUser');
+
+        // Route::resource('products', 'ProductController');
+    }
+);
+
+Route::apiResources(
+    ['products' => 'ProductController',
+    'categories' => 'CategoryController',
+    'allergens' => 'AllergensController',
+    'roles' => 'RoleController',
+    'clientTypes' => 'ClientTypeController',
+    'orders' => 'OrderController'
+    // 'users', 'UserController'
+    ]
+);
+// Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
+Route::resource('users', 'UserController', ['parameter' => ['users' => 'users']]);

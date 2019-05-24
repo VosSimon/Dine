@@ -14,7 +14,9 @@ class ClientTypeController extends Controller
      */
     public function index()
     {
-        //
+        $ClientType = ClientType::all();
+
+        return response()->json(['data' => $ClientType], 200);
     }
 
     /**
@@ -29,33 +31,38 @@ class ClientTypeController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param  \Illuminate\Http\Request $request
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $clientType = ClientType::create($data);
+
+        return response()->json(['data' => $clientType], 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ClientType  $clientType
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientType $clientType)
+    public function show($id)
     {
-        //
+        $clientType = Role::findOrfail($id);
+
+        return response()->json(['data' => $clientType], 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ClientType  $clientType
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClientType $clientType)
+    public function edit()
     {
         //
     }
@@ -63,23 +70,33 @@ class ClientTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ClientType  $clientType
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientType $clientType)
+    public function update(Request $request, $id)
     {
-        //
+        $clientType = ClientType::findOrFail($id);
+
+        if ($request->has('type')) {
+            $clientType->type = $request->type;
+        }
+
+        $clientType->save();
+        return response()->json('Client type changed');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ClientType  $clientType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClientType $clientType)
+    public function destroy($id)
     {
-        //
+        $clientType = ClientType::findOrFail($id);
+
+        $clientType->delete();
+
+        return response()->json(['Type removed:' => $clientType->type], 200);
     }
 }

@@ -15,8 +15,24 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json(['data' => $users], 200);
-        // return $users
+
+        if (!$users) {  // look into why this doesn't work
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'There are no users in the database'
+                ],
+                400
+            );
+        }
+
+        return response()->json(
+            [
+                'data' => $users,
+                'success' => true
+            ],
+            200
+        );
     }
 
     /**
@@ -37,7 +53,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed'
+        ];
+
+        $request->validate($rules);
+
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+        // $data['email_verified_at'] = User::UNVERIFIED_EMAIL;
+
+        $user = User::create($data);
+        return response()->json(['data' => $user], 201);
     }
 
     /**
@@ -48,7 +76,25 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrfail($id);
+
+        if (!$user) {
+            return response()->json(
+                [
+                'success' => false,
+                'message' => 'Usert with id ' . $id . ' not found'
+                ],
+                400
+            );
+        }
+
+        return response()->json(
+            [
+            'data' => $user,
+            'succsess' => true
+            ],
+            200
+        );
     }
 
     /**
@@ -71,7 +117,42 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrfail($id);
+
+        if (!$user) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Usert with id ' . $id . ' not found'
+                ],
+                400
+            );
+        }
+
+        $rules = [
+            'email' => 'email|unique:users,email' . $user->id,
+            'password' => 'min:8|confirmed'
+        ];
+        $request->validate($rules);
+
+        if ($request->has('email') && $user->email != $request->email) {
+            // $user->email_verified_at = User::UNVERIFIED_EMAIL;
+            $user->email = $request->email;
+        }
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Usert with id ' . $id . ' was updated'
+            ],
+            400
+        );
+
+
     }
 
     /**
@@ -82,6 +163,32 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrfail($id);
+
+        if (!$user) {
+            return response()->json(
+                [
+                'success' => false,
+                'message' => 'User with id ' . $id . ' not found'
+                ],
+                400
+            );
+        }
+
+        if ($user->delete()) {
+            return response()->json(
+                [
+                'success' => true
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                'success' => false,
+                'message' => 'User could not be deleted'
+                ],
+                500
+            );
+        }
     }
 }
