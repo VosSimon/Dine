@@ -14,7 +14,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $role = Role::all();
+
+        return response()->json(['data' => $role], 200);
     }
 
     /**
@@ -30,29 +32,36 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $role = Role::create($data);
+
+        return response()->json(['data' => $role], 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show($id)
     {
-        //
+        $role = Role::findOrfail($id);
+
+        return response()->json(['data' => $role], 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Role  $role
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
@@ -63,23 +72,33 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
-        //
+        $role = Role::findOrFail($id);
+
+        if ($request->has('role')) {
+            $role->role = $request->role;
+        }
+
+        $role->save();
+        return response()->json('Role changed');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        //
+        $role = Role::findOrFail($id);
+
+        $role->delete();
+
+        return response()->json(['Role removed:' => $role->role], 200);
     }
 }
