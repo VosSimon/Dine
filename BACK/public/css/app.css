@@ -1,43 +1,157 @@
 * { box-sizing: border-box; }
+/* -------------------- app.blade ---------------------- */
 body {
-    font: 500 100%/1.4em Arial, sans-serif;
+    font: 500 100%/1.3 Arial, sans-serif;
     color: #000;
     margin: 0;
     padding: 0;
 }
 
 main {
-    padding: 2em;
     background: #F1F1F1;
 }
 
-nav ul {
+nav {
+    background: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+    transition: all .5s ease;
+}
+
+nav #navbar {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+nav #navbar .fas {
+    color: #FFF;
+    font-size: 2.5em;
+}
+
+nav #navbar h1 {
+    color: #FFF;
+    font-size: 1.3rem;
     margin: 0;
+}
+
+nav ul {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    background: rgba(172, 82, 9, .9);
+    margin: 0;
+    padding: 1rem;
 }
 
 nav ul li {
     display: block;
-    padding: 1em 1.5em;
-    font-size: 1.2em;
+    text-align: center;
+    background: rgba(255, 255, 255, .9);
+    margin-bottom: 1rem;
+    font-size: 1rem;
 }
+
+nav ul li:last-child {
+    margin-bottom: 0;
+}
+
+nav .active {
+    background: rgba(255, 255, 255, .9);
+    font-size: 1.3rem;
+}
+
+nav ul li a {
+    color: #000;
+    font-weight: 700;
+    display: block;
+    padding: 1em 1.5em;
+}
+
+#subnav {
+    display: flex;
+    justify-content: space-around;
+}
+
+#subnav a {
+    width: calc(100%/3);
+}
+
+#subnav a div {
+    width: 100%;
+    padding: 1em;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#subnav a:nth-of-type(1) div {
+    background: rgb(214, 149, 9);
+}
+
+#subnav a:nth-of-type(2) div {
+    background: rgb(255, 189, 6);
+}
+
+#subnav a:nth-of-type(3) div {
+    background: rgb(255, 115, 0);
+}
+
+#subnav a div i {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#subnav a div span {
+    text-align: center;
+    height: 100%;
+    margin: 0;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+}
+
+#subnav a div span p {
+    margin: 0;
+}
+
+#subnav a div span p:first-child {
+    font-size: 3rem;
+    margin: 1rem 0 -.3rem;
+    color: #999;
+    display: none;
+}
+
+/* -------------------- end app.blade ------------------- */
+/* -------------------- main styles --------------------- */
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1 { font-size: 1.8rem; }
+
+h1,
+h2 { text-align: center; }
+
+.hide {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+ }
 
 a {
     text-decoration: none;
     color: #000;
-}
-
-.active {
-    background: #F1F1F1;
-}
-
-.not-active {
-    background: #BBB;
-    box-shadow: inset 0 -8px 4px -4px gray;
-}
-
-.active a {
-    color: blue;
 }
 
 ul {
@@ -45,32 +159,273 @@ ul {
 }
 
 div.message {
+    position: fixed;
+    top: 10%;
+    left: 0;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 1em 2em;
-    font-size: 1.4em;
+    font-size: 1.2rem;
     color: #FFF;
-    background-color: rgba(0, 200, 50, .8);
+    z-index: 1000;
+}
+
+.green {
+    background: rgba(0, 200, 50, .8);
+}
+.red {
+    background: rgba(240, 51, 3, 0.8);
 }
 
 .closebtn {
     font-size: 2.5em;
     cursor: pointer;
- }
+}
+
+/* ----------------- form syles ------------------------ */
+#addPage { padding: 1rem; }
+
+.productView,
+.categoryView,
+.allergensView {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #AAA;
+}
+
+.productView:nth-of-type(even),
+.productView:nth-of-type(even) input[type=file],
+.categoryView:nth-of-type(even),
+.allergensView:nth-of-type(even) {
+    background: #DDD;
+}
+
+fieldset {
+    border: 2px solid #663300;
+    margin-bottom: 2rem;
+}
+
+legend {
+    color: #663300;
+}
+
+form ul {
+    padding: 0;
+}
+
+form li {
+    position: relative;
+    margin-bottom: 1em;
+    background: #FFF;
+    display: inline-block;
+    width: 100%;
+    padding: 0;
+}
+
+form li.editSave {
+    display: flex;
+}
+
+form input[type=submit]:disabled {
+    background: rgb(199, 199, 199);
+
+}
+
+form input:disabled,
+form input:disabled + label,
+form textarea:disabled,
+form textarea:disabled + label,
+form select:disabled,
+form select:disabled + label,
+form input[type=file]:disabled:before {
+    color: #AAA;
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: block;
+    border: inset 2px;
+    font-size: 1.2rem;
+}
+
+form input[type=text]:focus,
+form input[type=number]:focus,
+form textarea:focus,
+form select:focus { padding: .4rem 1rem 1.8rem 1rem; }
+
+form label {
+    color: #333;
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    width: 100%;
+    padding-left: 1rem;
+    z-index: 1;
+    font-size: 1.2rem;
+    transition: background 0.2s,
+      color 0.2s,
+      top 0.2s,
+      bottom 0.2s,
+      right 0.2s,
+      left 0.2s;
+}
+
+form select + label { color: transparent; }
+
+form input:focus + label,
+form textarea:focus + label,
+form select:focus + label {
+    background: rgb(226, 128, 16);
+    top: auto;
+    bottom: 0rem;
+    color: #FFF;
+    z-index: 3;
+}
+
+#imageButtonLabel {
+    position: unset;
+    background: unset;
+    color: unset;
+}
+
+form input[type=file] {
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+
+form input[type=file] + label {
+    padding: 1.2rem 2rem;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #999;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+form input[type=file]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+form input[type=submit] {
+    border: outset 2px #663300;
+    background: #CC6600;
+}
+
+#showImageName {
+    display: none;
+    margin: 0;
+    padding: .5rem 1rem;
+    text-align: center;
+    background: rgb(226, 128, 16);
+}
+
+ /* ----------------- end input syles ------------------------ */
 
  /* ------------------------ admin edit ---------------------------- */
 
- #productSection {
-     display: flex;
-     justify-content: space-around;
-     flex-flow: wrap;
-     margin: 0 auto;
- }
+figure {
+    width: 80%;
+    margin: 0 auto;
+}
 
- .productView {
-     display: flex;
- }
+figure img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
 
+@media screen and (min-width: 768px) {
+
+    .container {
+        width: 750px;
+    }
+
+    nav ul li {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    nav ul li a {
+        font-size: 2rem;
+    }
+
+    #navMenu { width: 20%; }
+
+    #addPage {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    #addPage form ul {
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-between;
+        /* grid-template-columns: 1fr 1fr;
+        grid-column-gap: 2%; */
+    }
+
+    #addPage form ul li {
+        width: 49%;
+    }
+
+    #storeProduct {
+        flex: 1;
+    }
+
+    #productSection,
+    #categorySection,
+    #allergenSection {
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-around;
+    }
+    #productSection h1,
+    #productSection h2,
+    #categorySection h2,
+    #allergenSection h2
+     {
+        width: 100%;
+    }
+
+    .productView,
+    .categoryView,
+    .allergensView {
+        width: calc(100%/2 - 2rem);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .container { width: 970px; }
+
+    .productView,
+    .categoryView,
+    .allergensView {
+        width: calc(100%/3 - 2rem);
+    }
+}
+
+
+@media screen and (min-width: 1170px) {
+    .container { width: 1170px; }
+}

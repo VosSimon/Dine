@@ -6,66 +6,96 @@
         {{ $message }}
     </div>
 @endif
-<fieldset>
-    <legend>product</legend>
-    <form method="POST", enctype="multipart/form-data", action="{{ route('add.product.post') }}">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <ul>
-            <li>
-                <label for="name">naam</label>
-                <input name="name" id="name" type="text" required>
-            </li>
-            <li>
-                <label for="price">prijs</label>
-                <input name="price" id="price" type="number" step="0.01" required>
-            </li>
-            <li>
-                <label for="description">omschrijving</label>
-                <textarea name="description" id="description"></textarea>
-            </li>
-            <li>
-                <label for="image">afbeelding</label>
-                <input name="image" id="image" type="file">
-            </li>
-            <li>
-                <label for="category">categorie</label>
-                <select name="category_id" id="category" required>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </li>
-            <li>
-                <label for="allergens">allergenen</label>
-                <select name="allergens[]" id="allergens" multiple required>
-                    <option value="0" selected>geen</option>
-                    @foreach($allergens as $allergen)
-                        <option value="{{ $allergen->id }}">{{ $allergen->name }}</option>
-                    @endforeach
-                </select>
-            </li>
-            <li>
-                <input type="submit" value="opslaan">
-            </li>
-        </ul>
-    </form>
-</fieldset>
-<fieldset>
-    <legend>categorie</legend>
-    <form method="POST", enctype="multipart/form-data", action="{{ route('add.category.post') }}">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <label for="name">naam</label>
-        <input id="name" name="name" type="text" required>
-        <input value="opslaan" type="submit">
-    </form>
-</fieldset>
-<fieldset>
-    <legend>allergenen</legend>
-    <form method="POST", enctype="multipart/form-data", action="{{ route('add.allergens.post') }}">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <label for="name">naam</label>
-        <input id="name" name="name" type="text" required>
-        <input value="opslaan" type="submit">
-    </form>
-</fieldset>
+
+<section id="addPage">
+    <h1>Toevoegen</h1>
+    <h2>Producten</h2>
+    <fieldset>
+        <legend>Voeg product toe</legend>
+        <form method="POST", enctype="multipart/form-data", action="{{ route('add.product.post') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <ul>
+                <li class="col-left">
+                    <input name="name" id="name" type="text" required>
+                    <label for="name">naam</label>
+                </li>
+                <li class="col-left">
+                    <input required name="image" id="image" type="file">
+                    <label id="imageButtonLabel" for="image">Afbeelding kiezen</label>
+                    <p id="showImageName"></p>
+                </li>
+                <li class="col-right">
+                    <input name="price" id="price" type="number" step="0.01" required>
+                    <label for="price">prijs</label>
+                </li>
+                <li class="col-right">
+                    <select name="category_id" id="category" required>
+                        @if(count($categories) == 0)
+                            <option value="0">Geen categorieën gevonden.</option>
+                        @else
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    <label for="category">categorie</label>
+                </li>
+                <li class="col-right">
+                    <select name="allergens[]" id="allergens" multiple required>
+                        @if(count($categories) == 0)
+                            <option value="0">Geen allergenen gevonden.</option>
+                        @else
+                            <option value="0" selected>geen</option>
+                            @foreach($allergens as $allergen)
+                                <option value="{{ $allergen->id }}">{{ $allergen->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    <label for="allergens">allergenen</label>
+                </li>
+                <li class="col-left">
+                    <textarea name="description" id="description"></textarea>
+                    <label for="description">omschrijving</label>
+                </li>
+                <li id="storeProduct">
+                    <input type="submit" value="opslaan">
+                </li>
+            </ul>
+        </form>
+    </fieldset>
+
+    <h2>Categorieën</h2>
+    <fieldset>
+        <legend>Voeg categorie toe</legend>
+        <form method="POST", enctype="multipart/form-data", action="{{ route('add.category.post') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <ul>
+                <li>
+                    <input id="name" name="name" type="text" required>
+                    <label for="name">naam</label>
+                </li>
+                <li>
+                    <input value="opslaan" type="submit">
+                </li>
+            </ul>
+        </form>
+    </fieldset>
+
+    <h2>Allergenen</h2>
+    <fieldset>
+        <legend>Voeg allergenen toe</legend>
+        <form method="POST", enctype="multipart/form-data", action="{{ route('add.allergens.post') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <ul>
+                <li>
+                    <input id="name" name="name" type="text" required>
+                    <label for="name">naam</label>
+                </li>
+                <li>
+                    <input value="opslaan" type="submit">
+                </li>
+            </ul>
+        </form>
+    </fieldset>
+</section>
 @endsection

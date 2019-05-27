@@ -29,29 +29,46 @@ class adminController extends Controller
     {
         $message = session('message');
         $request->session()->pull('message', 'default');
+        $code = session('code');
+        $request->session()->pull('code', 'default');
+        $products = DB::table('products')
+            ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+            ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+            ->select('products.*', 'allergens.id AS allergen_id')
+            ->get();
         $allergens = Allergen::all();
         $categories = Category::all();
-        return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => $message]);
+        return view('add', [
+            'allergens' => $allergens,
+            'categories' => $categories,
+            'products' => $products,
+            'message' => $message,
+            'code' => $code,
+            'username' => 'Jefke'
+            ]);
     }
 
     public function edit(Request $request)
     {
         $message = session('message');
         $request->session()->pull('message', 'default');
+        $code = session('code');
+        $request->session()->pull('code', 'default');
         // $products = Product::all();
         $products = DB::table('products')
             ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
             ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
             ->select('products.*', 'allergens.id AS allergen_id')
             ->get();
-        // return $products;
         $allergens = Allergen::all();
         $categories = Category::all();
         return view('edit', [
             'allergens' => $allergens,
             'categories' => $categories,
             'products' => $products,
-            'message' => $message
+            'message' => $message,
+            'code' => $code,
+            'username' => 'Jefke'
             ]);
     }
 

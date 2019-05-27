@@ -57,7 +57,7 @@ class ProductController extends Controller
         // $allergens = Allergen::all();
         // $categories = Category::all();
         // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Product toegevoegd.']);
-        return redirect('/add')->with('message', 'Product: \''. $data["name"] .'\' toegevoegd.');
+        return redirect('/add')->with(array('message' => 'Product: \''. $data["name"] .'\' toegevoegd.', 'code' => 'green'));
     }
 
     /**
@@ -93,6 +93,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->description == "") {
+            unset($request->description);
+        }
         $product = Product::findOrFail($id);
         if ($request->has("category_id")) {
             $product->category_id = $request->category_id;
@@ -116,12 +119,12 @@ class ProductController extends Controller
         }
 
         if (!$product->isDirty()){
-            return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
+            return redirect('/edit')->with(array('message' => 'Er is geen gewijzigde waarde gevonden.', 'code' => 'red'));
         }
             $product->save();
 
             // return redirect()->route('edit');
-            return redirect('/edit')->with('message', 'Product gewijzigd.');
+            return redirect('/edit')->with(array('message' => 'Product gewijzigd.', 'code' => 'green'));
     }
 
     /**

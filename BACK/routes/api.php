@@ -17,11 +17,14 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::resource('products', 'ProductController', ['except' => ['create','edit']]);
-Route::resource('categories', 'CategoryController', ['except' => ['create','edit']]);
-Route::resource('allergens', 'AllergensController', ['except' => ['create','edit']]);
+Route::apiResources([
+    'products' => 'ProductController',
+    'categories' => 'CategoryController',
+    'allergens' => 'AllergensController',
+    'allergens' => 'AllergensController'
+]);
 Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
-Route::resource('allergens', 'AllergensController', ['except' => ['create', 'edit']]);
+
 // we have to add more of these routes
 //but we must do some research on how to configure them
 // by research i mean watch more videos :P
