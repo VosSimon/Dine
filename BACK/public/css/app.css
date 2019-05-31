@@ -311,7 +311,7 @@ form input[type=file] {
 
 
 form input[type=file] + label {
-    padding: 1.2rem 2rem;
+    padding: 1.3rem 2rem;
     display: block;
     margin: 0 auto;
     border: 1px solid #999;
@@ -367,6 +367,9 @@ figure img {
     }
 
     nav ul li a {
+        font-size: 1.5rem;
+    }
+    nav li.active a {
         font-size: 2rem;
     }
 

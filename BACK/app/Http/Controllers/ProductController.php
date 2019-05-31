@@ -17,11 +17,33 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::all();
+        if (isset($request->items)) {
+            $productList = Product::paginate($request->items);
+        } else {
+            $productList = Product::paginate(50);
+        }
+        $product = $productList;
 
-        return response()->json(['data' => $product], 200);
+        return response()->json($product, 200);
+    }
+
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    public function productByCategory(Request $request, $category)
+    {
+        if (isset($request->items)) {
+            $productList = Product::where('category_id', $category)->paginate($request->items);
+        } else {
+            $productList = Product::where('category_id', $category)->paginate(50);
+        }
+        $product = $productList;
+
+        return response()->json($product, 200);
     }
 
     /**

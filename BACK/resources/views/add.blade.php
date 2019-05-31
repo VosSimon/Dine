@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @if(isset($message))
-    <div class="message">
+<div class="message {{$code}}">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         {{ $message }}
     </div>
@@ -30,8 +30,9 @@
                 </li>
                 <li class="col-right">
                     <select name="category_id" id="category" required>
+                        <option value="" disabled selected hidden>Selecteer een categorie</option>
                         @if(count($categories) == 0)
-                            <option value="0">Geen categorieën gevonden.</option>
+                            <option value="0" disabled>Geen categorieën gevonden.</option>
                         @else
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>

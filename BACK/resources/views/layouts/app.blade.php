@@ -32,7 +32,9 @@
             @section("nav")
             <div id="navbar">
                 <i id="bars" class="fas fa-bars"></i>
-                <h1>Welkom admin {{$username}}</h1>
+                @if(isset($username))
+                    <h1>Welkom admin {{$username}}</h1>
+                @endif
             </div>
             <ul id="navMenu">
                 <li class="{{ (request()->is('add')) ? 'active' : 'not-active' }}"><a href="/add" title="Voeg producten, categorieën en allergenen toe">ADD</a></li>

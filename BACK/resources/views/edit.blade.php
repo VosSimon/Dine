@@ -45,7 +45,7 @@
 <section id="productSection" class="container">
     <h1>Aanpassen en verwijderen</h1>
     <h2>Producten</h2>
-    @foreach($products as $index => $product)
+    @foreach($products as $product)
     <div class="productView">
         <figure>
             <img src="{{asset('img/'.$product->image)}}">

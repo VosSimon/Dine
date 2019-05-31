@@ -1,0 +1,110 @@
+#productSection {
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  justify-content: space-between;
+
+  div.productView {
+    width: calc(100%/4 -1rem);
+    display: block;
+    padding: 1em;
+    border: 2px solid #333;
+  }
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+h1, h2 {
+  padding: 1rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.2rem;
+  padding-top: 0;
+}
+
+figure {
+  margin: 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+figcaption {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  width: 100%;
+
+  p {
+    display: block;
+    width: 49%;
+  }
+
+  p:nth-of-type(2) {
+    text-align: right
+  }
+
+  input[type=number] {
+    text-align: right;
+    width: 4rem;
+    &::-webkit-inner-spin-button{
+      opacity:1; // show arrows
+    }
+  }
+
+}
+
+input[type=search],
+select#filterProducts {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #f1f1f1;
+  border: 1px solid #333;
+}
+
+
+/* pagination select options style */
+
+::ng-deep .mat-select-value {
+color: #005999;
+  font-weight: bold;
+  font-size: 15px;
+}
+::ng-deep .mat-select-arrow {
+  color: #005999;
+}
+
+::ng-deep #cdk-overlay-0 {
+  transform: translateX(0px) translateY(0px) !important;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
+::ng-deep .mat-select-panel {
+  border: 1px solid #333;
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+}
+
+::ng-deep .mat-option{
+  padding: 0 !important;
+
+}
+::ng-deep .mat-option-text {
+  text-align: center;
+  background: #F1F1F1;
+}
+
+::ng-deep .mat-selected > .mat-option-text {
+  background: #AAA !important;
+}
+
