@@ -1,0 +1,68 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.sidenav {
+  width: 20%;
+  min-width: 80px;
+}
+
+.side-menu {
+  height: 90%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand {
+  color: orangered;
+  margin-left: 2em;
+  text-shadow: 2px 1px rgb(255, 142, 142);
+  letter-spacing: .5em;
+  cursor: pointer;
+}
+
+.container .mat-drawer .mat-icon {
+  display: block;
+  font-size: 2.5em;
+  // margin-top: 1.2em;
+}
+
+.container .mat-drawer .mat-button {
+  display: block;
+  width: 90%;
+}
+
+.container .mat-drawer .mat-divider {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-left: 0;
+  width: 90%;
+}
+
+.power_icon:hover {
+  color: rgb(63, 81, 181);
+  cursor: pointer;
+}
+
+.shopping_icon {
+  cursor: pointer;
+}
+
+h3 {
+  display: block;
+  margin: .5em 1.5em;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbarlogo {
+  height: 100%;
+}

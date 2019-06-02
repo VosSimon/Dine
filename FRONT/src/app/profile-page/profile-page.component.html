@@ -1,0 +1,99 @@
+<div class="container">
+  <h3>My profile page</h3>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Here you can add, edit or remove personal information or delete your account</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="profileForm" (ngSubmit)="registerForm.valid && onRegisterSubmit()" novalidate>
+
+        <div class="group1">
+          <mat-form-field class="fourtypercent" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input id="fname" matInput formControlName="fname" placeholder="Enter your name" />
+            <mat-error *ngIf="f.fname.invalid">
+              Please enter a <strong>valid</strong> name!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="fourtypercent" appearance="outline">
+            <mat-label>Family Name</mat-label>
+            <input id="lname" matInput formControlName="lname" placeholder="Enter your family name" />
+            <mat-error *ngIf="f.lname.invalid">
+              Please enter a <strong>valid</strong> family name!
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="group2">
+          <mat-form-field class="fourtypercent" appearance="outline">
+            <mat-label>Telephone</mat-label>
+            <input id="telephone" matInput formControlName="telephone" placeholder="Enter your telephone" />
+            <mat-error *ngIf="f.telephone.invalid">
+              Telephone is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fourtypercent" appearance="outline">
+            <input matInput [matDatepicker]="picker" placeholder="Your Birth Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="group3">
+          <mat-form-field class="fourtypercent" appearance="outline">
+            <mat-label>Company</mat-label>
+            <input id="company" matInput formControlName="company" placeholder="Enter your company" />
+            <mat-error *ngIf="f.company.invalid">
+              Company is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="fourtypercent" appearance="outline">
+            <mat-label>BTW</mat-label>
+            <input id="btw" matInput formControlName="btw" placeholder="Enter your BTW number" />
+            <mat-error *ngIf="f.btw.invalid">
+              BTW is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="group4">
+          <mat-form-field class="fourtypercent" appearance="outline">
+            <mat-label>Address</mat-label>
+            <input id="address" matInput formControlName="address" placeholder="Enter your address" />
+            <mat-error *ngIf="f.address.invalid">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="twentypercent" appearance="outline">
+            <mat-label>Postcode</mat-label>
+            <input id="postcode" matInput formControlName="postcode" placeholder="Enter your postcode" />
+            <mat-error *ngIf="f.postcode.invalid">
+              Postcode is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="twentypercent" appearance="outline">
+            <mat-label>City</mat-label>
+            <input id="city" matInput formControlName="city" placeholder="Enter your city" />
+            <mat-error *ngIf="f.city.invalid">
+              City is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="group5">
+          <button mat-button type="submit" class="mat-raised-button mat-primary" [disabled]="!profileForm.valid"
+            (click)="onProfileSubmit()">Save</button>
+          <img *ngIf="loading"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <button mat-button class="mat-raised-button mat-warn">Delete my account</button>
+        </div>
+
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+
+</div><!-- end container -->
