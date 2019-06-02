@@ -46,7 +46,7 @@ class CategoryController extends Controller
         // $categories = Category::all();
         // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Categorie toegevoegd.']);
         $message = 'Categorie: \''. $data["name"] .'\' toegevoegd.';
-        return redirect('/add')->with('message', $message);
+        return redirect('/add')->with(array('message' => $message, 'code' => 'green'));
     }
 
     /**
@@ -94,7 +94,7 @@ class CategoryController extends Controller
         $category->save();
 
         $message = 'Categorie: \''. $request->name .'\' gewijzigd.';
-        return redirect('/edit')->with('message', $message);
+        return redirect('/edit')->with(array('message' => $message, 'code' => 'green'));
 
     }
 
@@ -110,6 +110,6 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return redirect('/edit')->with('message', 'Categorie verwijderd.');
+        return redirect('/edit')->with(array('message' => 'Categorie verwijderd.', 'code' => 'green'));
     }
 }

@@ -37,3 +37,4 @@ Route::apiResources(
 );
 // Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
 Route::resource('users', 'UserController', ['parameter' => ['users' => 'users']]);
+Route::get('productByCategory/{category}', 'ProductController@productByCategory');

@@ -54,9 +54,8 @@ figcaption {
   input[type=number] {
     text-align: right;
     width: 4rem;
-
-    &::-webkit-inner-spin-button {
-      opacity: 1; // show arrows
+    &::-webkit-inner-spin-button{
+      opacity:1; // show arrows
     }
   }
 
@@ -75,11 +74,10 @@ select#filterProducts {
 /* pagination select options style */
 
 ::ng-deep .mat-select-value {
-  color: #005999;
+color: #005999;
   font-weight: bold;
   font-size: 15px;
 }
-
 ::ng-deep .mat-select-arrow {
   color: #005999;
 }
@@ -98,16 +96,16 @@ select#filterProducts {
   bottom: 1em;
 }
 
-::ng-deep .mat-option {
+::ng-deep .mat-option{
   padding: 0 !important;
 
 }
-
 ::ng-deep .mat-option-text {
   text-align: center;
   background: #F1F1F1;
 }
 
-::ng-deep .mat-selected>.mat-option-text {
+::ng-deep .mat-selected > .mat-option-text {
   background: #AAA !important;
 }
+

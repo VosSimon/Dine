@@ -17,11 +17,33 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::all();
+        if (isset($request->items)) {
+            $productList = Product::paginate($request->items);
+        } else {
+            $productList = Product::paginate(50);
+        }
+        $product = $productList;
 
-        return response()->json(['data' => $product], 200);
+        return response()->json($product, 200);
+    }
+
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    public function productByCategory(Request $request, $category)
+    {
+        if (isset($request->items)) {
+            $productList = Product::where('category_id', $category)->paginate($request->items);
+        } else {
+            $productList = Product::where('category_id', $category)->paginate(50);
+        }
+        $product = $productList;
+
+        return response()->json($product, 200);
     }
 
     /**
@@ -57,7 +79,7 @@ class ProductController extends Controller
         // $allergens = Allergen::all();
         // $categories = Category::all();
         // return view('add', ['allergens' => $allergens, 'categories' => $categories, 'message' => 'Product toegevoegd.']);
-        return redirect('/add')->with('message', 'Product: \''. $data["name"] .'\' toegevoegd.');
+        return redirect('/add')->with(array('message' => 'Product: \''. $data["name"] .'\' toegevoegd.', 'code' => 'green'));
     }
 
     /**
@@ -93,6 +115,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->description == "") {
+            unset($request->description);
+        }
         $product = Product::findOrFail($id);
         if ($request->has("category_id")) {
             $product->category_id = $request->category_id;
@@ -115,13 +140,13 @@ class ProductController extends Controller
             $product->description = $request->description;
         }
 
-        if (!$product->isDirty()) {
-            return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
+        if (!$product->isDirty()){
+            return redirect('/edit')->with(array('message' => 'Er is geen gewijzigde waarde gevonden.', 'code' => 'red'));
         }
             $product->save();
 
             // return redirect()->route('edit');
-            return redirect('/edit')->with('message', 'Product gewijzigd.');
+            return redirect('/edit')->with(array('message' => 'Product gewijzigd.', 'code' => 'green'));
     }
 
     /**

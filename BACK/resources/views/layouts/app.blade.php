@@ -19,18 +19,32 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <ul>
+        <nav>
+            @section("nav")
+            <div id="navbar">
+                <i id="bars" class="fas fa-bars"></i>
+                @if(isset($username))
+                    <h1>Welkom admin {{$username}}</h1>
+                @endif
+            </div>
+            <ul id="navMenu">
                 <li class="{{ (request()->is('add')) ? 'active' : 'not-active' }}"><a href="/add" title="Voeg producten, categorieën en allergenen toe">ADD</a></li>
                 <li class="{{ (request()->is('edit')) ? 'active' : 'not-active' }}"><a href="/edit" title="Pas producten, categorieën en allergenen aan of verwijder">EDIT/REM</a></li>
             </ul>
+            @show
         </nav>
+        <header>
+            @yield('header')
+        </header>
 
         <main class="py-4">
             @yield('content')

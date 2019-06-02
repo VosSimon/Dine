@@ -11,14 +11,16 @@
     <figure>
       <img src="http://dine.test/img/{{product.image}}" alt="image for {{ product.name }}">
       <figcaption>
-        <p>{{ product.name }}</p>
-        <p>{{ product.price }}</p>
-        <input type="number" step="1" value="0">
-        <mat-icon>shopping_basket</mat-icon>
+          <p>{{ product.name }}</p>
+          <p>{{ product.price }}</p>
+          <input type="number" step="1" value="0">
+          <mat-icon>shopping_basket</mat-icon>
       </figcaption>
     </figure>
   </div>
-  <mat-paginator id="paginator" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-    (page)="pageEvent($event)">
-  </mat-paginator>
+  <mat-paginator id="paginator" [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="pageEvent($event)">
+</mat-paginator>
 </section>
