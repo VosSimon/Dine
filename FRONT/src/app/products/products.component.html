@@ -1,8 +1,10 @@
 <section id="productSection">
   <h1>Alle producten</h1>
   <h2>Vind een product</h2>
-  <p>{{pageSize}}</p>
-  <input type="search" value="Zoek per naam">
+  <input type="search" value="Zoek per naam" (input)="searchByName($event)">
+  <select id="autocomplete">
+    <option *ngFor="let auto of autocomplete" value="{{auto.name}}">{{auto.name}}</option>
+  </select>
   <select id="filterProducts" (change)="filterProduct($event)">
     <option value="" disabled selected hidden>Filter per categorie</option>
     <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.name}}</option>

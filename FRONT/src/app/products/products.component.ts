@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatPaginator } from '@angular/material';
+
+
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
+
 export class ProductsComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   products: Array<object>;
   categories: Array<object>;
@@ -15,8 +21,10 @@ export class ProductsComponent implements OnInit {
   path: string;
   pageSize: number;
   pageSizeOptions: number[] = [1, 5, 10, 25, 50];
+  autocomplete:Array<object>;
 
   constructor(private http: HttpClient) {
+
     this.http.get('http://dine.test/products').subscribe((result) => {
       this.products = result['data'];
       console.log(result);
@@ -43,6 +51,7 @@ export class ProductsComponent implements OnInit {
       this.path = result['path'];
       this.pageSize = result['per_page'];
       this.index = result['current_page'];
+      this.paginator.pageIndex = 0;
     });
   }
 
@@ -54,6 +63,14 @@ export class ProductsComponent implements OnInit {
       this.products = result['data'];
       this.length = result['total'];
     });
+  }
+
+  searchByName(e) {
+    this.http.post('http://dine.test/searchProduct/', JSON.stringify(e.target.value)).subscribe((result) => {
+      console.log(result);
+
+    });
+
   }
 
   ngOnInit() {

@@ -46,6 +46,18 @@ class ProductController extends Controller
         return response()->json($product, 200);
     }
 
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    public function searchProductByName(Request $request)
+    {
+        $product = Product::where('name', 'LIKE', '%'.$request->search.'%')->get('name');
+
+        return response()->json($product, 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
