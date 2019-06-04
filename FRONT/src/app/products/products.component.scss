@@ -2,14 +2,19 @@
   display: flex;
   flex-flow: wrap;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
 
   div.productView {
-    width: calc(100%/4 -1rem);
+    max-width: 400px;
     display: block;
     padding: 1em;
-    border: 2px solid #333;
+    border-top: 2px solid #333;
+
+    &:nth-child(odd) {
+      background: #DDD;
+    }
   }
+
 }
 
 h1 {
@@ -19,6 +24,7 @@ h1 {
 
 h1,
 h2 {
+  width: 100%;
   padding: 1rem;
   margin: 0;
 }
@@ -64,48 +70,45 @@ figcaption {
 input[type=search],
 select#filterProducts {
   width: 100%;
-  margin-bottom: 1rem;
   padding: 1rem;
-  background: #f1f1f1;
+  background: #FFF;
   border: 1px solid #333;
 }
 
+select#filterProducts {
+  margin: 1em 0;
+}
 
-/* pagination select options style */
+select#autocompleteList {
+  width: 100%;
+}
 
-// ::ng-deep .mat-select-value {
-// color: #005999;
-//   font-weight: bold;
-//   font-size: 15px;
-// }
-// ::ng-deep .mat-select-arrow {
-//   color: #005999;
-// }
+select#autocompleteList option {
+  width: 100%;
+  padding: .5em 1em;
+}
 
-// ::ng-deep #cdk-overlay-0 {
-//   transform: translateX(0px) translateY(0px) !important;
-//   position: fixed;
-//   right: 0;
-//   bottom: 0;
-// }
+select#autocompleteList option:nth-child(even) {
+  background: #EEE;
+}
 
-// ::ng-deep .mat-select-panel {
-//   border: 1px solid #333;
-//   position: fixed;
-//   right: 1em;
-//   bottom: 1em;
-// }
+mat-paginator {
+  width: 100%;
+  background: #333;
+  color: #FFF;
+}
 
-// ::ng-deep .mat-option{
-//   padding: 0 !important;
+::ng-deep .mat-select-arrow, ::ng-deep .mat-paginator-icon, ::ng-deep .mat-select-value {
+  color: rgba($color: #FFF, $alpha: 1.0);
+}
 
-// }
-// ::ng-deep .mat-option-text {
-//   text-align: center;
-//   background: #F1F1F1;
-// }
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #FFF;
+}
 
-// ::ng-deep .mat-selected > .mat-option-text {
-//   background: #AAA !important;
-// }
-
+@media screen and (min-width : 768px) {
+  div.productView {
+    margin: 1em;
+    border: 2px solid #333;
+  }
+}
