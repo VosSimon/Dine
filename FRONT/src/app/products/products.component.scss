@@ -73,39 +73,39 @@ select#filterProducts {
 
 /* pagination select options style */
 
-::ng-deep .mat-select-value {
-color: #005999;
-  font-weight: bold;
-  font-size: 15px;
-}
-::ng-deep .mat-select-arrow {
-  color: #005999;
-}
+// ::ng-deep .mat-select-value {
+// color: #005999;
+//   font-weight: bold;
+//   font-size: 15px;
+// }
+// ::ng-deep .mat-select-arrow {
+//   color: #005999;
+// }
 
-::ng-deep #cdk-overlay-0 {
-  transform: translateX(0px) translateY(0px) !important;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-}
+// ::ng-deep #cdk-overlay-0 {
+//   transform: translateX(0px) translateY(0px) !important;
+//   position: fixed;
+//   right: 0;
+//   bottom: 0;
+// }
 
-::ng-deep .mat-select-panel {
-  border: 1px solid #333;
-  position: fixed;
-  right: 1em;
-  bottom: 1em;
-}
+// ::ng-deep .mat-select-panel {
+//   border: 1px solid #333;
+//   position: fixed;
+//   right: 1em;
+//   bottom: 1em;
+// }
 
-::ng-deep .mat-option{
-  padding: 0 !important;
+// ::ng-deep .mat-option{
+//   padding: 0 !important;
 
-}
-::ng-deep .mat-option-text {
-  text-align: center;
-  background: #F1F1F1;
-}
+// }
+// ::ng-deep .mat-option-text {
+//   text-align: center;
+//   background: #F1F1F1;
+// }
 
-::ng-deep .mat-selected > .mat-option-text {
-  background: #AAA !important;
-}
+// ::ng-deep .mat-selected > .mat-option-text {
+//   background: #AAA !important;
+// }
 

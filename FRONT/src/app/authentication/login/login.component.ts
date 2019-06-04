@@ -38,13 +38,16 @@ export class LoginComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
-  onLoginSubmit() {
+  onLoginSubmit(event) {
+    event.preventDefault();
     // console.log(this.loginForm.value);
+    const fd = new FormData();
+    fd.append('email', this.loginForm.value.email);
+    fd.append('password', this.loginForm.value.password);
     this.submitted = true;
     this.loading = true;
-    const data = this.loginForm.value;
     // console.log(data);
-    this.loginService.loginUser(data);
+    this.loginService.loginUser(fd);
   }
 
 }

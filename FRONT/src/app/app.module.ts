@@ -32,6 +32,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AboutComponent } from './about/about.component';
     ProfilePageComponent,
     ShoppingCartComponent,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

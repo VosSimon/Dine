@@ -6,26 +6,30 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class RegisterService {
-  token: string;
-  headers = new Headers({ 'Content-Type': 'application/json' });
+  registeraccessToken: string;
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
-  register(data) {
-    return this.http.post('http://dine.test/register', JSON.stringify(data)).subscribe(
+  register(fd) {
+    console.log(fd);
+    return this.http.post('http://dine.test/register', fd).subscribe(
       (response: any) => {
         console.log(response);
-        // this.token = response.token;
-
-        // console.log(this.token);
-        // this.router.navigate(['/']);
+        this.registeraccessToken = response.success.token;
+        localStorage.setItem('token', this.registeraccessToken);
+        this.router.navigate(['/login']);
       },
       (error) => {
+        if (error) {
         console.log(error);
+        }
       }
     );
   }
 }
+
+// 'Accept' : 'application/ json',
+//   'Authorization': 'Bearer'.$accessToken

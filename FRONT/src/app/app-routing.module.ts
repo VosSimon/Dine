@@ -18,7 +18,7 @@ const routes: Routes = [
     loadChildren: './authentication/authentication.module#AuthenticationModule'
   },
   {
-    path: '',
+    path: ' ',
     component: LandingPageComponent
   },
   {

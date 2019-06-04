@@ -12,10 +12,10 @@
       <h2>Welcome</h2>
       <mat-divider></mat-divider>
       <button mat-button routerLink="/products">Products</button>
-      <button mat-button >Menu</button>
+      <button mat-button routerLink="/menu">Menu</button>
       <button mat-button routerLink="/contact">Contact us</button>
       <button mat-button routerLink="/about">About us</button>
-      <button mat-button routerLink="/profile">Profile</button>
+      <button mat-button routerLink="/profile" *ngIf="loginService.isLoggedIn()">Profile</button>
       <mat-divider></mat-divider>
       <button mat-button [matMenuTriggerFor]="catMenu">Categories</button>
       <mat-divider [inset]="true"></mat-divider>
@@ -28,9 +28,8 @@
         <button mat-menu-item routerLink="/register" *ngIf="!loginService.isLoggedIn()">Register</button>
         <button mat-menu-item (click)="logOut()" *ngIf="loginService.isLoggedIn()">Logout</button>
       </mat-menu>
-      <mat-menu #catMenu="matMenu">
-        <button mat-menu-item *ngFor="let category of categories"></button>
-        <button mat-menu-item>SHit eRrOr</button>
+      <mat-menu  #catMenu="matMenu">
+        <div *ngFor="let category of categories"><button mat-menu-item>{{category.name}}</button></div>
       </mat-menu>
     </div>
 
@@ -41,7 +40,7 @@
         <button mat-icon-button (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-        <span class="brand" routerLink="/">Dine</span>
+        <span class="brand" routerLink="">Dine</span>
         <span class="spacer"></span>
         <mat-icon
           [matMenuTriggerFor]="menucart"

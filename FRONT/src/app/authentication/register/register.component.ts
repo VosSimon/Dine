@@ -64,9 +64,9 @@ export class RegisterComponent implements OnInit {
     return null;
   }
 
-  onRegisterSubmit() {
-    console.log(this.registerForm.value);
-
+  onRegisterSubmit(event) {
+    // console.log(this.registerForm.value);
+    event.preventDefault();
     // stop here if form is invalid
     // this is not necesary because I set the submit button to disabled if the form is not valid
     if (this.registerForm.invalid) {
@@ -74,9 +74,13 @@ export class RegisterComponent implements OnInit {
     }
     this.submitted = true;
     this.loading = true;
-    const data = this.registerForm.value;
-    // console.log(data);
-    this.registerService.register(data);
+    // const data = this.registerForm.value;
+    const fd = new FormData();
+    fd.append('email', this.registerForm.value.email);
+    fd.append('password', this.registerForm.value.password);
+    fd.append('password_confirmation', this.registerForm.value.password_confirmation);
+    // console.log(fd);
+    this.registerService.register(fd);
   }
 
 }
