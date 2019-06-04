@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material';
+import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 
 
 
@@ -21,7 +22,9 @@ export class ProductsComponent implements OnInit {
   path: string;
   pageSize: number;
   pageSizeOptions: number[] = [1, 5, 10, 25, 50];
-  autocomplete:Array<object>;
+  showSearchProductList = false;
+  autocompleteList: Array<object>;
+  searchInput:string;
 
   constructor(private http: HttpClient) {
 
@@ -43,16 +46,18 @@ export class ProductsComponent implements OnInit {
 
   filterProduct(e) {
     const categoryId = e.target.value;
-    this.http.get('http://dine.test/productByCategory/' + categoryId).subscribe((result) => {
-      this.products = result['data'];
-      console.log(result);
+    if (categoryId !== "0") {
+      this.http.get('http://dine.test/productByCategory/' + categoryId + '?items=' + this.pageSize).subscribe((result) => {
+        this.products = result['data'];
+        console.log(result);
 
-      this.length = result['total'];
-      this.path = result['path'];
-      this.pageSize = result['per_page'];
-      this.index = result['current_page'];
-      this.paginator.pageIndex = 0;
-    });
+        this.length = result['total'];
+        this.path = result['path'];
+        this.pageSize = result['per_page'];
+        this.index = result['current_page'];
+        this.paginator.pageIndex = 0;
+      });
+    }
   }
 
   pageEvent(e) {
@@ -65,12 +70,28 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  searchByName(e) {
-    this.http.post('http://dine.test/searchProduct/', JSON.stringify(e.target.value)).subscribe((result) => {
-      console.log(result);
+  autocomplete(e) {
+    const data = new FormData();
+    data.append("search", e.target.value);
+    // const data = JSON.stringify({search : e.target.value});
+    this.http.post('http://dine.test/autocompleteProduct', data).subscribe((result) => {
+      this.autocompleteList = result["data"];
+      this.showSearchProductList = true;
+      if (this.searchInput === "") this.showSearchProductList = false;
 
     });
 
+  }
+
+  searchByName(e) {
+    if (e.type === "change"||e.type === "keydown"&&e.code === "Enter") {
+
+      this.http.get('http://dine.test/searchProductByName?name=' + this.searchInput + '&items=' + this.pageSize).subscribe((result) => {
+        this.products = result["data"];
+        document.querySelector<HTMLSelectElement>('#filterProducts').value = "0";
+        this.showSearchProductList = false;
+      })
+    }
   }
 
   ngOnInit() {

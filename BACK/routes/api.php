@@ -38,4 +38,5 @@ Route::apiResources(
 // Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
 Route::resource('users', 'UserController', ['parameter' => ['users' => 'users']]);
 Route::get('productByCategory/{category}', 'ProductController@productByCategory');
-Route::post('searchProduct', 'ProductController@searchProductByName');
+Route::post('autocompleteProduct', 'ProductController@autocompleteProduct');
+Route::get('searchProductByName', 'ProductController@searchProductByName');

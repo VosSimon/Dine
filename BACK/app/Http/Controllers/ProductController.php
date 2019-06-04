@@ -51,9 +51,27 @@ class ProductController extends Controller
     //  *
     //  * @return \Illuminate\Http\Response
     //  */
+    public function autocompleteProduct(Request $request)
+    {
+
+        $product = Product::where('name', 'LIKE', '%'.$request->search.'%')->limit(20)->get('name');
+
+        return response()->json(["data" => $product], 200);
+    }
+
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
     public function searchProductByName(Request $request)
     {
-        $product = Product::where('name', 'LIKE', '%'.$request->search.'%')->get('name');
+        if (isset($request->items)) {
+            $productList = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate($request->items);
+        } else {
+            $productList = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate(50);
+        }
+        $product = $productList;
 
         return response()->json($product, 200);
     }

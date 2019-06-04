@@ -1,12 +1,13 @@
 <section id="productSection">
   <h1>Alle producten</h1>
   <h2>Vind een product</h2>
-  <input type="search" value="Zoek per naam" (input)="searchByName($event)">
-  <select id="autocomplete">
-    <option *ngFor="let auto of autocomplete" value="{{auto.name}}">{{auto.name}}</option>
+  <input type="search" placeholder="Zoek per naam" (input)="autocomplete($event)" [(ngModel)]="searchInput" (keydown)="searchByName($event)">
+  <select id="autocompleteList" size="3" [hidden]="!showSearchProductList" [(ngModel)]="searchInput" (change)=searchByName($event)>
+    <option *ngFor="let auto of autocompleteList" value="{{auto.name}}">{{auto.name}}</option>
   </select>
   <select id="filterProducts" (change)="filterProduct($event)">
     <option value="" disabled selected hidden>Filter per categorie</option>
+    <option value="0">Alle categorieën</option>
     <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.name}}</option>
   </select>
   <div *ngFor="let product of products" class="productView">
