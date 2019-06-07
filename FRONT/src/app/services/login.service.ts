@@ -23,7 +23,7 @@ export class LoginService {
   ) { }
 
   loginUser(fd) {
-    return this.http.post('http://dine.test/login', fd).subscribe(
+    return this.http.post('http://dine.test/apilogin', fd).subscribe(
       (response: any) => {
         this.accessToken = response.success.token;
         localStorage.setItem('token', this.accessToken);
@@ -37,7 +37,7 @@ export class LoginService {
   }
 
   getUser() {
-    return this.http.get('http://dine.test/user', {headers: this.headers}).subscribe(
+    return this.http.get('http://dine.test/apiuser', {headers: this.headers}).subscribe(
       (result: any) => {
         this.credentials = JSON.stringify(result);
         localStorage.setItem('user', this.credentials);

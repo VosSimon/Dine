@@ -1,3 +1,166 @@
-<p>
-  landing-page works!
-</p>
+<div class="container">
+  <section class="banner">
+    <div class="left-photo"></div>
+    <div class="right-photo"></div>
+    <div class="wrap">
+      <a title="Go to bakery" class="title-left">Bakery</a>
+      <a title="Go to tea-house" class="title-right">Tea house</a>
+    </div>
+  </section>
+  <div class="divider">
+    <mat-divider></mat-divider>
+    <span>Promotions</span>
+    <mat-divider></mat-divider>
+  </div>
+
+  <section class="slide-wrap">
+    <slideshow #slideshow [imageUrls]="imageUrlArray" [height]="height" [minHeight]="minHeight" [arrowSize]="arrowSize"
+      [showArrows]="showArrows" [disableSwiping]="disableSwiping" [autoPlay]="autoPlay"
+      [stopAutoPlayOnSlide]="stopAutoPlayOnSlide" [backgroundSize]="backgroundSize"
+      [backgroundPosition]="backgroundPosition" [backgroundRepeat]="backgroundRepeat" [showDots]="showDots"
+      [dotColor]="dotColor" [showCaptions]="showCaptions" [captionColor]="captionColor"
+      [captionBackground]="captionBackground" [lazyLoad]="lazyLoad" [hideOnNoSlides]="hideOnNoSlides"
+      [fullscreen]="fullscreen">
+    </slideshow>
+    <!-- <slideshow class="slide" [imageUrls]="imageUrlArray"></slideshow> -->
+  </section>
+
+
+
+  <div class="divider">
+    <mat-divider></mat-divider>
+    <span>Large variety of products</span>
+    <mat-divider></mat-divider>
+  </div>
+
+  <section class="categories-wrap">
+    <mat-card class="category">
+      <img mat-card-image src="../../assets/FixedImages/Bread.jpg" alt="Brood">
+      <mat-card-content>
+        <span>Brood</span>
+        <p>Different kind of bread in different sizes, shapes and textures.</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="category">
+      <img mat-card-image src="../../assets/FixedImages/koffiekoeken.jpg" alt="Koffiekoeken">
+      <mat-card-content>
+        <span>Koffiekoeken</span>
+        <p>Challange your taste with a multitude of flavours and combinations of textures.</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="category">
+      <img mat-card-image src="../../assets/FixedImages/taarten.jpg" alt="Taart">
+      <mat-card-content>
+        <span>Cakes</span>
+        <p>Be it you celebrate something or you just want to enjoy a cake all by yourself, we got you covered.</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="category">
+      <img mat-card-image src="../../assets/FixedImages/broodje.jpg" alt="Broodjes">
+      <mat-card-content>
+        <span>Sandwiches</span>
+        <p>Great sandwiches don't happen by accident..</p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+
+  <div class="divider">
+    <mat-divider></mat-divider>
+    <span>Where and how to find us</span>
+    <mat-divider></mat-divider>
+  </div>
+
+  <section class="contact-wrap">
+    <mat-card>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2498.6845031714656!2d4.402608415759583!3d51.22488737958969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f6582b14cd4b%3A0x19634bd549137260!2sKaasbrug+2%2C+2000+Antwerpen!5e0!3m2!1sen!2sbe!4v1559773221346!5m2!1sen!2sbe"
+        frameborder="0" style="border:0" allowfullscreen></iframe>
+      <span>KAASBRUG 2 ANTWERPEN 2200</span>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>We are open between:</mat-card-title>
+      </mat-card-header>
+      <table class="opening-hours-table">
+        <tr id="Monday" class="openingHours" title="Open Monday at 9am to 6pm">
+          <td>Monday</td>
+          <td class="opens">09:00</td>
+          <td>-</td>
+          <td class="closes">18:00</td>
+        </tr>
+        <tr id="Tuesday" class="openingHours" title="Open Tuesday at 9am to 6pm">
+          <td>Tuesday</td>
+          <td class="opens">09:00</td>
+          <td>-</td>
+          <td class="closes">18:00</td>
+        </tr>
+        <tr id="Wednesday" class="openingHours" title="Open Wednesday at 9am to 6pm">
+          <td>Wednesday</td>
+          <td class="opens">09:00</td>
+          <td>-</td>
+          <td class="closes">18:00</td>
+        </tr>
+        <tr id="Thursday" class="openingHours" title="Open Thursday at 9am to 8pm">
+          <td>Thursday</td>
+          <td class="opens">09:00</td>
+          <td>-</td>
+          <td class="closes">20:00</td>
+        </tr>
+        <tr id="Friday" class="openingHours" title="Open Friday at 9am to 6pm">
+          <td>Friday</td>
+          <td class="opens">09:00</td>
+          <td>-</td>
+          <td class="closes">18:00</td>
+        </tr>
+        <tr id="Saturday" class="openingHours" title="Open Saturday at 10am to 6pm">
+          <td>Saturday</td>
+          <td class="opens">10:00</td>
+          <td>-</td>
+          <td class="closes">18:00</td>
+        </tr>
+        <tr id="Sunday" class="openingHours" title="Open Sunday at 11am to 4pm">
+          <td>Sunday</td>
+          <td class="opens">11:00</td>
+          <td>-</td>
+          <td class="closes">16:00</td>
+        </tr>
+      </table>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Leave us a message</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="messageForm" (ngSubmit)="messageForm.valid && onMessageSubmit()" novalidate>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input id="email" matInput formControlName="email" placeholder="Enter your email" />
+            <mat-error *ngIf="f.email.invalid">
+              Please enter a <strong>valid</strong> email!
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Message</mat-label>
+            <textarea id="message" matInput formControlName="message" placeholder="Write us a message"></textarea>
+            <mat-error *ngIf="f.message.invalid">
+              Message cannot be longer than <strong>140 characters</strong> !
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-button type="submit" class="mat-raised-button mat-primary" (click)="onMessageSubmit($event)"
+            [disabled]="!messageForm.valid">Send Message
+          </button>
+          <img *ngIf="loading"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+</div>

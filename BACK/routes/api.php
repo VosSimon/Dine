@@ -14,14 +14,12 @@ use Illuminate\Http\Request;
 */
 
 
-Route::post('login', 'PassportController@login');
-Route::post('register', 'PassportController@register');
+Route::post('apilogin', 'PassportController@login');
+Route::post('apiregister', 'PassportController@register');
 
 Route::middleware('auth:api')->group(
     function () {
-        Route::get('user', 'PassportController@getUser');
-
-        // Route::resource('products', 'ProductController');
+        Route::get('apiuser', 'PassportController@getUser');
     }
 );
 
@@ -35,7 +33,6 @@ Route::apiResources(
     // 'users', 'UserController'
     ]
 );
-// Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
 Route::resource('users', 'UserController', ['parameter' => ['users' => 'users']]);
 Route::get('productByCategory/{category}', 'ProductController@productByCategory');
 Route::post('autocompleteProduct', 'ProductController@autocompleteProduct');

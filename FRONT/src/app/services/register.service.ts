@@ -15,7 +15,7 @@ export class RegisterService {
 
   register(fd) {
     console.log(fd);
-    return this.http.post('http://dine.test/register', fd).subscribe(
+    return this.http.post('http://dine.test/apiregister', fd).subscribe(
       (response: any) => {
         console.log(response);
         this.registeraccessToken = response.success.token;

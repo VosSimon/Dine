@@ -37,6 +37,8 @@ import { AboutComponent } from './about/about.component';
 import { CurrencyPipe } from './currency.pipe';
 import { MenuComponent } from './menu/menu.component';
 
+import { SlideshowModule } from 'ng-simple-slideshow';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +71,8 @@ import { MenuComponent } from './menu/menu.component';
     MatDividerModule,
     MatBadgeModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SlideshowModule
   ],
   providers: [LoginService, RegisterService, ProfileService, AuthGuard, MatDatepickerModule, ShoppingCartService],
   bootstrap: [AppComponent]
