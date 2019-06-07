@@ -119,7 +119,7 @@ export class ProductsComponent implements OnInit {
     this.cartService.addToShoppingCart(cartItem);
 
     this._snackBar.open('Het artikel is toegevoegd aan je winkelmandje.', 'x', {
-      duration: 5000
+      duration:3000
     });
   }
 

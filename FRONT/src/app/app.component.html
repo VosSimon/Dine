@@ -52,10 +52,8 @@
           <h3>Items in your cart</h3>
           <mat-divider></mat-divider>
           <ol>
-            <li>Error</li>
-            <li>Bulk EroR</li>
-            <li>Premium EroR</li>
-            <li>Amazing EroR</li>
+            <li *ngIf="!shoppingCartList" style="list-style: none">Shopping cart is empty</li>
+            <li *ngFor="let item of shoppingCartList">{{ item.product.name }} ({{ item.quantity }})</li>
           </ol>
           <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/cart">Manage cart</button>

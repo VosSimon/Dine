@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { Subscription } from 'rxjs';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { CartItem } from './models/cart-item.model';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   itemsInCart: number = 0;
   subscription: Subscription;
+  shoppingCartList: CartItem[];
 
   constructor(
     private loginService: LoginService,
@@ -28,6 +30,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.cartService.itemsInShoppingCartChanged.subscribe(number => {
       this.itemsInCart = number;
+    })
+
+    this.subscription = this.cartService.cartChanged.subscribe((items: CartItem[]) => {
+      this.shoppingCartList = items;
     })
   }
 
