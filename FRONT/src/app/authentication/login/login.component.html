@@ -25,7 +25,7 @@
         </mat-icon>
       </mat-form-field>
 
-      <button mat-button type="submit" class="mat-raised-button mat-primary" (click)="onLoginSubmit"
+      <button mat-button type="submit" class="mat-raised-button mat-primary" (click)="onLoginSubmit($event)"
         [disabled]="!loginForm.valid">Login
       </button>
       <img *ngIf="loading"

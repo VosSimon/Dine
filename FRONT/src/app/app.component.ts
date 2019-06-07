@@ -10,7 +10,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  // categories;
+  categories: Array<object>;
 
   itemsInCart: number = 0;
   subscription: Subscription;
@@ -20,10 +20,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private cartService : ShoppingCartService
   ) {
-    // this.http.get('http://dine.test/categories').subscribe((result) => {
-      // this.categories = result;
-      // console.log(result);
-    // });
+    this.http.get('http://dine.test/categories').subscribe((result) => {
+      this.categories = result['data'];
+    });
   }
 
   ngOnInit() {

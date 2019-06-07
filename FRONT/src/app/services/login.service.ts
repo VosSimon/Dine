@@ -6,20 +6,29 @@ import { Router, ActivatedRoute } from '@angular/router';
   providedIn: 'root'
 })
 export class LoginService {
+  accessToken: string = localStorage.getItem('token');
   credentials: string;
+
+
+
+  'headers' = {
+    Authorization : 'Bearer ' + this.accessToken,
+  };
+
+
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
-  loginUser(data) {
-    return this.http.post('http://dine.test/login', JSON.stringify(data)).subscribe(
+  loginUser(fd) {
+    return this.http.post('http://dine.test/login', fd).subscribe(
       (response: any) => {
-        const message = response;
-        console.log(message);
-        this.router.navigate(['/']);
-        // this.getCredentials();
+        this.accessToken = response.success.token;
+        localStorage.setItem('token', this.accessToken);
+        this.router.navigate(['/profile']);
+        this.getUser();
       },
       (error) => {
         console.log(error);
@@ -27,15 +36,15 @@ export class LoginService {
     );
   }
 
-  // getCredentials() {
-  //   return this.http.get('http://localhost:7707/login').subscribe(
-  //     (result: any) => {
-  //       this.credentials = JSON.stringify(result);
-  //       localStorage.setItem('user', this.credentials);
-  //       console.log('You\'re in..This are your credentials: ' + this.credentials);
-  //     }
-  //   );
-  // }
+  getUser() {
+    return this.http.get('http://dine.test/user', {headers: this.headers}).subscribe(
+      (result: any) => {
+        this.credentials = JSON.stringify(result);
+        localStorage.setItem('user', this.credentials);
+        console.log('You\'re in..This are your credentials: ' + this.credentials);
+      }
+    );
+  }
 
   isLoggedIn() {
     return this.credentials != null;
@@ -44,6 +53,7 @@ export class LoginService {
   logOut() {
     this.router.navigate(['login']);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     return this.credentials = null;
   }
 }

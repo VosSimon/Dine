@@ -35,6 +35,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { CurrencyPipe } from './currency.pipe';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CurrencyPipe } from './currency.pipe';
     ShoppingCartComponent,
     ContactComponent,
     AboutComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
