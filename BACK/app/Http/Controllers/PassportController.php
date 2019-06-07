@@ -77,3 +77,6 @@ class PassportController extends Controller
 // Links with the tutorials:
 // https://www.tutsmake.com/create-rest-api-using-passport-laravel-5-8-authentication/
 // https://tutsforweb.com/laravel-passport-create-rest-api-with-authentication/
+
+// if you end remigrating your DB, you'll have to do this comand :
+// php artisan passport:client --personal

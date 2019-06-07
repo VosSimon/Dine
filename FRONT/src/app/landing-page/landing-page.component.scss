@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css?family=Kumar+One+Outline|VT323&display=swap');
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 415px;
+}
+
+.banner {
+   width: 100%;
+   height: 30vw;
+}
+
+.left-photo,
+.right-photo,
+.wrap {
+  width: 100%;
+  height: 30vw;
+  position: absolute;
+}
+
+.left-photo {
+  background: #ffffff url("../../assets/FixedImages/pille-riin-priske-985974-unsplash.jpg") no-repeat;
+  background-size: 85%;
+  // clip-path: polygon(100% 0, 0 100%, 0 0);
+  background-position: -25% 50%;
+  clip-path: polygon(0 0, 75% 0, 25% 100%, 0% 100%);
+}
+
+.right-photo {
+  background: #ffffff url("../../assets/FixedImages/philipp-cordts-326252-unsplash.jpg") no-repeat;
+  background-size: 85%;
+  // clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  background-position: 165% 50%;
+  clip-path: polygon(100% 0, 75% 0, 25% 100%, 100% 100%);
+ }
+
+.wrap {
+  background-color: rgba(0, 0, 0, .4);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title-left, .title-right {
+  position: relative;
+  font-family: 'Kumar One Outline',
+  cursive;
+  color: white;
+  letter-spacing: .3em;
+  font-size: .8em;
+  // 576px window width and more
+  @include sm {
+    font-size: .7em;
+  }
+
+  // 768px window width and more
+  @include md {
+    font-size: 1.4em;
+  }
+
+  // 992px window width and more
+  @include lg {
+    font-size: 2em;
+  }
+
+  // 1200px window width and more
+  @include xl {
+    font-size: 2.2em;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.divider {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  // 576px window width and more
+  @include sm {
+    margin-top: .7em;
+    margin-bottom: .7em;
+  }
+
+  // 768px window width and more
+  @include md {
+    margin-top: 1.4em;
+    margin-bottom: 1.4em;
+  }
+
+  // 992px window width and more
+  @include lg {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  // 1200px window width and more
+  @include xl {
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+  }
+}
+
+.mat-divider {
+  width: 30%;
+}
+
+.divider span {
+  font-size: .6em;
+  // 576px window width and more
+  @include sm {
+    font-size: .8em;
+  }
+
+  // 768px window width and more
+  @include md {
+    font-size: 1em;
+  }
+
+  // 992px window width and more
+  @include lg {
+    font-size: 1.2em;
+    letter-spacing: .1em;
+  }
+
+  // 1200px window width and more
+  @include xl {
+    font-size: 1.3em;
+    letter-spacing: .1em;
+  }
+}
+
+.slide-wrap {
+  width: 100%;
+  height: 30vw;
+}
+
+.categories-wrap {
+  width: 100%;
+  // height: 55vw;
+  // border: 1px solid black;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  // 992px window width and more
+  @include lg {
+    flex-wrap: nowrap;
+  }
+  .category{
+    width: 49%;
+    height: 70vw;
+    text-align: center;
+    // 576px window width and more
+    @include sm {
+      width: 49%;
+      height: 55vw;
+    }
+    // 768px window width and more
+    @include md {
+      height: 35vw;
+      width: 49%;
+    }
+    // 992px window width and more
+    @include lg {
+      width: 24%;
+      height: 25vw;
+    }
+
+    // 1200px window width and more
+    @include xl {
+      height: 22vw;
+    }
+    span, p{
+      font-size: .8em;
+      // 576px window width and more
+      @include sm {
+        font-size: 1em;
+      }
+    }
+    img {
+      display: block;
+      height: 60%;
+      // 768px window width and more
+      @include md {
+        height: 70%;
+      }
+      // 1200px window width and more
+      @include xl {
+        height: 75%;;
+      }
+    }
+  }
+}
+
+.contact-wrap {
+  width: 100%;
+  // height: 18vw;
+  // border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 2.5em;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+
+  // 768px window width and more
+  @include md {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  // 992px window width and more
+  @include lg {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  mat-card {
+    width: 100%;
+    margin-top: 10px;
+
+    &:first-child {
+      @include md {
+        width: 100%;
+      }
+      @include lg {
+        width: 50%;
+      }
+    }
+    &:last-child {
+      @include md {
+        margin-left: 15px;
+      }
+      @include lg {
+        margin-left: 0;
+      }
+    }
+
+    iframe {
+      width: 100%;
+      @include lg {
+        height: 25vw;
+      }
+      @include xl {
+        height: 15vw;
+      }
+    }
+
+    .opening-hours-table {
+      font-family: 'VT323',
+      monospace;
+      letter-spacing: .1em;
+      width: 100%;
+      padding: 0 10px 0 10px;
+      overflow: hidden;
+      tr td:first-child {
+        font-weight: bold;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .full-width {
+        width: 95%;
+      }
+    }
+
+    // 576px window width and more
+    @include sm {
+      width: 100%;
+    }
+
+    // 768px window width and more
+    @include md {
+      width: 49%;
+    }
+
+    // 992px window width and more
+    @include lg {
+      width: 24%;
+      margin-top: 0;
+    }
+  }
+}
