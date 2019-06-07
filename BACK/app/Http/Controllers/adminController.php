@@ -54,14 +54,18 @@ class adminController extends Controller
         $request->session()->pull('message', 'default');
         $code = session('code');
         $request->session()->pull('code', 'default');
-        // $products = Product::all();
         $products = DB::table('products')
+            ->select('products.*', DB::raw('GROUP_CONCAT(allergen_id) AS allergen_id'))
             ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
             ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
-            ->select('products.*', 'allergens.id AS allergen_id')
+            ->groupBy('products.id')
             ->get();
         $allergens = Allergen::all();
         $categories = Category::all();
+        for ($i = 0; $i < count($products); $i++) {
+            $allergensArray = explode(",", $products[$i]->allergen_id);
+            $products[$i]->allergen_id = $allergensArray;
+        }
         return view('edit', [
             'allergens' => $allergens,
             'categories' => $categories,

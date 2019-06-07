@@ -9,6 +9,7 @@ import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { ProfileService } from './services/profile.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 // Material section
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -32,6 +34,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
+import { CurrencyPipe } from './currency.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { AboutComponent } from './about/about.component';
     ProfilePageComponent,
     ShoppingCartComponent,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    CurrencyPipe
   ],
   imports: [
     BrowserModule,
@@ -58,13 +62,14 @@ import { AboutComponent } from './about/about.component';
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
     MatBadgeModule,
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [LoginService, RegisterService, ProfileService, AuthGuard, MatDatepickerModule],
+  providers: [LoginService, RegisterService, ProfileService, AuthGuard, MatDatepickerModule, ShoppingCartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

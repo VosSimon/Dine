@@ -74,7 +74,7 @@
                         <select disabled name="allergens[]" id="allergens" multiple required>
                             <option value="0">geen</option>
                             @foreach($allergens as $allergen)
-                                @if($allergen->id == $product->allergen_id)
+                                @if(in_array($allergen->id, $product->allergen_id) == true)
                                     <option selected value="{{ $allergen->id }}">{{ $allergen->name }}</option>
                                 @else
                                     <option value="{{ $allergen->id }}">{{ $allergen->name }}</option>

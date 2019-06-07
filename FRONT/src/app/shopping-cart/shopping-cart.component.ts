@@ -1,15 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ShoppingCartService } from '../services/shopping-cart.service';
+import { CartItem } from '../models/cart-item.model';
+import { Subscription } from 'rxjs';
+
+
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  
-  constructor() { }
+
+  shoppingCartList: CartItem[];
+  itemsInShoppingCart: number = 0;
+  totalAmount: number = 0;
+  subscription: Subscription;
+
+
+  constructor( private cartService: ShoppingCartService ) {  }
+
 
   ngOnInit() {
+    this.shoppingCartList = this.cartService.getShoppingCart();
+    this.itemsInShoppingCart = this.shoppingCartList.length;
+    this.shoppingCartList.forEach((item) => {
+      this.totalAmount += item.totalPrice
+    })
+
+    this.subscription = this.cartService.cartChanged
+      .subscribe((items: CartItem[]) => {
+          this.shoppingCartList = items;
+          this.totalAmount = 0;
+          this.shoppingCartList.forEach((item) => {
+          this.totalAmount += item.totalPrice;
+          })
+        }
+    );
+
+    this.subscription = this.cartService.itemsInShoppingCartChanged.subscribe(number => {
+      this.itemsInShoppingCart = number;
+    })
+
+  }
+
+  counter(plusOrMin, id) {
+    this.totalAmount = 0;
+    this.shoppingCartList.forEach((item) => {
+      if (item.product.id === id) {
+        item.alterQuantity(plusOrMin);
+      }
+      this.totalAmount += item.totalPrice;
+    })
+
   }
 
 }

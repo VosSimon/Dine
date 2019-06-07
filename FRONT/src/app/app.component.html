@@ -46,7 +46,7 @@
         <mat-icon
           [matMenuTriggerFor]="menucart"
           class="shopping_icon"
-          matBadge="0"
+          [matBadge]="itemsInCart"
           matBadgeColor="accent">shopping_cart
         </mat-icon>
         <mat-menu #menucart="matMenu" class="shopping_menu">

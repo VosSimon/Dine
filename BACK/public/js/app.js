@@ -39,7 +39,7 @@ $("input[type=file]").on('change', function(event) {
 })
 $(document).ready(function() {
     let navHeight = $("nav").innerHeight();
-    $("main").css("padding-top", navHeight);
+    $("main").css("top", navHeight);
     $("#navMenu").css("top", navHeight);
 
     $("input[type=text]").each(function() {
