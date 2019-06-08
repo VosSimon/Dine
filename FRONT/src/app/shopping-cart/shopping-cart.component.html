@@ -10,9 +10,9 @@
           <figcaption>
             <h3>{{ cartItem.product.name }}</h3>
             <div class="productCounter">
-              <mat-icon (click)="counter('min', cartItem.product.id)">indeterminate_check_box</mat-icon>
+              <mat-icon (click)="counter('min', cartItem)">indeterminate_check_box</mat-icon>
               <p>{{ cartItem.quantity }}</p>
-              <mat-icon (click)="counter('plus', cartItem.product.id)">add_box</mat-icon>
+              <mat-icon (click)="counter('plus', cartItem)">add_box</mat-icon>
             </div>
             <div class="prices">
               <p class="price">
@@ -24,7 +24,7 @@
                   {{ cartItem.totalPrice|currency:'eur' }}
               </p>
             </div>
-            <mat-icon class="clear">clear</mat-icon>
+            <mat-icon (click)="removeItem(cartItem)" class="clear">clear</mat-icon>
           </figcaption>
         </figure>
       </li>

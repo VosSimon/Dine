@@ -44,15 +44,16 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  counter(plusOrMin, id) {
+  counter(plusOrMin, cartItem: CartItem) {
+    this.cartService.counter(plusOrMin, cartItem);
     this.totalAmount = 0;
-    this.shoppingCartList.forEach((item) => {
-      if (item.product.id === id) {
-        item.alterQuantity(plusOrMin);
-      }
+    this.shoppingCartList.forEach((item: CartItem) => {
       this.totalAmount += item.totalPrice;
     })
+  }
 
+  removeItem(cartItem: CartItem) {
+    this.cartService.removeItem(cartItem);
   }
 
 }
