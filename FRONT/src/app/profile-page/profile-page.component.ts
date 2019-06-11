@@ -34,16 +34,16 @@ export class ProfilePageComponent implements OnInit {
         Validators.minLength(2)
       ]],
       company: ['', [
-        Validators.required,
-        Validators.minLength(2)
+      //   Validators.required,
+      //   Validators.minLength(2)
       ]],
       btw: ['', [
-        Validators.required,
-        Validators.minLength(2)
+      //   Validators.required,
+      //   Validators.minLength(2)
       ]],
       address: ['', [
-        Validators.required,
-        Validators.minLength(2)
+        // Validators.required,
+        // Validators.minLength(2)
       ]],
       postcode: ['', [
         Validators.required,

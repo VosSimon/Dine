@@ -10,6 +10,8 @@ import { RegisterService } from './services/register.service';
 import { ProfileService } from './services/profile.service';
 import { PasswordResetService } from './services/password-reset.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { ShoppingCartService } from './services/shopping-cart.service';
+import { OrderService } from './services/order.service';
 
 // Material section
 import { MatButtonModule } from '@angular/material/button';
@@ -19,11 +21,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,9 +38,11 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
+import { CurrencyPipe } from './currency.pipe';
 import { MenuComponent } from './menu/menu.component';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +53,9 @@ import { SlideshowModule } from 'ng-simple-slideshow';
     ShoppingCartComponent,
     ContactComponent,
     AboutComponent,
-    MenuComponent
+    CurrencyPipe,
+    MenuComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -63,12 +72,24 @@ import { SlideshowModule } from 'ng-simple-slideshow';
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
     MatBadgeModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    SlideshowModule
+    SlideshowModule,
+    MatStepperModule,
+    MatRadioModule
+  ],
+  providers: [
+    LoginService,
+    RegisterService,
+    ProfileService,
+    AuthGuard,
+    MatDatepickerModule,
+    ShoppingCartService,
+    OrderService
   ],
   providers: [LoginService, RegisterService, ProfileService, PasswordResetService, AuthGuard, MatDatepickerModule],
   bootstrap: [AppComponent]

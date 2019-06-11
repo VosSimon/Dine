@@ -15,9 +15,9 @@
       <img src="http://dine.test/img/{{product.image}}" alt="image for {{ product.name }}">
       <figcaption>
           <p>{{ product.name }}</p>
-          <p>{{ product.price }}</p>
-          <input type="number" step="1" value="0">
-          <mat-icon>shopping_basket</mat-icon>
+          <p>{{ product.price|currency:'eur' }}</p>
+          <input (change)="quantityChanged()" type="number" step="1" value="0" min="0">
+          <mat-icon (click)="addToShoppingCart($event, product)">shopping_cart</mat-icon>
       </figcaption>
     </figure>
   </div>

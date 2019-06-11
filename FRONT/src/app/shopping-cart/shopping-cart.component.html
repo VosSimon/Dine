@@ -1,1 +1,48 @@
-<h1>shopping-cart works</h1>
+<section id="shoppingCart">
+  <div id="cartList">
+    <h1>Your shopping cart ({{itemsInShoppingCart}})</h1>
+    <ul>
+      <li *ngFor="let cartItem of shoppingCartList">
+        <figure>
+          <div>
+            <img src="http://dine.test/img/{{cartItem.product.image}}">
+          </div>
+          <figcaption>
+            <h3>{{ cartItem.product.name }}</h3>
+            <div class="productCounter">
+              <mat-icon (click)="counter('min', cartItem)">indeterminate_check_box</mat-icon>
+              <p>{{ cartItem.quantity }}</p>
+              <mat-icon (click)="counter('plus', cartItem)">add_box</mat-icon>
+            </div>
+            <div class="prices">
+              <p class="price">
+                {{ cartItem.quantity }}
+                x
+                {{ cartItem.product.price|currency:'eur' }}
+              </p>
+              <p class="totalPrice">
+                  {{ cartItem.totalPrice|currency:'eur' }}
+              </p>
+            </div>
+            <mat-icon (click)="removeItem(cartItem)" class="clear">clear</mat-icon>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+    <div>
+      <button routerLink="/products" class="bigbutton">Verder winkelen</button>
+    </div>
+  </div>
+  <div id="checkout">
+    <div>
+      <span>
+        <p>Totaal</p>
+        <p>{{itemsInShoppingCart}} product(en)</p>
+      </span>
+      <p class="totalAmount">{{totalAmount|currency:'eur'}}</p>
+    </div>
+    <button routerLink="/checkout" class="bigbutton">Betalen</button>
+  </div>
+
+</section>
+

@@ -41,23 +41,25 @@
         </button>
         <span class="brand" routerLink="" (click)="drawer.close()">Dine</span>
         <span class="spacer"></span>
-        <mat-icon
+        <!-- <mat-icon
           [matMenuTriggerFor]="menucart"
           class="shopping_icon"
-          matBadge="0"
+          [matBadge]="itemsInCart"
+          matBadgeColor="accent">shopping_cart
+        </mat-icon> -->
+        <mat-icon
+          routerLink="/cart"
+          class="shopping_icon"
+          [matBadge]="itemsInCart"
           matBadgeColor="accent">shopping_cart
         </mat-icon>
         <mat-menu #menucart="matMenu" class="shopping_menu">
-          <h3>Items in your cart</h3>
+            <!-- <mat-icon id="closeCart" [matMenuTriggerFor]="menucart">close</mat-icon> -->
+          <!-- <mat-divider></mat-divider> -->
+          <!-- <app-shopping-cart (click) = "$event.stopPropagation()"></app-shopping-cart> -->
           <mat-divider></mat-divider>
-          <ol>
-            <li>Error</li>
-            <li>Bulk EroR</li>
-            <li>Premium EroR</li>
-            <li>Amazing EroR</li>
-          </ol>
-          <mat-divider></mat-divider>
-          <button mat-menu-item routerLink="/cart">Manage cart</button>
+          <!-- <button mat-menu-item routerLink="/cart">Manage cart</button> -->
+
         </mat-menu>
       </mat-toolbar-row>
     </mat-toolbar>

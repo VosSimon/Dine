@@ -65,14 +65,19 @@ figcaption {
     }
   }
 
+  mat-icon {
+    cursor: pointer;
+  }
+
 }
 
 input[type=search],
 select#filterProducts {
   width: 100%;
   padding: 1rem;
-  background: #FFF;
-  border: 1px solid #333;
+  background: #fafafa;
+  border: none;
+  border-bottom: 1px solid #333;
 }
 
 select#filterProducts {
@@ -84,7 +89,7 @@ select#autocompleteList {
 }
 
 select#autocompleteList option {
-  width: 100%;
+  width: 90vw;
   padding: .5em 1em;
 }
 
