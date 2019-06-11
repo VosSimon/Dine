@@ -1,0 +1,81 @@
+<div class="container">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form (submit)="firstFormSubmit($event)" [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Bestelling</ng-template>
+          <h3>Bestelling</h3>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>Bestel optijd</mat-card-title>
+              </mat-card-header>
+
+              <mat-card-content>
+                <ol>
+
+                  <li>Bestellingen voor de volgende dag, graag voor 15u bestellen.</li>
+                  <li>Grote bestellingen graag 3 dagen op voorhand bestellen.</li>
+                </ol>
+              </mat-card-content>
+            </mat-card>
+            <h4>Ophaalmoment</h4>
+            <mat-form-field class="fourtypercent" appearance="outline">
+              <mat-label>Ophaaldag</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Ophaaldag" formControlName="orderDate" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="fourtypercent" appearance="outline">
+              <mat-label>Ophaaluur</mat-label>
+              <input matInput type="time" placeholder="Ophaaluur" formControlName="orderTime" required>
+            </mat-form-field>
+            <h4>Winkelwagentje</h4>
+            <span>
+              {{ itemsInShoppingCart }} {{ itemsInShoppingCart <= 1? 'artikel' : 'artikelen' }} -
+              <a routerLink="/cart" style="color:red;">Wijzigen</a>
+            </span>
+            <span class="flexSpaceBetween"><p>Totaal artikelen ({{itemsInShoppingCart}})</p><p class="bold">{{totalPrice|currency:'eur'}}</p></span>
+            <mat-divider></mat-divider>
+            <span class="flexSpaceBetween"><p>Te betalen</p><p class="bold">{{totalPrice|currency:'eur'}}</p></span>
+
+            <button class="stepper" class="bigbutton" matStepperNext>Next</button>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>Betaling</ng-template>
+        <h3>Kies je betaalswijze</h3>
+        <label id="example-radio-group-label">Pick your favorite season</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          [(ngModel)]="paymentMethod"
+          class="example-radio-group">
+          <mat-radio-button [checked]="true" class="example-radio-button" value="bakery">
+            Betalen in de bakkerij
+          </mat-radio-button>
+          <mat-radio-button [disabled]="true" class="example-radio-button" value="online">
+            Online betalen (binnenkort beschikbaar)
+          </mat-radio-button>
+        </mat-radio-group>
+        <!-- TODO make required -->
+        <div class="stepper">
+          <button class="bigbutton" matStepperPrevious>Back</button>
+          <button (click)="stepTwo()" class="bigbutton" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Bevestiging</ng-template>
+        <mat-card>
+            <mat-card-header>
+              <!-- <mat-card-title></mat-card-title> -->
+            </mat-card-header>
+
+            <mat-card-content>
+              U hebt gekozen om uw bestelling op te halen op: {{date}} om {{time}} uur.
+            </mat-card-content>
+          </mat-card>
+        <div>
+          <button (click)="orderSubmit()" class="bigbutton">Bestelling verzenden</button>
+          <button class="bigbutton" matStepperPrevious>Back</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+</div>

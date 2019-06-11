@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderDetail;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -35,7 +36,25 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create(
+            [
+            'user_id' => $request->userId,
+            'bruto' => $request->totalPrice,
+            'netto' => $request->totalPrice
+            ]
+        );
+        $orderDetail = [];
+        foreach ($request->items as $item) {
+            $detail = OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $item['product']['id'],
+                'quantity' => $item['quantity']
+            ]);
+            array_push($orderDetail, $detail);
+        }
+        return [$order, $orderDetail];
+
+        // TODO add payment method and userHasPayed when implementing online payment
     }
 
     /**

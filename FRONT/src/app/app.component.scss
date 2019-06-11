@@ -7,8 +7,8 @@
 }
 
 .sidenav {
-  width: 20%;
-  min-width: 80px;
+  width: 40vw;
+  // min-width: 80px;
 }
 
 .side-menu {
@@ -53,6 +53,24 @@
 .shopping_icon {
   cursor: pointer;
 }
+
+// ::ng-deep .mat-menu-panel {
+//   max-width: 100% !important;
+//   max-height: 100% !important;
+//   border-radius: 0px !important;
+// }
+
+// ::ng-deep .cdk-overlay-pane {
+//   width: 85vw !important;
+//   right: 0 !important;
+// }
+
+// ::ng-deep .mat-menu-content:not(:empty) {
+//   padding-top: 0 !important;
+//   padding-bottom: 0 !important;
+// }
+
+
 
 h3 {
   display: block;

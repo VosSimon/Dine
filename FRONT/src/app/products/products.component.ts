@@ -31,12 +31,8 @@ export class ProductsComponent implements OnInit {
   showSearchProductList = false;
   autocompleteList: Array<object>;
   searchInput:string;
-  productQuantity;
   quantity;
-  pageInformation;
   subscription: Subscription;
-  message: string = "";
-  showMessage: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -45,7 +41,7 @@ export class ProductsComponent implements OnInit {
     private _snackBar: MatSnackBar,
     ) {
 
-    this.http.get('http://dine.test/categories').subscribe((result) => {
+    this.http.get('http://localhost:8000/categories').subscribe((result) => {
       this.categories = result['data'];
     });
 
@@ -110,6 +106,12 @@ export class ProductsComponent implements OnInit {
       // TODO:: strange error when setting showSearchProductList to false.
       // solved with queryselector but problem when searching product and type more. need to clear input first.
     }
+  }
+
+  quantityChanged() {
+    this._snackBar.open('Vergeen niet op het winkelmandje te klikken om toe te voegen.', 'x.', {
+      duration:4000
+    });
   }
 
   addToShoppingCart(e, product: Product) {

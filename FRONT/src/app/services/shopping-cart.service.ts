@@ -65,6 +65,18 @@ export class ShoppingCartService {
     return this.cartArray;
   }
 
+  getNrOfItemsInShoppingCart() {
+    return this.cartArray.length;
+  }
+
+  getTotalPrice() {
+    let totalPrice: number = 0;
+    this.cartArray.forEach((item: CartItem) => {
+      totalPrice += item.totalPrice;
+    })
+    return totalPrice;
+  }
+
   counter(plusOrMin, cartItem: CartItem) {
     cartItem.alterQuantity(plusOrMin);
     this.cartChanged.next(this.cartArray);

@@ -10,4 +10,24 @@ body {
     color: #000;
     text-decoration: none;
   }
+
+  .flexSpaceBetween {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .bigbutton {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgb(12, 12, 173);
+    border-radius: 5px;
+    background: rgb(0, 0, 255);
+    color: #FFF;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
 }

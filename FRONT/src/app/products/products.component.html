@@ -16,8 +16,8 @@
       <figcaption>
           <p>{{ product.name }}</p>
           <p>{{ product.price|currency:'eur' }}</p>
-          <input type="number" step="1" value="0" min="0">
-          <mat-icon (click)="addToShoppingCart($event, product)">shopping_basket</mat-icon>
+          <input (change)="quantityChanged()" type="number" step="1" value="0" min="0">
+          <mat-icon (click)="addToShoppingCart($event, product)">shopping_cart</mat-icon>
       </figcaption>
     </figure>
   </div>

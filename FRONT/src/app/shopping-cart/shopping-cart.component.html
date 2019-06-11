@@ -29,16 +29,19 @@
         </figure>
       </li>
     </ul>
+    <div>
+      <button routerLink="/products" class="bigbutton">Verder winkelen</button>
+    </div>
   </div>
   <div id="checkout">
     <div>
       <span>
         <p>Totaal</p>
-        <p>({{itemsInShoppingCart}} product(en))</p>
+        <p>{{itemsInShoppingCart}} product(en)</p>
       </span>
       <p class="totalAmount">{{totalAmount|currency:'eur'}}</p>
     </div>
-    <button id="checkoutButton">Betalen</button>
+    <button routerLink="/checkout" class="bigbutton">Betalen</button>
   </div>
 
 </section>

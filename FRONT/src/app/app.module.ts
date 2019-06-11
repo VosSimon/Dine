@@ -10,6 +10,7 @@ import { RegisterService } from './services/register.service';
 import { ProfileService } from './services/profile.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { OrderService } from './services/order.service';
 
 // Material section
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +26,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +41,7 @@ import { CurrencyPipe } from './currency.pipe';
 import { MenuComponent } from './menu/menu.component';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,8 @@ import { SlideshowModule } from 'ng-simple-slideshow';
     ContactComponent,
     AboutComponent,
     CurrencyPipe,
-    MenuComponent
+    MenuComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -72,9 +77,19 @@ import { SlideshowModule } from 'ng-simple-slideshow';
     MatBadgeModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    SlideshowModule
+    SlideshowModule,
+    MatStepperModule,
+    MatRadioModule
   ],
-  providers: [LoginService, RegisterService, ProfileService, AuthGuard, MatDatepickerModule, ShoppingCartService],
+  providers: [
+    LoginService,
+    RegisterService,
+    ProfileService,
+    AuthGuard,
+    MatDatepickerModule,
+    ShoppingCartService,
+    OrderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
