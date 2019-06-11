@@ -27,8 +27,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +43,7 @@ import { MenuComponent } from './menu/menu.component';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthenticationModule, // ask about removing this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    AuthenticationModule,
     AppRoutingModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -86,12 +87,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
     LoginService,
     RegisterService,
     ProfileService,
+    PasswordResetService,
     AuthGuard,
+    ProductService,
     MatDatepickerModule,
     ShoppingCartService,
-    OrderService
+    OrderService,
+    MatDatepickerModule
   ],
-  providers: [LoginService, RegisterService, ProfileService, PasswordResetService, AuthGuard, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
