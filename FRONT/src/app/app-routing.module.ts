@@ -19,6 +19,14 @@ const routes: Routes = [
     loadChildren: './authentication/authentication.module#AuthenticationModule'
   },
   {
+    path: 'resetrequest',
+    loadChildren: './authentication/authentication.module#AuthenticationModule'
+  },
+  {
+    path: 'passwordreset',
+    loadChildren: './authentication/authentication.module#AuthenticationModule'
+  },
+  {
     path: ' ',
     component: LandingPageComponent
   },

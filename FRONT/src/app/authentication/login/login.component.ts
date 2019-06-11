@@ -40,13 +40,12 @@ export class LoginComponent implements OnInit {
 
   onLoginSubmit(event) {
     event.preventDefault();
-    // console.log(this.loginForm.value);
+    console.log(this.loginForm.value);
     const fd = new FormData();
     fd.append('email', this.loginForm.value.email);
     fd.append('password', this.loginForm.value.password);
     this.submitted = true;
     this.loading = true;
-    // console.log(data);
     this.loginService.loginUser(fd);
   }
 

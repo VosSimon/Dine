@@ -8,6 +8,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { ProfileService } from './services/profile.service';
+import { PasswordResetService } from './services/password-reset.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { OrderService } from './services/order.service';
@@ -43,6 +44,7 @@ import { MenuComponent } from './menu/menu.component';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthenticationModule, // ask about removing this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    AuthenticationModule,
     AppRoutingModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -87,10 +89,13 @@ import { CheckoutComponent } from './checkout/checkout.component';
     LoginService,
     RegisterService,
     ProfileService,
+    PasswordResetService,
     AuthGuard,
+    ProductService,
     MatDatepickerModule,
     ShoppingCartService,
-    OrderService
+    OrderService,
+    MatDatepickerModule
   ],
   bootstrap: [AppComponent]
 })

@@ -6,30 +6,29 @@
         <image x="35" y="23" width="600" height="438"
           xlink:href="data:img/png;base64,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" />
       </svg>
-      <span class="brand" routerLink="">Dine</span>
+      <span class="brand" routerLink="" (click)="drawer.close()">Dine</span>
     </mat-toolbar>
     <div class="side-menu">
       <h2>Welcome</h2>
       <mat-divider></mat-divider>
-      <button mat-button routerLink="/products">Products</button>
-      <button mat-button routerLink="/menu">Menu</button>
-      <button mat-button routerLink="/contact">Contact us</button>
-      <button mat-button routerLink="/about">About us</button>
-      <button mat-button routerLink="/profile" *ngIf="loginService.isLoggedIn()">Profile</button>
-      <mat-divider></mat-divider>
-      <button mat-button [matMenuTriggerFor]="catMenu">Categories</button>
-      <mat-divider [inset]="true"></mat-divider>
-      <mat-icon [matMenuTriggerFor]="menu" class="power_icon">power_settings_new</mat-icon>
+      <button mat-button routerLink="/products" (click)="drawer.close()">Products</button>
+      <button mat-button routerLink="/menu" (click)="drawer.close()">Menu</button>
+      <button mat-button routerLink="/contact" (click)="drawer.close()">Contact us</button>
+      <button mat-button routerLink="/about" (click)="drawer.close()">About us</button>
+      <button mat-button routerLink="/profile" *ngIf="loginService.isLoggedIn()"
+        (click)="drawer.close()">Profile</button>
       <mat-divider></mat-divider>
       <mat-slide-toggle>Lights On!</mat-slide-toggle>
       <mat-slide-toggle>EN/NL</mat-slide-toggle>
+      <mat-divider [inset]="true"></mat-divider>
+      <mat-icon [matMenuTriggerFor]="menu" class="power_icon">power_settings_new</mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/login" *ngIf="!loginService.isLoggedIn()">Login</button>
-        <button mat-menu-item routerLink="/register" *ngIf="!loginService.isLoggedIn()">Register</button>
-        <button mat-menu-item (click)="logOut()" *ngIf="loginService.isLoggedIn()">Logout</button>
-      </mat-menu>
-      <mat-menu  #catMenu="matMenu">
-        <div *ngFor="let category of categories"><button mat-menu-item>{{category.name}}</button></div>
+        <button mat-menu-item routerLink="/login" *ngIf="!loginService.isLoggedIn()"
+          (click)="drawer.close()">Login</button>
+        <button mat-menu-item routerLink="/register" *ngIf="!loginService.isLoggedIn()"
+          (click)="drawer.close()">Register</button>
+        <button mat-menu-item (click)="logOut()" *ngIf="loginService.isLoggedIn()"
+          (click)="drawer.close()">Logout</button>
       </mat-menu>
     </div>
 
@@ -40,7 +39,7 @@
         <button mat-icon-button (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-        <span class="brand" routerLink="">Dine</span>
+        <span class="brand" routerLink="" (click)="drawer.close()">Dine</span>
         <span class="spacer"></span>
         <!-- <mat-icon
           [matMenuTriggerFor]="menucart"

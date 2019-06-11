@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ResetRequestComponent } from './reset-request/reset-request.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { LandingPageComponent } from '../landing-page/landing-page.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
@@ -23,6 +25,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'resetrequest',
+    component: ResetRequestComponent
+  },
+  {
+    path: 'passwordreset',
+    component: PasswordResetComponent
   },
   {
     path: 'about',
