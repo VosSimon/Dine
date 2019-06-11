@@ -69,14 +69,19 @@
           </mat-form-field>
           <mat-form-field class="twentypercent" appearance="outline">
             <mat-label>Postcode</mat-label>
-            <input id="postcode" matInput formControlName="postcode" placeholder="Enter your postcode" />
+            <input type="number" id="postcode" matInput formControlName="postcode" (input)="autocompletePostcode($event)" [matAutocomplete]="auto" placeholder="Enter your postcode" />
+            <mat-autocomplete (optionSelected)="autofillGemeente($event)" #auto="matAutocomplete">
+              <mat-option [attr.data-gemeente]="option.Postcode.naam_deelgemeente" *ngFor="let option of postcodeOptions" [value]="option.Postcode.postcode_deelgemeente">
+                {{option.Postcode.postcode_deelgemeente}} - {{option.Postcode.naam_deelgemeente}}
+              </mat-option>
+            </mat-autocomplete>
             <mat-error *ngIf="f.postcode.invalid">
               Postcode is <strong>required</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="twentypercent" appearance="outline">
             <mat-label>City</mat-label>
-            <input id="city" matInput formControlName="city" placeholder="Enter your city" />
+            <input [value]="autofilledGemeente" id="city" matInput formControlName="city" placeholder="Enter your city" />
             <mat-error *ngIf="f.city.invalid">
               City is <strong>required</strong>
             </mat-error>

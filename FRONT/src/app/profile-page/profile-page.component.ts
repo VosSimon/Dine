@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ProfileService } from '../services/profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,6 +14,9 @@ export class ProfilePageComponent implements OnInit {
   profileForm: FormGroup;
   submitted = false;
   loading = false;
+  postcodeOptions: Array<object>;
+  subscription: Subscription;
+  autofilledGemeente: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,6 +58,11 @@ export class ProfilePageComponent implements OnInit {
         Validators.minLength(2)
       ]],
     });
+
+
+    this.subscription = this.profileService.autocompletePost.subscribe((postecodeArray: Array<object>) => {
+      this.postcodeOptions = postecodeArray;
+    })
   }
 
   get f() { return this.profileForm.controls; }
@@ -71,5 +80,13 @@ export class ProfilePageComponent implements OnInit {
     const data = this.profileForm.value;
     // console.log(data);
     this.profileService.handleProfile(data);
+  }
+
+  autocompletePostcode(e) {
+    this.profileService.autocompletePostcode(e.target.value);
+  }
+
+  autofillGemeente(e) {
+    this.autofilledGemeente = e.option._element.nativeElement.dataset.gemeente;
   }
 }

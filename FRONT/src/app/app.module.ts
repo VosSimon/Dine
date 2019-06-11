@@ -28,6 +28,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -79,7 +80,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     MatNativeDateModule,
     SlideshowModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatAutocompleteModule
   ],
   providers: [
     LoginService,
