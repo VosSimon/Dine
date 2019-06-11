@@ -16,10 +16,16 @@ use Illuminate\Http\Request;
 
 Route::post('apilogin', 'PassportController@login');
 Route::post('apiregister', 'PassportController@register');
+Route::get('activate/{token}', 'PassportController@signupActivate');
+Route::post('create', 'PasswordResetController@create');
+Route::get('find/{token}', 'PasswordResetController@find');
+Route::post('reset', 'PasswordResetController@reset');
+
 
 Route::middleware('auth:api')->group(
     function () {
         Route::get('apiuser', 'PassportController@getUser');
+        Route::get('logout', 'PassportController@logout');
     }
 );
 

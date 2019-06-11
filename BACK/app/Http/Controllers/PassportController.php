@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\SignupActivate;
 use Validator;
+use Carbon\Carbon;
 
 class PassportController extends Controller
 {
@@ -35,8 +37,10 @@ class PassportController extends Controller
         $input = $request->all();
         //return response($input);
         $input['password'] = bcrypt($input['password']);
+        $input[ 'activation_token'] = str_random(60);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('AppName')->accessToken;
+        $user->notify(new SignupActivate($user));
+        $success['token'] =  $user->createToken('Personal Access Token')->accessToken;
         return response()->json(['success' => $success], $this->successStatus)
             ->header('Content-Type', 'text/plain');
     }
@@ -47,11 +51,22 @@ class PassportController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        $request->validate(
+            [
+            'email' => 'required|string|email',
+            'password' => 'required|string'
+            ]
+        );
+
+        $credentials = request(['email', 'password']);
+        $credentials['active'] = 1;
+        $credentials['deleted_at'] = null;
+
+        if (Auth:: attempt($credentials)) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('AppName')->accessToken;
+            $success['token'] =  $user->createToken('Persona lAccess Token')->accessToken;
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
@@ -68,6 +83,26 @@ class PassportController extends Controller
         $user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);
     }
+
+    /**
+     * Sets the user to active after email confirmation
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function signupActivate($token)
+    {
+        $user = User::where('activation_token', $token)->first();
+        if (!$user) {
+            return response()->json([
+                'message' => 'This activation token is invalid.'
+            ], 404);
+        }
+        $user->active = true;
+        $user->email_verified_at = Carbon::now();
+        $user->activation_token = '';
+        $user->save();
+        return response()->json($user);
+    }
 }
 
 /////////////////////////////
@@ -80,3 +115,14 @@ class PassportController extends Controller
 
 // if you end remigrating your DB, you'll have to do this comand :
 // php artisan passport:client --personal
+
+
+// install carbon  $ composer require nesbot/carbon
+
+
+// BestMarvelFanSite@gmail.com
+// Vlad&SimonBest2
+
+
+// Change the email look
+// https://medium.com/@christianjombo/customizing-laravels-default-notification-email-template-adding-a-logo-and-changing-ff6f107dd640

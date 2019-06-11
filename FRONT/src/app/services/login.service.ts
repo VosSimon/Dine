@@ -25,6 +25,7 @@ export class LoginService {
   loginUser(fd) {
     return this.http.post('http://dine.test/apilogin', fd).subscribe(
       (response: any) => {
+        console.log(response);
         this.accessToken = response.success.token;
         localStorage.setItem('token', this.accessToken);
         this.router.navigate(['/profile']);

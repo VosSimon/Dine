@@ -8,6 +8,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { ProfileService } from './services/profile.service';
+import { PasswordResetService } from './services/password-reset.service';
 import { AuthGuard } from './services/auth-guard.service';
 
 // Material section
@@ -69,7 +70,7 @@ import { SlideshowModule } from 'ng-simple-slideshow';
     MatNativeDateModule,
     SlideshowModule
   ],
-  providers: [LoginService, RegisterService, ProfileService, AuthGuard, MatDatepickerModule],
+  providers: [LoginService, RegisterService, ProfileService, PasswordResetService, AuthGuard, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
