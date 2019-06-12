@@ -17,10 +17,11 @@ use Illuminate\Http\Request;
 // use this so you don't have to register or reset password to be able to see how emails look
 
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\PasswordResetSuccess;
+// use App\Notifications\PasswordResetSuccess;
+use App\Notifications\ContactMessage;
 
 Route::get('/test-mail', function () {
-    Notification::route('mail', 'BestMarvelFanSite@gmail.com')->notify(new PasswordResetSuccess());
+    Notification::route('mail', 'BestMarvelFanSite@gmail.com')->notify(new ContactMessage("something@lol.co", "I just want to say that the croisants are amazing!!!"));
     return 'Sent';
 });
 
@@ -32,7 +33,7 @@ Route::get('activate/{token}', 'PassportController@signupActivate');
 Route::post('create', 'PasswordResetController@create');
 Route::get('find/{token}', 'PasswordResetController@find');
 Route::post('reset', 'PasswordResetController@reset');
-
+Route::post('contact/message', 'ContactMessageController@sendMessage');
 
 Route::middleware('auth:api')->group(
     function () {

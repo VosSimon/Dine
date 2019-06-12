@@ -47,7 +47,7 @@ class PasswordResetController extends Controller
         }
         return response()->json(
             [
-             ' message' => ' We have e-mailed your password reset link!'
+             'message' => ' We have e-mailed your password reset link!'
             ]
         );
     }
@@ -65,7 +65,7 @@ class PasswordResetController extends Controller
         if (!$passwordReset) {
             return response()->json(
                 [
-                  ' message' => 'This password reset  token is invalid.'
+                  'message' => 'This password reset  token is invalid.'
                 ], 404
             );
         }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ContactMessageService } from '../services/contact-message.service';
+
 // import { IImage } from './modules/slideshow/IImage';
 
 @Component({
@@ -42,7 +44,8 @@ export class LandingPageComponent implements OnInit {
   fullscreen: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private contactMessageService: ContactMessageService
   ) { }
 
   ngOnInit() {
@@ -70,13 +73,11 @@ export class LandingPageComponent implements OnInit {
     fd.append('message', this.messageForm.value.message);
     this.submitted = true;
     this.loading = true;
-    // console.log(data);
-    // this.loginService.loginUser(fd);
+    this.contactMessageService.send(fd);
   }
 
-
-  // remove later //
-
+  // the slider is a npm package
+  // install it with rh comand below
+  // or run npm install if you have the code
   // npm i -S ng-simple-slideshow
-
 }

@@ -45,11 +45,13 @@ class OrderController extends Controller
         );
         $orderDetail = [];
         foreach ($request->items as $item) {
-            $detail = OrderDetail::create([
+            $detail = OrderDetail::create(
+                [
                 'order_id' => $order->id,
                 'product_id' => $item['product']['id'],
                 'quantity' => $item['quantity']
-            ]);
+                ]
+            );
             array_push($orderDetail, $detail);
         }
         return [$order, $orderDetail];

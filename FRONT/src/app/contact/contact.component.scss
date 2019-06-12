@@ -1,0 +1,144 @@
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // 768px window width and more
+  @include md {
+    width: 85%;
+  }
+  // 992px window width and more
+  @include lg {
+    width: 75%;
+  }
+  // 1200px window width and more
+  @include xl {
+    width: 60%;
+  }
+
+  h1 {
+    font-weight: 300;
+    letter-spacing: .2em;
+    text-shadow: 10px 10px 5px rgba(150, 150, 150, 1);
+  }
+
+  mat-card {
+    margin-top: 2em;
+    width: 98%;
+
+    .opening-hours-table {
+      width: 100%;
+      td:nth-of-type(3) {
+        width: 20%;
+        text-align: center;
+      }
+      // 768px window width and more
+      @include md {
+        width: 80%;
+        margin-left: 10%;
+      }
+
+      // 992px window width and more
+      @include lg {
+        width: 70%;
+        margin-left: 15%;
+      }
+
+      // 1200px window width and more
+      @include xl {
+        width: 50%;
+        margin-left: 25%;
+      }
+      td:nth-of-type(4) {
+        text-align: right;
+      }
+    }
+  }
+
+  mat-card:nth-of-type(1) {
+    margin-top: 0;
+  }
+  mat-card:nth-of-type(3) {
+    margin-bottom: 3em;
+  }
+
+  iframe {
+    width: 100%;
+    height: 60vw;
+
+    // 768px window width and more
+    @include md {
+      height: 50vw;
+    }
+    // 992px window width and more
+    @include lg {
+      height: 30vw;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    // 992px window width and more
+    @include lg {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .full-width {
+      width: 100%;
+      height: 100%;
+      
+      @include lg {
+        width: 30%;
+      }
+    }
+  }
+}
+
+
