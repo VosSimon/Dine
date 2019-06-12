@@ -13,6 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
+// testing email style   remove later
+// use this so you don't have to register or reset password to be able to see how emails look
+
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PasswordResetSuccess;
+
+Route::get('/test-mail', function () {
+    Notification::route('mail', 'BestMarvelFanSite@gmail.com')->notify(new PasswordResetSuccess());
+    return 'Sent';
+});
+
+// end test    don't remove yet  :P
 
 Route::post('apilogin', 'PassportController@login');
 Route::post('apiregister', 'PassportController@register');

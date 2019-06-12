@@ -66,7 +66,7 @@ class PassportController extends Controller
 
         if (Auth:: attempt($credentials)) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('Persona lAccess Token')->accessToken;
+            $success['token'] =  $user->createToken('Personal Access Token')->accessToken;
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
@@ -102,6 +102,20 @@ class PassportController extends Controller
         $user->activation_token = '';
         $user->save();
         return response()->json($user);
+    }
+
+    /**
+     * Logging out user
+     */
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::user()->token()->revoke();
+            return response()->json(['success' => 'logout_success'], 200);
+        } else {
+            return response()->json(['error' => 'api.something_went_wrong'], 500);
+        }
+        // return $this->json(null, "Successfully Logged Out");
     }
 }
 
