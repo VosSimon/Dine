@@ -107,10 +107,22 @@ img {
 .header {
     padding: 25px 0;
     text-align: center;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#959595+0,0d0d0d+34,010101+50,0a0a0a+60,4e4e4e+100,383838+100,1b1b1b+100,383838+100,4e4e4e+102 */
+    background: #959595;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #959595 0%, #0d0d0d 34%, #010101 50%, #0a0a0a 60%, #4e4e4e 100%, #383838 100%, #1b1b1b 100%, #383838 100%, #4e4e4e 102%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #959595 0%, #0d0d0d 34%, #010101 50%, #0a0a0a 60%, #4e4e4e 100%, #383838 100%, #1b1b1b 100%, #383838 100%, #4e4e4e 102%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #959595 0%, #0d0d0d 34%, #010101 50%, #0a0a0a 60%, #4e4e4e 100%, #383838 100%, #1b1b1b 100%, #383838 100%, #4e4e4e 102%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#959595', endColorstr='#4e4e4e', GradientType=0);
+    /* IE6-9 */
+
 }
 
 .header a {
-    color: #bbbfc3;
+    color: #ffffff;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -160,6 +172,18 @@ img {
     padding: 0;
     text-align: center;
     width: 570px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#959595+0,0d0d0d+34,010101+50,0a0a0a+60,4e4e4e+100,383838+100,1b1b1b+100,383838+100,4e4e4e+102 */
+    background: #959595;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #959595 0%, #0d0d0d 34%, #010101 50%, #0a0a0a 60%, #4e4e4e 100%, #383838 100%, #1b1b1b 100%, #383838 100%, #4e4e4e 102%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #959595 0%, #0d0d0d 34%, #010101 50%, #0a0a0a 60%, #4e4e4e 100%, #383838 100%, #1b1b1b 100%, #383838 100%, #4e4e4e 102%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #959595 0%, #0d0d0d 34%, #010101 50%, #0a0a0a 60%, #4e4e4e 100%, #383838 100%, #1b1b1b 100%, #383838 100%, #4e4e4e 102%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#959595', endColorstr='#4e4e4e', GradientType=0);
+    /* IE6-9 */
+
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 570px;

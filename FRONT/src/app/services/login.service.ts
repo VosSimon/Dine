@@ -28,8 +28,8 @@ export class LoginService {
         console.log(response);
         this.accessToken = response.success.token;
         localStorage.setItem('token', this.accessToken);
-        this.router.navigate(['/profile']);
         this.getUser();
+        this.router.navigate(['/profile']);
       },
       (error) => {
         console.log(error);
@@ -39,8 +39,8 @@ export class LoginService {
 
   getUser() {
     return this.http.get('http://dine.test/apiuser', {headers: this.headers}).subscribe(
-      (result: any) => {
-        this.credentials = JSON.stringify(result);
+      (response: any) => {
+        this.credentials = JSON.stringify(response);
         localStorage.setItem('user', this.credentials);
         console.log('You\'re in..This are your credentials: ' + this.credentials);
       }
@@ -52,9 +52,14 @@ export class LoginService {
   }
 
   logOut() {
-    this.router.navigate(['login']);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    return this.credentials = null;
+    return this.http.get('http://dine.test/logout', { headers: this.headers }).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.router.navigate(['login']);
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        return this.credentials = null;
+      }
+    );
   }
 }

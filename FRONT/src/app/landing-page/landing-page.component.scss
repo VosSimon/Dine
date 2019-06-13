@@ -301,6 +301,9 @@ $screen-xl-min: 1200px;
       tr td:first-child {
         font-weight: bold;
       }
+      td:nth-of-type(4) {
+        text-align: right;
+      }
     }
 
     form {
