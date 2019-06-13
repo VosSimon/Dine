@@ -53,23 +53,46 @@ class PassportController extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate(
-            [
-            'email' => 'required|string|email',
-            'password' => 'required|string'
-            ]
+        //Error messages
+        $messages = [
+            "email.required" => "Email is required",
+            "email.email" => "Email is not valid",
+            "email.exists" => "Email doesn't exists",
+            "password.required" => "Password is required",
+            "password.min" => "Password must be at least 8 characters"
+        ];
+
+        // validate the form data
+        $validator = Validator::make(
+            $request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|string|min:8'
+            ], $messages
         );
 
-        $credentials = request(['email', 'password']);
-        $credentials['active'] = 1;
-        $credentials['deleted_at'] = null;
-
-        if (Auth:: attempt($credentials)) {
-            $user = Auth::user();
-            $success['token'] =  $user->createToken('Personal Access Token')->accessToken;
-            return response()->json(['success' => $success], $this->successStatus);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 401);
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            // attempt to log
+            $credentials = request(['email', 'password']);
+            $credentials['active'] = 1;
+            $credentials['deleted_at'] = null;
+
+            if (Auth::attempt($credentials)) {
+                $user = Auth::user();
+                $success['token'] =  $user->createToken('Personal Access Token')->accessToken;
+                return response()->json(
+                    [
+                        'success' => $success,
+                    ], $this->successStatus
+                );
+            } else {
+                return response()->json(
+                    [
+                        'error' => 'Password is incorrect!'
+                    ]
+                );
+            }
         }
     }
 
@@ -93,9 +116,11 @@ class PassportController extends Controller
     {
         $user = User::where('activation_token', $token)->first();
         if (!$user) {
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'This activation token is invalid.'
-            ], 404);
+                ], 404
+            );
         }
         $user->active = true;
         $user->email_verified_at = Carbon::now();

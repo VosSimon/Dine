@@ -73,7 +73,10 @@ export class LandingPageComponent implements OnInit {
     fd.append('message', this.messageForm.value.message);
     this.submitted = true;
     this.loading = true;
-    this.contactMessageService.send(fd);
+    const prom = this.contactMessageService.send(fd);
+    prom.then(() => {
+      this.loading = false;
+    });
   }
 
   // the slider is a npm package

@@ -64,11 +64,9 @@ $screen-xl-min: 1200px;
 }
 
 .brand {
-  color: orangered;
   margin-left: 2em;
-  text-shadow: 2px 1px rgb(255, 142, 142);
-  letter-spacing: .5em;
   cursor: pointer;
+  outline: none;
 }
 
 .container .mat-drawer .mat-icon {
@@ -127,6 +125,7 @@ h3 {
 
 .toolbarlogo {
   height: 100%;
+  margin-left: 3em;
 }
 
 ol { padding-right: 1rem; }
