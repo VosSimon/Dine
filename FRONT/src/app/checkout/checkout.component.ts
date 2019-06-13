@@ -22,7 +22,6 @@ export class CheckoutComponent implements OnInit {
   cartArray: CartItem[];
   totalPrice: number = 0;
   orderPickupDate: string;
-  paymentMethod: string;
   date: string;
   time: string;
 
@@ -42,7 +41,7 @@ export class CheckoutComponent implements OnInit {
       orderTime: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
-      // payment: ['', Validators.required]
+      paymentMethod: ['', Validators.required]
     });
 
   }
@@ -56,16 +55,9 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  stepTwo() {
-    console.log(this.paymentMethod);
-
-  }
-
   orderSubmit() {
-    if (!this.paymentMethod) {
-      alert("No payment method checked. Please check one.");
-    } else {
-      this.orderService.placeOrder(this.cartArray, this.orderPickupDate, this.paymentMethod, 11);
-    }
+    let user = JSON.parse(localStorage.getItem('user'));
+    this.orderService.placeOrder(this.cartArray, this.orderPickupDate, this.secondFormGroup.value, user.success.id);
+
   }
 }

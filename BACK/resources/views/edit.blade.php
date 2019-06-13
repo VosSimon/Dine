@@ -45,7 +45,7 @@
 <section id="productSection" class="container">
     <h1>Aanpassen en verwijderen</h1>
     <h2>Producten</h2>
-    @foreach($products as $product)
+    @foreach($products as $index => $product)
     <div class="productView">
         <figure>
             <img src="{{asset('img/'.$product->image)}}">
@@ -55,11 +55,11 @@
             <input disabled type="hidden" name="_token" value="{{ csrf_token() }}">
                 <ul>
                     <li>
-                        <input disabled type="text" name="name" required id="prodName" value="{{ $product->name }}">
-                        <label for="prodName">naam</label>
+                    <input disabled type="text" name="name" required id="prodName{{$product->id}}" value="{{ $product->name }}">
+                        <label for="prodName{{$product->id}}">naam</label>
                     </li>
                     <li>
-                        <select disabled name="category_id" id="category" required>
+                        <select disabled name="category_id" id="category{{$product->id}}" required>
                         @foreach($categories as $category)
                             @if($category->id == $product->category_id)
                                 <option selected value="{{ $category->id }}">{{ $category->name }}</option>
@@ -68,10 +68,10 @@
                             @endif
                         @endforeach
                         </select>
-                        <label for="catName">categorie naam</label>
+                        <label for="category{{$product->id}}">categorie naam</label>
                     </li>
                     <li>
-                        <select disabled name="allergens[]" id="allergens" multiple required>
+                        <select disabled name="allergens[]" id="allergens{{$product->id}}" multiple required>
                             <option value="0">geen</option>
                             @foreach($allergens as $allergen)
                                 @if(in_array($allergen->id, $product->allergen_id) == true)
@@ -81,20 +81,20 @@
                                 @endif
                             @endforeach
                         </select>
-                        <label for="allergens">allergenen</label>
+                        <label for="allergens{{$product->id}}">allergenen</label>
                     </li>
                     <li>
-                        <input disabled type="file" name="image" id="image">
-                        <label id="imageButtonLabel" for="image">afbeelding</label>
-                        <p id="showImageName"></p>
+                    <input data-index="{{$index}}" disabled type="file" name="image" id="image{{$product->id}}">
+                        <label class="imageButtonLabel" for="image{{$product->id}}">afbeelding</label>
+                        <p class="showImageName"></p>
                     </li>
                     <li>
-                        <input disabled type="number" name="price" step="0.01" required id="price" value="{{ $product->price }}">
-                        <label for="price">prijs</label>
+                        <input disabled type="number" name="price" step="0.01" required id="price{{$product->id}}" value="{{ $product->price }}">
+                        <label for="price{{$product->id}}">prijs</label>
                     </li>
                     <li>
-                        <textarea disabled type="text" name="description" id="desc" placeholder="{{ $product->description }}"></textarea>
-                        <label for="desc">omschrijving</label>
+                        <textarea disabled type="text" name="description" id="desc{{$product->id}}" placeholder="{{ $product->description }}"></textarea>
+                        <label for="desc{{$product->id}}">omschrijving</label>
                     </li>
                     <li class="editSave">
                     <input type="button" class="editProduct" value="edit">

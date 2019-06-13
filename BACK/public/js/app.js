@@ -27,16 +27,20 @@ $(".editAllergen").on('click', function(event) {
     event.target.form[3].disabled = !event.target.form[3].disabled;
 })
 
-$("input[type=file]").on('change', function(event) {
-    filePath = event.target.value;
-    filePathArray = filePath.split("\\");
-    fileName = filePathArray.pop();
-    $("#showImageName").text(fileName);
-    $("#showImageName").css("display", "block");
-    if (filePath == "") {
-        $("#showImageName").css("display", "none");
-    }
-})
+// $("input[type=file]").on('change', function(event) {
+//     // $index = parseInt(event.target.dataset.index) + 1;
+//     filePath = event.target.value;
+//     filePathArray = filePath.split("\\");
+//     fileName = filePathArray.pop();
+//     // console.log(fileName);
+//     // console.log($("#showImageName")[$index]);
+
+//     $("#showImageName").text(fileName);
+//     $("#showImageName").css("display", "block");
+//     if (filePath == "") {
+//         $("#showImageName").css("display", "none");
+//     }
+// })
 $(document).ready(function() {
     let navHeight = $("nav").innerHeight();
     $("main").css("top", navHeight);

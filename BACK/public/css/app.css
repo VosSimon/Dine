@@ -286,6 +286,9 @@ form label {
       left 0.2s;
 }
 
+form#login label,
+form#register label { position: unset }
+
 form select + label { color: transparent; }
 
 form input:focus + label,
@@ -298,7 +301,7 @@ form select:focus + label {
     z-index: 3;
 }
 
-#imageButtonLabel {
+.imageButtonLabel {
     position: unset;
     background: unset;
     color: unset;
@@ -315,6 +318,7 @@ form input[type=file] {
 
 
 form input[type=file] + label {
+    top: 0;
     padding: 1.3rem 2rem;
     display: block;
     margin: 0 auto;
@@ -336,7 +340,7 @@ form input[type=submit] {
     background: #CC6600;
 }
 
-#showImageName {
+.showImageName {
     display: none;
     margin: 0;
     padding: .5rem 1rem;

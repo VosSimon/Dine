@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { CartItem } from '../models/cart-item.model';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class ShoppingCartComponent implements OnInit {
   subscription: Subscription;
 
 
-  constructor( private cartService: ShoppingCartService ) {  }
+  constructor(
+    private cartService: ShoppingCartService,
+    private _snackBar: MatSnackBar ) {  }
 
 
   ngOnInit() {
@@ -56,4 +59,11 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.removeItem(cartItem);
   }
 
+  goToCheckout() {
+    if (this.itemsInShoppingCart < 1) {
+      this._snackBar.open('Oeps, niet vergeten producten toe te voegen!', 'x', {
+        duration: 3000
+      })
+    }
+  }
 }
