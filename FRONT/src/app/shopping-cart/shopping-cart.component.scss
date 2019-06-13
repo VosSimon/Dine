@@ -115,5 +115,31 @@ div.productCounter {
   }
 }
 
+@media screen and (min-width : 768px) {
+  #shoppingCart {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  ul {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+
+    li {
+      margin: 1rem;
+      padding: 1rem;
+      border: 2px solid #AAA;
+
+      figure {
+        flex-direction: column;
+      }
+
+      img {
+        max-width: 400px;
+      }
+    }
+  }
+}
 
 

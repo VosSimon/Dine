@@ -1,7 +1,7 @@
 <div class="container">
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup">
-        <form (submit)="firstFormSubmit($event)" [formGroup]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Bestelling</ng-template>
           <h3>Bestelling</h3>
             <mat-card>
@@ -37,29 +37,31 @@
             <mat-divider></mat-divider>
             <span class="flexSpaceBetween"><p>Te betalen</p><p class="bold">{{totalPrice|currency:'eur'}}</p></span>
 
-            <button class="stepper" class="bigbutton" matStepperNext>Next</button>
+            <button class="bigbutton stepper" matStepperNext>Next</button>
         </form>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup">
-        <ng-template matStepLabel>Betaling</ng-template>
-        <h3>Kies je betaalswijze</h3>
-        <label id="example-radio-group-label">Pick your favorite season</label>
-        <mat-radio-group
-          aria-labelledby="example-radio-group-label"
-          [(ngModel)]="paymentMethod"
-          class="example-radio-group">
-          <mat-radio-button [checked]="true" class="example-radio-button" value="bakery">
-            Betalen in de bakkerij
-          </mat-radio-button>
-          <mat-radio-button [disabled]="true" class="example-radio-button" value="online">
-            Online betalen (binnenkort beschikbaar)
-          </mat-radio-button>
-        </mat-radio-group>
-        <!-- TODO make required -->
-        <div class="stepper">
-          <button class="bigbutton" matStepperPrevious>Back</button>
-          <button (click)="stepTwo()" class="bigbutton" matStepperNext>Next</button>
-        </div>
+      <mat-step [completed]="false" [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Betaling</ng-template>
+          <h3>Kies je betaalswijze</h3>
+          <label id="example-radio-group-label">Kies de betalingswijze</label>
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            formControlName="paymentMethod"
+            class="example-radio-group">
+            <mat-radio-button class="example-radio-button" value="bakery">
+              Betalen in de bakkerij
+            </mat-radio-button>
+            <mat-radio-button [disabled]="true" class="example-radio-button" value="online">
+              Online betalen (binnenkort beschikbaar)
+            </mat-radio-button>
+          </mat-radio-group>
+          <!-- TODO make required -->
+          <div class="stepper">
+            <button class="bigbutton" matStepperNext>Next</button>
+            <button class="bigbutton" matStepperPrevious>Back</button>
+          </div>
+        </form>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Bevestiging</ng-template>

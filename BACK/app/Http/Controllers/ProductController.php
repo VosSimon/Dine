@@ -9,6 +9,7 @@ use App\Product;
 use App\Allergen;
 use App\Category;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProductController extends Controller
 {
@@ -19,12 +20,13 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request->items)) {
-            $productList = Product::paginate($request->items);
-        } else {
-            $productList = Product::paginate(50);
-        }
-        $product = $productList;
+        $product = DB::table('products')
+        ->select('products.*', DB::raw('GROUP_CONCAT(allergen_id) AS allergen_id'))
+        ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+        ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+        ->groupBy('products.id')
+        ->paginate($request->items? $request->items: 50);
+
 
         return response()->json($product, 200);
     }
@@ -36,12 +38,13 @@ class ProductController extends Controller
     //  */
     public function productByCategory(Request $request, $category)
     {
-        if (isset($request->items)) {
-            $productList = Product::where('category_id', $category)->paginate($request->items);
-        } else {
-            $productList = Product::where('category_id', $category)->paginate(50);
-        }
-        $product = $productList;
+        $product = DB::table('products')
+        ->select('products.*', DB::raw('GROUP_CONCAT(allergen_id) AS allergen_id'))
+        ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+        ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+        ->where('category_id', $category)
+        ->groupBy('products.id')
+        ->paginate($request->items? $request->items: 50);
 
         return response()->json($product, 200);
     }
@@ -66,12 +69,13 @@ class ProductController extends Controller
     //  */
     public function searchProductByName(Request $request)
     {
-        if (isset($request->items)) {
-            $productList = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate($request->items);
-        } else {
-            $productList = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate(50);
-        }
-        $product = $productList;
+        $product = DB::table('products')
+        ->select('products.*', DB::raw('GROUP_CONCAT(allergen_id) AS allergen_id'))
+        ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+        ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+        ->where('products.name', 'LIKE', '%'.$request->name.'%')
+        ->groupBy('products.id')
+        ->paginate($request->items? $request->items: 50);
 
         return response()->json($product, 200);
     }
@@ -96,7 +100,11 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $data["image"] = $request->image->store('');
+        $thumbnail = Image::make($request->file('image')->getRealPath());
+        $thumbnail->widen(300);
+        $thumbnail->save(public_path('thumbnails/'.$data["image"]));
         // afbeelding opslaan in /public/img/random gegenereerde naam
+        // thumbnail opslaan in thumbnails map
         // $data["image"] bevat gegenereerde naam voor in de database
         $product = Product::create($data);
         $allergens = array_values(array_filter($data["allergens"]));
@@ -158,8 +166,11 @@ class ProductController extends Controller
         }
 
         if ($request->has("image")) {
-            $request->image = $request->image->store('');
-            $product->image = $request->image;
+            $image = $request->image->store('');
+            $product->image = $image;
+            $thumbnail = Image::make($request->file('image')->getRealPath());
+            $thumbnail->widen(300);
+            $thumbnail->save(public_path('thumbnails/'.$image));
         }
 
         if ($request->has("price")) {
@@ -191,23 +202,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        // $products = DB::table('products')
-        //     ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
-        //     ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
-        //     ->select('products.*', 'allergens.id AS allergen_id')
-        //     ->get();
-        // // return $products;
-        // $allergens = Allergen::all();
-        // $categories = Category::all();
-        // $message = 'Product Verwijderd.';
-        // return Response::view('edit', [
-        //     'allergens' => $allergens,
-        //     'categories' => $categories,
-        //     'products' => $products,
-        //     'message' => $message
-        //     ]);
-        // return response()->json('Product verwijderd.');
         return redirect('/edit')->with('message', 'Product verwijderd.');
-        // return redirect()->route('add');
     }
 }

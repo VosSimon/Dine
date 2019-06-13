@@ -5,7 +5,7 @@ import { Product } from '../models/product.model';
 import { CartItem } from '../models/cart-item.model';
 import { ProductService } from '../services/product.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 
 
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  providers: [ProductService, MatSnackBar]
+  providers: [ProductService]
 })
 
 export class ProductsComponent implements OnInit {
@@ -33,6 +33,9 @@ export class ProductsComponent implements OnInit {
   searchInput:string;
   quantity;
   subscription: Subscription;
+  // allergens: Array<object>;
+  allergenMap = new Map();
+  test = true;
 
   constructor(
     private http: HttpClient,
@@ -44,6 +47,14 @@ export class ProductsComponent implements OnInit {
     this.http.get('http://localhost:8000/categories').subscribe((result) => {
       this.categories = result['data'];
     });
+
+    this.http.get('http://dine.test/allergens').subscribe((result) => {
+      let allergens = result['data'];
+      allergens.forEach((allergen) => {
+        this.allergenMap.set(allergen['id'], allergen['name']);
+      })
+
+    })
 
   }
 
@@ -94,7 +105,6 @@ export class ProductsComponent implements OnInit {
     const data = new FormData();
     data.append("search", e.target.value);
     this.productService.autocompleteProduct(data);
-
   }
 
   searchByName(e) {
@@ -102,7 +112,6 @@ export class ProductsComponent implements OnInit {
       this.productService.searchByName(this.searchInput, this.pageSize);
       document.querySelector<HTMLSelectElement>('#filterProducts').value = "0";
       document.querySelector<HTMLSelectElement>('#autocompleteList').hidden = true;
-      // this.showSearchProductList = false;
       // TODO:: strange error when setting showSearchProductList to false.
       // solved with queryselector but problem when searching product and type more. need to clear input first.
     }
@@ -123,6 +132,19 @@ export class ProductsComponent implements OnInit {
     this._snackBar.open('Het artikel is toegevoegd aan je winkelmandje.', 'x', {
       duration:3000
     });
+  }
+
+  expansionPanel(id: Number) {
+    let el = document.querySelector('#expand-' + id) as HTMLDivElement;
+    let allExpansion = document.querySelectorAll('.expansionDiv') as NodeListOf<HTMLDivElement>;
+    if (el.hidden === false) {
+      el.hidden = !el.hidden;
+    } else if (el.hidden === true) {
+      allExpansion.forEach((expansionEl) => {
+        expansionEl.hidden = true;
+      })
+      el.hidden = !el.hidden;
+    }
   }
 
 

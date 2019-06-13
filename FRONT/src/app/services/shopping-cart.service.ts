@@ -94,4 +94,11 @@ export class ShoppingCartService {
     }
   }
 
+  removeAllItems() {
+    this.cartArray = [];
+    this.cartChanged.next(this.cartArray);
+    this.itemsInShoppingCartChanged.next(this.cartArray.length);
+    localStorage.removeItem('dine-shopping-cart');
+  }
+
 }

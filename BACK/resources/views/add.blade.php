@@ -21,8 +21,8 @@
                 </li>
                 <li class="col-left">
                     <input required name="image" id="image" type="file">
-                    <label id="imageButtonLabel" for="image">Afbeelding kiezen</label>
-                    <p id="showImageName"></p>
+                    <label class="imageButtonLabel" for="image">Afbeelding kiezen</label>
+                    <p class="showImageName"></p>
                 </li>
                 <li class="col-right">
                     <input name="price" id="price" type="number" step="0.01" required>

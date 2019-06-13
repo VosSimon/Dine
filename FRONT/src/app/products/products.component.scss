@@ -42,6 +42,10 @@ figure {
   }
 }
 
+ul {
+  list-style: none;
+}
+
 figcaption {
   display: flex;
   flex-flow: wrap;
@@ -64,11 +68,16 @@ figcaption {
       opacity:1; // show arrows
     }
   }
+}
 
-  mat-icon {
-    cursor: pointer;
-  }
+mat-icon {
+  cursor: pointer;
+}
 
+.expansionArrow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 input[type=search],

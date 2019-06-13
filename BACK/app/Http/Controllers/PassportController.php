@@ -35,7 +35,6 @@ class PassportController extends Controller
         }
 
         $input = $request->all();
-        //return response($input);
         $input['password'] = bcrypt($input['password']);
         $input[ 'activation_token'] = str_random(60);
         $user = User::create($input);

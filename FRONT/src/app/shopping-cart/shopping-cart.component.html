@@ -41,7 +41,7 @@
       </span>
       <p class="totalAmount">{{totalAmount|currency:'eur'}}</p>
     </div>
-    <button routerLink="/checkout" class="bigbutton">Betalen</button>
+    <button (click)="goToCheckout()" [routerLink]="itemsInShoppingCart < 1? '/products' : '/checkout'" class="bigbutton">Betalen</button>
   </div>
 
 </section>

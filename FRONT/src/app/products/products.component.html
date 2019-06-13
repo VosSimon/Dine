@@ -20,6 +20,15 @@
           <mat-icon (click)="addToShoppingCart($event, product)">shopping_cart</mat-icon>
       </figcaption>
     </figure>
+    <div class="expansionArrow">
+      <mat-icon (click)="expansionPanel(product.id)">keyboard_arrow_down</mat-icon>
+    </div>
+    <div class="expansionDiv" [id]="'expand-'+ product.id" [hidden]="test">
+      <h4>Allergenen</h4>
+      <ul>
+        <li *ngFor="let allergen_id of product.allergens">{{allergenMap.get(allergen_id)}}</li>
+      </ul>
+    </div>
   </div>
   <mat-paginator id="paginator" [length]="length"
               [pageSize]="pageSize"
