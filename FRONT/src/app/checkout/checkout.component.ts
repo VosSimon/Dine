@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { OrderService } from '../services/order.service';
 import { CartItem } from '../models/cart-item.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-checkout',
@@ -28,7 +29,8 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private cartService: ShoppingCartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private _snackBar: MatSnackBar,
     ) {}
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class CheckoutComponent implements OnInit {
     this.totalPrice = this.cartService.getTotalPrice();
 
     this.firstFormGroup = this.formBuilder.group({
-      orderDate: ['', Validators.required],
+      orderDate: ['', [Validators.required, this.dateValidator.bind(this)]],
       orderTime: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
@@ -46,11 +48,26 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  firstFormSubmit(e) {
-    if (this.firstFormGroup.valid) {
-      this.date = new Date(this.firstFormGroup.value.orderDate).toLocaleDateString();
-      this.time = this.firstFormGroup.value.orderTime
-      this.orderPickupDate = this.date + "|" + this.time;
+  dateValidator(control: AbstractControl) {
+    let daysToAdd = 1;
+    let time = new Date();
+    let hours = time.getHours();
+    if (hours >= 15) {
+      console.log("after 15h");
+
+      daysToAdd = 2;
+    }
+    let date = new Date(control.value);
+    let nowPlusDay = new Date();
+    let dayPlus = nowPlusDay.getDate() + daysToAdd;
+    nowPlusDay.setDate(dayPlus);
+    if (date.toLocaleDateString() < nowPlusDay.toLocaleDateString()) {
+      this._snackBar.open('Bestellingen dienen 1 dag op voorhand te gebeuren, 2 dagen als u besteld na 15u.', 'x', {
+        duration: 5000
+      })
+      return {isError: true};
+    } else {
+      return null;
     }
 
   }

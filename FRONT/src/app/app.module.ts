@@ -15,7 +15,7 @@ import { OrderService } from './services/order.service';
 
 // Material section
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule, MatSnackBar } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -95,7 +95,8 @@ import { ProductService } from './services/product.service';
     MatDatepickerModule,
     ShoppingCartService,
     OrderService,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatSnackBar,
   ],
   bootstrap: [AppComponent]
 })

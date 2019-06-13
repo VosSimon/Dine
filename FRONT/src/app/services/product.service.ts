@@ -20,7 +20,7 @@ export class ProductService {
       let products = result["data"];
       this.products = [];
       products.map((product) => {
-        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description));
+        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description, product.allergen_id));
       });
       this.productsChanged.next(this.products);
       this.pageInformation = [{
@@ -37,7 +37,7 @@ export class ProductService {
       let products = result["data"];
       this.products = [];
       products.map((product) => {
-        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description));
+        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description, product.allergen_id));
       });
       this.productsChanged.next(this.products);
       this.pageInformation = [{
@@ -60,7 +60,7 @@ export class ProductService {
       let products = result["data"];
       this.products = [];
       products.map((product) => {
-        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description));
+        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description, product.allergen_id));
       });
       this.productsChanged.next(this.products);
       this.pageInformation = [{
@@ -78,7 +78,7 @@ export class ProductService {
       let products = result["data"];
       this.products = [];
       products.map((product) => {
-        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description));
+        this.products.push(new Product(product.id, product.category_id, product.name, product.image, product.price, product.description, product.allergen_id));
       });
       this.productsChanged.next(this.products);
       this.pageInformation = [{

@@ -20,12 +20,13 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request->items)) {
-            $productList = Product::paginate($request->items);
-        } else {
-            $productList = Product::paginate(50);
-        }
-        $product = $productList;
+        $product = DB::table('products')
+        ->select('products.*', DB::raw('GROUP_CONCAT(allergen_id) AS allergen_id'))
+        ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+        ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+        ->groupBy('products.id')
+        ->paginate($request->items? $request->items: 50);
+
 
         return response()->json($product, 200);
     }
@@ -37,12 +38,13 @@ class ProductController extends Controller
     //  */
     public function productByCategory(Request $request, $category)
     {
-        if (isset($request->items)) {
-            $productList = Product::where('category_id', $category)->paginate($request->items);
-        } else {
-            $productList = Product::where('category_id', $category)->paginate(50);
-        }
-        $product = $productList;
+        $product = DB::table('products')
+        ->select('products.*', DB::raw('GROUP_CONCAT(allergen_id) AS allergen_id'))
+        ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+        ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+        ->where('category_id', $category)
+        ->groupBy('products.id')
+        ->paginate($request->items? $request->items: 50);
 
         return response()->json($product, 200);
     }
@@ -67,12 +69,13 @@ class ProductController extends Controller
     //  */
     public function searchProductByName(Request $request)
     {
-        if (isset($request->items)) {
-            $productList = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate($request->items);
-        } else {
-            $productList = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate(50);
-        }
-        $product = $productList;
+        $product = DB::table('products')
+        ->select('products.*', DB::raw('GROUP_CONCAT(allergen_id) AS allergen_id'))
+        ->leftJoin('allergen_product', 'allergen_product.product_id', '=', 'products.id')
+        ->leftJoin('allergens', 'allergens.id', '=', 'allergen_id')
+        ->where('products.name', 'LIKE', '%'.$request->name.'%')
+        ->groupBy('products.id')
+        ->paginate($request->items? $request->items: 50);
 
         return response()->json($product, 200);
     }
