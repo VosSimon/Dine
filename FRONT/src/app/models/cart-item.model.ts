@@ -15,6 +15,7 @@ export class CartItem {
   public alterQuantity(plusOrMin, nrsPlusOrMin = 1) {
     if (plusOrMin === 'min') {
       this.quantity -= nrsPlusOrMin;
+      if (this.quantity < 1) this.quantity = 1;
     } else if (plusOrMin === 'plus') {
       this.quantity += nrsPlusOrMin;
     }
