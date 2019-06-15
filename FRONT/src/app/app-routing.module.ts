@@ -8,6 +8,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   {

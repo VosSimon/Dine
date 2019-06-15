@@ -15,7 +15,7 @@
       <button mat-button routerLink="/menu" (click)="drawer.close()">Menu</button>
       <button mat-button routerLink="/contact" (click)="drawer.close()">Contact us</button>
       <button mat-button routerLink="/about" (click)="drawer.close()">About us</button>
-      <button mat-button routerLink="/profile" *ngIf="loginService.isLoggedIn()"
+      <button mat-button routerLink="/profile" *ngIf="loggedIn"
         (click)="drawer.close()">Profile</button>
       <mat-divider></mat-divider>
       <mat-slide-toggle>Lights On!</mat-slide-toggle>
@@ -23,11 +23,11 @@
       <mat-divider [inset]="true"></mat-divider>
       <mat-icon [matMenuTriggerFor]="menu" class="power_icon">power_settings_new</mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/login" *ngIf="!loginService.isLoggedIn()"
+        <button mat-menu-item routerLink="/login" *ngIf="!loggedIn"
           (click)="drawer.close()">Login</button>
-        <button mat-menu-item routerLink="/register" *ngIf="!loginService.isLoggedIn()"
+        <button mat-menu-item routerLink="/register" *ngIf="!loggedIn"
           (click)="drawer.close()">Register</button>
-        <button mat-menu-item (click)="logOut()" *ngIf="loginService.isLoggedIn()"
+        <button mat-menu-item (click)="logOut()" *ngIf="loggedIn"
           (click)="drawer.close()">Logout</button>
       </mat-menu>
     </div>

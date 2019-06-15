@@ -48,7 +48,8 @@ Route::apiResources(
     'allergens' => 'AllergensController',
     'roles' => 'RoleController',
     'clientTypes' => 'ClientTypeController',
-    'orders' => 'OrderController'
+    'orders' => 'OrderController',
+    'profile' => 'ProfileController'
     // 'users', 'UserController'
     ]
 );
@@ -56,3 +57,4 @@ Route::resource('users', 'UserController', ['parameter' => ['users' => 'users']]
 Route::get('productByCategory/{category}', 'ProductController@productByCategory');
 Route::post('autocompleteProduct', 'ProductController@autocompleteProduct');
 Route::get('searchProductByName', 'ProductController@searchProductByName');
+// Route::put('profile/update', 'ProfileController@update');

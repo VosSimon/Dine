@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.scss']
+  styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class ProfilePageComponent implements OnInit {
   loading = false;
   postcodeOptions: Array<object>;
   subscription: Subscription;
-  autofilledGemeente: string = "";
+  autofilledGemeente: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,7 +35,9 @@ export class ProfilePageComponent implements OnInit {
       ]],
       telephone: ['', [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(9)
+      ]],
+      birthDate: ['', [
       ]],
       company: ['', [
       //   Validators.required,
@@ -45,20 +47,14 @@ export class ProfilePageComponent implements OnInit {
       //   Validators.required,
       //   Validators.minLength(2)
       ]],
-      address: ['', [
-        // Validators.required,
-        // Validators.minLength(2)
-      ]],
       postcode: ['', [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(4)
       ]],
       city: ['', [
-        Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(3)
       ]],
     });
-
 
     this.subscription = this.profileService.autocompletePost.subscribe((postecodeArray: Array<object>) => {
       this.postcodeOptions = postecodeArray;
@@ -67,8 +63,9 @@ export class ProfilePageComponent implements OnInit {
 
   get f() { return this.profileForm.controls; }
 
-  onProfileSubmit() {
-    console.log(this.profileForm.value);
+  onProfileSubmit(event) {
+    event.preventDefault();
+    // console.log(this.profileForm.value);
 
     // stop here if form is invalid
     // this is not necesary because I set the submit button to disabled if the form is not valid
@@ -77,9 +74,19 @@ export class ProfilePageComponent implements OnInit {
     }
     this.submitted = true;
     this.loading = true;
-    const data = this.profileForm.value;
-    // console.log(data);
-    this.profileService.handleProfile(data);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const id = user.id;
+    const fd = new FormData();
+    fd.append('userId', id);
+    fd.append('fname', this.profileForm.value.fname);
+    fd.append('lname', this.profileForm.value.lname);
+    fd.append('telephone', this.profileForm.value.telephone);
+    fd.append('birthDate', this.profileForm.value.birthDate);
+    fd.append('company', this.profileForm.value.company);
+    fd.append('btw', this.profileForm.value.btw);
+    fd.append('postcode', this.profileForm.value.postcode);
+    console.log(id);
+    this.profileService.handleProfile(fd);
   }
 
   autocompletePostcode(e) {

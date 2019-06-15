@@ -88,7 +88,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
         }
 
-        if (!$category->isDirty()){
+        if (!$category->isDirty()) {
             return response()->json(['data' => 'You need to specify a different value to update.', 'code' => 422], 422);
         }
         $category->save();

@@ -23,7 +23,7 @@ export class ShoppingCartService {
       } else {
         rej('No shopping cart found in localstorage.');
       }
-    })
+    });
 
     // check if shopping cart in localstorage
     promise.then((result: CartItem[]) => {
@@ -35,9 +35,6 @@ export class ShoppingCartService {
       this.cartChanged.next(this.cartArray);
       this.itemsInShoppingCartChanged.next(this.cartArray.length);
     }).catch((err) => console.log(err));
-
-
-
 
   }
 

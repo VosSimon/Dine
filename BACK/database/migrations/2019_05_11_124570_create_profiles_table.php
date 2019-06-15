@@ -15,26 +15,22 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('address_id')->nullable();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('fname');
             $table->string('lname');
             $table->string('telephone');
-            $table->date('birth_date');
+            $table->date('birth_date')->nullable();
             $table->string('company')->nullable();
-            $table->string('btw')->nullable();// maybe this should go on orders table
+            $table->string('btw')->nullable();
+            $table->string('postcode');
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-
-            $table->foreign('address_id')
-                ->references('id')
-                ->on('addresses')
-                ->onDelete('cascade');
-        });
+            }
+        );
     }
 
     /**

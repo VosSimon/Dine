@@ -12,6 +12,7 @@ import { ProductsComponent } from '../products/products.component';
 import { ProfilePageComponent } from '../profile-page/profile-page.component';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from '../checkout/checkout.component';
+import { AuthGuard } from '../services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -52,7 +53,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'cart',
@@ -60,7 +62,8 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    component: CheckoutComponent
+    component: CheckoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     // this needs some configuring

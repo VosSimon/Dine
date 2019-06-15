@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('bruto', 8, 2);
             $table->decimal('netto', 8, 2);
+            $table->timestamp('pickup');
             $table->timestamps();
 
             $table->foreign('user_id')

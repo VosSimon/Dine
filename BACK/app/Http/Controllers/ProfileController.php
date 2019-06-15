@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Validator;
 
 class ProfileController extends Controller
 {
@@ -14,7 +16,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $profile = Profile::all();
+
+        return response()->json(['data' => $profile], 200);
     }
 
     /**
@@ -35,7 +39,52 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        if ($request->birthDate == null) {
+            unset($request->birthDate);
+        }
+        if ($request->company == null) {
+            unset($request->company);
+        }
+        if ($request->btw == null) {
+            unset($request->btw);
+        }
+
+        // validate the form data
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'fname' => 'required|string',
+                'lname' => 'required|string',
+                'telephone' => 'required|string',
+                'postcode' => 'required|string'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        } else {
+            $profile = Profile::create(
+                [
+                    'user_id' => $request->userId,
+                    'fname' => $request->fname,
+                    'lname' => $request->lname,
+                    'telephone' => $request->telephone,
+                    'birth_date' => $request->bithDate,
+                    'company' => $request->company,
+                    'btw' => $request->btw,
+                    'postcode' => $request->postcode
+                ]
+            );
+        }
+        return response()->json(
+            [
+                'profile' => $profile,
+                'success' => 'Profile information saved successfully'
+            ],
+            200
+        );
     }
 
     /**
@@ -44,9 +93,11 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show($id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+
+        return response()->json(['data' => $profile], 200);
     }
 
     /**
@@ -67,9 +118,37 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, $id)
     {
-        //
+        $id = $request->userId;
+        $profile = Profile::where('user_id', $id)->first();
+        return response()->json([$request]);
+        // validate the form data
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'fname' => 'required|string',
+                'lname' => 'required|string',
+                'telephone' => 'required|string',
+                'postcode' => 'required|string'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        } else {
+            //update
+            $profile->fname = $request->fname;
+            $profile->lname = $request->lname;
+            $profile->telephone = $request->telephone;
+            $profile->birth_date = $request->bithDate;
+            $profile->company = $request->company;
+            $profile->btw = $request->btw;
+            $profile->postcode = $request->postcode;
+            $profile->save();
+        }
+
+        return response()->json(['success' => 'Profile updated succesfully']);
     }
 
     /**
@@ -78,8 +157,20 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profile $profile)
+    public function destroy($id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+
+        $profile->delete();
+
     }
 }
+
+
+// clean this up
+// $date = Carbon::createFromIsoFormat('!YYYY-MMMM-D h:mm:ss a', $request->birthDate);
+        // $newdate = $date->isoFormat('M-D-YY H:mm');
+        // $incoming = $request->birthDate;
+        // $date = strtotime($incoming);
+        // $newformat = date('Y-m-d', $incoming);
+        // return response()->json($formatteddate);

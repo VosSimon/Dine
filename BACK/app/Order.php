@@ -9,7 +9,8 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'bruto',
-        'netto'
+        'netto',
+        'pickup'
     ];
 
     public function user()

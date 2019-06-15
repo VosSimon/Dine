@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { EmailValidator } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +10,27 @@ import { EmailValidator } from '@angular/forms';
 export class LoginService {
   accessToken: string = localStorage.getItem('token');
   credentials: string;
-
-
+  // Create a stream of logged in status to communicate throughout app
+  loggedIn: boolean;
+  loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
   'headers' = {
     Authorization : 'Bearer ' + this.accessToken,
   };
-
-
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private _snackBar: MatSnackBar
   ) { }
+
+  isLoggedIn(): boolean {
+    const status = JSON.parse(localStorage.getItem('loggedIn'));
+    if (status === true) {
+      this.setLoggedIn(true);
+    }
+    return status;
+  }
 
   loginUser(fd) {
     return this.http.post('http://dine.test/apilogin', fd).subscribe(
@@ -34,10 +41,14 @@ export class LoginService {
         } else if (response.success) {
           this.accessToken = response.success.token;
           localStorage.setItem('token', this.accessToken);
-          this.getUser();
-          this.router.navigate(['/profile']);
-        }
-      },
+          this.getUser().then(() => {
+              console.log(this.isLoggedIn());
+              if (this.isLoggedIn()) {
+                this.router.navigate(['/profile']);
+              }
+            });
+          }
+        },
       (error) => {
         console.log(error);
         if (error.error.email) {
@@ -53,11 +64,14 @@ export class LoginService {
   }
 
   getUser() {
-    return this.http.get('http://dine.test/apiuser', {headers: this.headers}).subscribe(
+    return new Promise(resolve => {
+      this.http.get('http://dine.test/apiuser', {headers: this.headers}).subscribe(
       (response: any) => {
-        this.credentials = JSON.stringify(response);
-        localStorage.setItem('user', this.credentials);
-        console.log('You\'re in..This are your credentials: ' + this.credentials);
+        const credentials = JSON.stringify(response.success);
+        localStorage.setItem('user', credentials);
+        resolve(localStorage.setItem('loggedIn', 'true'));
+        this.setLoggedIn(true);
+        console.log('This are your credentials: ' + credentials);
       },
       (error) => {
         this._snackBar.open(error.message, 'x', {
@@ -65,10 +79,13 @@ export class LoginService {
         });
       }
     );
+     });
   }
 
-  isLoggedIn() {
-    return this.credentials != null;
+  setLoggedIn(value: boolean) {
+    // Update login status subject
+    this.loggedIn$.next(value);
+    this.loggedIn = value;
   }
 
   logOut() {
@@ -78,7 +95,9 @@ export class LoginService {
         this.router.navigate(['']);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        return this.credentials = null;
+        localStorage.setItem('loggedIn', 'false');
+        // return this.credentials = null;
+        this.setLoggedIn(false);
       }
     );
   }

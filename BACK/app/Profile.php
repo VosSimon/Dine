@@ -10,22 +10,18 @@ class Profile extends Model
 
     protected $fillable = [
         'user_id',
-        'address_id',
         'fname',
         'lname',
         'telephone',
-        'birthdate',
+        'birth_date',
         'company',
-        'btw'
+        'btw',
+        'postcode'
     ];
 
     public function user()
     {
-        return $this->hasOne()(User::class);
+        return $this->hasOne(User::class);
     }
 
-    public function address()
-    {
-        return $this->hasOne(Address::class);
-    }
 }

@@ -22,13 +22,24 @@ class PassportController extends Controller
      */
     public function register(Request $request)
     {
+        //Error messages
+        $messages = [
+            "email.required" => "Email is required",
+            "email.email" => "Email is not valid",
+            "email.unique" => "This email is already being used on this website",
+            "password.required" => "Password is required",
+            "password.min" => "Password must be at least 8 characters",
+            "password_confirmation.required" => "Password_confirmation is required",
+            "password_confirmation.same" => "Password_confirmation is not not the same like password"
+        ];
+
         $validator = Validator::make(
             $request->all(),
             [
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required|same:password',
-            ]
+            ], $messages
         );
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
@@ -40,7 +51,12 @@ class PassportController extends Controller
         $user = User::create($input);
         $user->notify(new SignupActivate($user));
         $success['token'] =  $user->createToken('Personal Access Token')->accessToken;
-        return response()->json(['success' => $success], $this->successStatus)
+        return response()->json(
+            [
+                'success' => $success,
+                'message' => "We have sent you an email to confirm your registration"
+            ], $this->successStatus
+        )
             ->header('Content-Type', 'text/plain');
     }
 
@@ -125,7 +141,7 @@ class PassportController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->activation_token = '';
         $user->save();
-        return response()->json($user);
+        return view('auth/confirm-registration');
     }
 
     /**
@@ -135,11 +151,10 @@ class PassportController extends Controller
     {
         if (Auth::check()) {
             Auth::user()->token()->revoke();
-            return response()->json(['success' => 'logout_success'], 200);
+            return response()->json(['success' => 'Successfully Logged Out'], 200);
         } else {
             return response()->json(['error' => 'api.something_went_wrong'], 500);
         }
-        // return $this->json(null, "Successfully Logged Out");
     }
 }
 
