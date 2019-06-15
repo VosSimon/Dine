@@ -11,7 +11,8 @@ import { CartItem } from './models/cart-item.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  categories: Array<object>;
+  // categories: Array<object>;
+
   itemsInCart: number = 0;
   subscription: Subscription;
   shoppingCartList: CartItem[];
@@ -22,9 +23,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private cartService : ShoppingCartService
   ) {
-    this.http.get('http://dine.test/categories').subscribe((result) => {
-      this.categories = result['data'];
-    });
+    // this.http.get('http://dine.test/categories').subscribe((result) => {
+    //   this.categories = result['data'];
+    // });
   }
 
   ngOnInit() {
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.loggedIn = boolean;
       console.log(this.loggedIn);
     });
-    
+
     this.subscription = this.cartService.itemsInShoppingCartChanged.subscribe(number => {
       this.itemsInCart = number;
     });

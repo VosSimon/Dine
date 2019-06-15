@@ -28,8 +28,7 @@ export class ProductsComponent implements OnInit {
   path: string;
   pageSize: number;
   pageSizeOptions: number[] = [1, 5, 10, 25, 50];
-  showSearchProductList = false;
-  autocompleteList: Array<object>;
+  autocompleteList: Array<object> = [];
   searchInput:string;
   quantity;
   subscription: Subscription;
@@ -44,7 +43,7 @@ export class ProductsComponent implements OnInit {
     private _snackBar: MatSnackBar,
     ) {
 
-    this.http.get('http://localhost:8000/categories').subscribe((result) => {
+    this.http.get('http://dine.test/categories').subscribe((result) => {
       this.categories = result['data'];
     });
 
@@ -77,8 +76,6 @@ export class ProductsComponent implements OnInit {
   ngAfterViewInit() {
     this.productService.autocompleteList.subscribe((list:Array<object>) => {
       this.autocompleteList = list;
-      if (this.autocomplete.length > 0) this.showSearchProductList = true;
-      if (this.searchInput === "") this.showSearchProductList = false;
     })
   }
 
@@ -102,6 +99,12 @@ export class ProductsComponent implements OnInit {
   }
 
   autocomplete(e) {
+    if (this.searchInput == "") {
+      this.productService.searchByName(this.searchInput, this.pageSize);
+      if (this.searchInput == "") this.autocompleteList = [];
+      return;
+      // when inputfield in cleared, all products are searched.
+    }
     const data = new FormData();
     data.append("search", e.target.value);
     this.productService.autocompleteProduct(data);
@@ -110,10 +113,7 @@ export class ProductsComponent implements OnInit {
   searchByName(e) {
     if (e.type === "change"||e.type === "keydown"&&e.code === "Enter") {
       this.productService.searchByName(this.searchInput, this.pageSize);
-      document.querySelector<HTMLSelectElement>('#filterProducts').value = "0";
-      document.querySelector<HTMLSelectElement>('#autocompleteList').hidden = true;
-      // TODO:: strange error when setting showSearchProductList to false.
-      // solved with queryselector but problem when searching product and type more. need to clear input first.
+      this.autocompleteList = [];
     }
   }
 
@@ -125,7 +125,7 @@ export class ProductsComponent implements OnInit {
 
   addToShoppingCart(e, product: Product) {
     this.quantity = parseInt(e.path[1].children[2].value);
-    e.path[1].children[2].value = 0;
+    e.path[1].children[2].value = 1;
     const cartItem = new CartItem(product, this.quantity);
     this.cartService.addToShoppingCart(cartItem);
 
