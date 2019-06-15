@@ -26,7 +26,7 @@ export class ProfileService {
   handleProfile(fd) {
     if (localStorage.getItem('profile') != null) {
       const id = JSON.parse(localStorage.getItem('profile')).id;
-      return this.http.put('http://dine.test/profile/' + id, fd, { headers: this.headers}).subscribe(
+      return this.http.put('http://dine.test/profile/' + id , { headers: this.headers }, fd).subscribe(
         (response: any) => {
           console.log(response);
           if (response.error) {
