@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
+import { Timeouts } from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,6 @@ export class LoginService {
   // Create a stream of logged in status to communicate throughout app
   loggedIn: boolean;
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
-
-  'headers' = {
-    Authorization : 'Bearer ' + this.accessToken,
-  };
 
   constructor(
     private http: HttpClient,
@@ -35,14 +32,12 @@ export class LoginService {
   loginUser(fd) {
     return this.http.post('http://dine.test/apilogin', fd).subscribe(
       (response: any) => {
-        console.log(response);
         if (response.error) {
           this._snackBar.open(response.error, 'x', { duration: 5000 });
         } else if (response.success) {
           this.accessToken = response.success.token;
           localStorage.setItem('token', this.accessToken);
           this.getUser().then(() => {
-              console.log(this.isLoggedIn());
               if (this.isLoggedIn()) {
                 this.router.navigate(['/profile']);
               }
@@ -64,8 +59,12 @@ export class LoginService {
   }
 
   getUser() {
+
     return new Promise(resolve => {
-      this.http.get('http://dine.test/apiuser', {headers: this.headers}).subscribe(
+      this.http.get('http://dine.test/apiuser', {headers: {
+        'Accept' : 'application/json',
+        Authorization : 'Bearer ' + this.accessToken,
+      }}).subscribe(
       (response: any) => {
         const credentials = JSON.stringify(response.success);
         localStorage.setItem('user', credentials);
@@ -89,9 +88,12 @@ export class LoginService {
   }
 
   logOut() {
-    return this.http.get('http://dine.test/logout', { headers: this.headers }).subscribe(
+    return this.http.get('http://dine.test/logout', { headers: {
+      'Accept' : 'application/json',
+      Authorization : 'Bearer ' + this.accessToken,
+      }
+      }).subscribe(
       (response: any) => {
-        console.log(response);
         this.router.navigate(['']);
         localStorage.removeItem('user');
         localStorage.removeItem('token');

@@ -31,7 +31,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.loginService.loggedIn$.subscribe(boolean => {
       this.loggedIn = boolean;
-      console.log(this.loggedIn);
     });
 
     this.subscription = this.cartService.itemsInShoppingCartChanged.subscribe(number => {

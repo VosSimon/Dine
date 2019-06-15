@@ -120,8 +120,10 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id = $request->userId;
-        $profile = Profile::where('user_id', $id)->first();
+        $putData = file_get_contents("php://input");
+        $request = json_decode($putData);
+        $id = $id;
+        $profile = Profile::where('id', $id)->first();
         return response()->json([$request]);
         // validate the form data
         $validator = Validator::make(
@@ -137,11 +139,20 @@ class ProfileController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
         } else {
+            if ($request->birthDate == null) {
+                unset($request->birthDate);
+            }
+            if ($request->company == null) {
+                unset($request->company);
+            }
+            if ($request->btw == null) {
+                unset($request->btw);
+            }
             //update
             $profile->fname = $request->fname;
             $profile->lname = $request->lname;
             $profile->telephone = $request->telephone;
-            $profile->birth_date = $request->bithDate;
+            $profile->birth_date = $request->birthDate;
             $profile->company = $request->company;
             $profile->btw = $request->btw;
             $profile->postcode = $request->postcode;

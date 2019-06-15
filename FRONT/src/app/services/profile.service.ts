@@ -13,8 +13,8 @@ export class ProfileService {
   autocompletePost = new Subject<object[]>();
   accessToken: string = localStorage.getItem('token');
 
-  'headers' = {
-    Authorization: 'Bearer ' + this.accessToken,
+  headers = {
+    Authorization: 'Bearer ' + this.accessToken
   };
 
   constructor(
@@ -26,9 +26,7 @@ export class ProfileService {
   handleProfile(fd) {
     if (localStorage.getItem('profile') != null) {
       const id = JSON.parse(localStorage.getItem('profile')).id;
-      console.log(id);
-      console.log(fd);
-      return this.http.put('http://dine.test/profile/' + id , { headers: this.headers }, fd).subscribe(
+      return this.http.put('http://dine.test/profile/' + id, fd, { headers: this.headers}).subscribe(
         (response: any) => {
           console.log(response);
           if (response.error) {
@@ -64,27 +62,6 @@ export class ProfileService {
         }
       );
     }
-  }
-
-  updateProfile(fd) {
-    return this.http.put('http://dine.test/profile', fd).subscribe(
-      (response: any) => {
-        console.log(response);
-        if (response.error) {
-          this._snackBar.open(response.error, 'x', { duration: 5000 });
-        } else if (response.success) {
-          this._snackBar.open(response.success, 'x', { duration: 5000 });
-          const profile = JSON.stringify(response.profile);
-          localStorage.setItem('profile', profile);
-        }
-        // this.router.navigate(['/']);
-      },
-      (error) => {
-        console.log(error);
-        this._snackBar.open(error, 'x', { duration: 5000 });
-
-      }
-    );
   }
 
   autocompletePostcode(input: number) {

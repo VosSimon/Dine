@@ -76,16 +76,18 @@ export class ProfilePageComponent implements OnInit {
     this.loading = true;
     const user = JSON.parse(localStorage.getItem('user'));
     const id = user.id;
-    const fd = new FormData();
-    fd.append('userId', id);
-    fd.append('fname', this.profileForm.value.fname);
-    fd.append('lname', this.profileForm.value.lname);
-    fd.append('telephone', this.profileForm.value.telephone);
-    fd.append('birthDate', this.profileForm.value.birthDate);
-    fd.append('company', this.profileForm.value.company);
-    fd.append('btw', this.profileForm.value.btw);
-    fd.append('postcode', this.profileForm.value.postcode);
-    console.log(id);
+    // const fd = new FormData();
+    // fd.append('userId', id);
+    // fd.append('fname', this.profileForm.value.fname);
+    // fd.append('lname', this.profileForm.value.lname);
+    // fd.append('telephone', this.profileForm.value.telephone);
+    // fd.append('birthDate', this.profileForm.value.birthDate);
+    // fd.append('company', this.profileForm.value.company);
+    // fd.append('btw', this.profileForm.value.btw);
+    // fd.append('postcode', this.profileForm.value.postcode);
+    // console.log(id);
+    const fd = {userId: id, fname: this.profileForm.value.fname, lname: this.profileForm.value.lname, telephone: this.profileForm.value.telephone,
+    birthdate: this.profileForm.value.birthDate, company: this.profileForm.value.company, btw: this.profileForm.value.btw, postcode: this.profileForm.value.postcode}
     this.profileService.handleProfile(fd);
   }
 

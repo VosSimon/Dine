@@ -90,11 +90,14 @@ class PassportController extends Controller
         } else {
             // attempt to log
             $credentials = request(['email', 'password']);
-            $credentials['active'] = 1;
+            // $credentials['active'] = 1;
             $credentials['deleted_at'] = null;
 
             if (Auth::attempt($credentials)) {
                 $user = Auth::user();
+                if ($user->active == 0) {
+                    return response()->json(['error' => 'Valideer eerst je account door op de link in uw email te klikken.']);
+                };
                 $success['token'] =  $user->createToken('Personal Access Token')->accessToken;
                 return response()->json(
                     [
