@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ContactMessageService } from '../services/contact-message.service';
+import { Subscription } from 'rxjs';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,8 +14,11 @@ export class ContactComponent implements OnInit {
   messageForm: FormGroup;
   submitted = false;
   loading = false;
+  color: string = "warn";
+  subscription: Subscription;
 
   constructor(
+    private themeService: ThemeService,
     private formBuilder: FormBuilder,
     private contactMessageService: ContactMessageService
   ) { }
@@ -30,6 +35,10 @@ export class ContactComponent implements OnInit {
         Validators.maxLength(140)
       ]]
     });
+
+    this.subscription = this.themeService.theme.subscribe((color: string) => {
+      this.color = color;
+    })
   }
 
   // convenience getter for easy access to form fields

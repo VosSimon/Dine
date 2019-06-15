@@ -46,6 +46,7 @@ import { MenuComponent } from './menu/menu.component';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductService } from './services/product.service';
+import { ThemeService } from './services/theme.service';
 // import { DatePickerModule } from './date-format';
 
 @NgModule({
@@ -98,6 +99,7 @@ import { ProductService } from './services/product.service';
     MatDatepickerModule,
     ShoppingCartService,
     OrderService,
+    ThemeService,
     MatDatepickerModule,
     MatSnackBar,
     // { provide: DateAdapter, useClass: DatePickerModule }

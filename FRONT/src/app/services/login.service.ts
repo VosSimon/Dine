@@ -68,9 +68,10 @@ export class LoginService {
       (response: any) => {
         const credentials = JSON.stringify(response.success);
         localStorage.setItem('user', credentials);
-        resolve(localStorage.setItem('loggedIn', 'true'));
+        localStorage.setItem('loggedIn', 'true');
         this.setLoggedIn(true);
         console.log('This are your credentials: ' + credentials);
+        resolve();
       },
       (error) => {
         this._snackBar.open(error.message, 'x', {

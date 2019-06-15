@@ -31,7 +31,7 @@
       </li>
     </ul>
     <div>
-      <button routerLink="/products" class="bigbutton">Verder winkelen</button>
+      <button mat-raised-button [color]="color" routerLink="/products" class="bigbutton">Verder winkelen</button>
     </div>
   </div>
   <div id="checkout">
@@ -42,7 +42,7 @@
       </span>
       <p class="totalAmount">{{totalAmount|currency:'eur'}}</p>
     </div>
-    <button (click)="goToCheckout()" [routerLink]="itemsInShoppingCart < 1? '/products' : '/checkout'" class="bigbutton">Betalen</button>
+    <button mat-raised-button [color]="color" (click)="goToCheckout()" [routerLink]="itemsInShoppingCart < 1? '/products' : '/checkout'" class="bigbutton">Betalen</button>
   </div>
 
 </section>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ContactMessageService } from '../services/contact-message.service';
+import { Subscription } from 'rxjs';
+import { ThemeService } from '../services/theme.service';
 
 // import { IImage } from './modules/slideshow/IImage';
 
@@ -42,8 +44,11 @@ export class LandingPageComponent implements OnInit {
   hideOnNoSlides: boolean = false;
   width: string = '100%';
   fullscreen: boolean = false;
+  subscription: Subscription;
+  color: string = "warn";
 
   constructor(
+    private themeService: ThemeService,
     private formBuilder: FormBuilder,
     private contactMessageService: ContactMessageService
   ) { }
@@ -60,6 +65,10 @@ export class LandingPageComponent implements OnInit {
         Validators.maxLength(140)
       ]]
     });
+
+    this.subscription = this.themeService.theme.subscribe((color: string) => {
+      this.color = color;
+    })
   }
 
   // convenience getter for easy access to form fields
