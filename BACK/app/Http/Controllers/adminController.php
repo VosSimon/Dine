@@ -85,4 +85,10 @@ class adminController extends Controller
         return view('rem', ['allergens' => $allergens, 'categories' => $categories, 'message' => $message]);
     }
 
+
+    public function noperm()
+    {
+        return view('nopermission');
+    }
+
 }

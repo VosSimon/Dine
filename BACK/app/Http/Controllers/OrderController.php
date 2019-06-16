@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\OrderDetail;
 use Illuminate\Http\Request;
+use App\Notifications\OrderConfirmation;
 
 class OrderController extends Controller
 {
@@ -54,6 +55,10 @@ class OrderController extends Controller
             );
             array_push($orderDetail, $detail);
         }
+        $orderid = $order->id;
+        $id = $request->userId;
+        $user = Auth::user()::where('id', $id);
+        $user->notify(new OrderConfirmation($orderid));
         return [$order, $orderDetail];
 
         // TODO add payment method and userHasPayed when implementing online payment

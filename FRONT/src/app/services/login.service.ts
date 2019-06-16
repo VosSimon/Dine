@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
-import { Timeouts } from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +44,7 @@ export class LoginService {
           }
         },
       (error) => {
-        console.log(error);
+        // console.log(error);
         if (error.error.email) {
           const emailError = error.error.email;
           this._snackBar.open(emailError, 'x', { duration: 5000 });
@@ -62,15 +61,16 @@ export class LoginService {
 
     return new Promise(resolve => {
       this.http.get('http://dine.test/apiuser', {headers: {
-        'Accept' : 'application/json',
+        Accept : 'application/json',
         Authorization : 'Bearer ' + this.accessToken,
       }}).subscribe(
       (response: any) => {
         const credentials = JSON.stringify(response.success);
         localStorage.setItem('user', credentials);
-        resolve(localStorage.setItem('loggedIn', 'true'));
+        localStorage.setItem('loggedIn', 'true');
         this.setLoggedIn(true);
-        console.log('This are your credentials: ' + credentials);
+        // console.log('This are your credentials: ' + credentials);
+        resolve();
       },
       (error) => {
         this._snackBar.open(error.message, 'x', {
@@ -98,7 +98,6 @@ export class LoginService {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         localStorage.setItem('loggedIn', 'false');
-        // return this.credentials = null;
         this.setLoggedIn(false);
       }
     );

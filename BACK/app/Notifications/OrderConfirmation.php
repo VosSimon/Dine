@@ -6,21 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Order;
+use App\OrderDetail;
+use App\Product;
 
-class PasswordResetRequest extends Notification
+class OrderConfirmation extends Notification
 {
     use Queueable;
 
-    protected $token;
+    protected $orderid;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct( $orderid)
     {
-        $this->token = $token;
+        $this->orderid = $orderid;
     }
 
     /**
@@ -42,11 +45,20 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        // $url = url('/api/password/find/' . $this->token);
+        $detail = OrderDetail::where('order_id', $this->orderid)->first();
+        $product_id = $detail['product_id'];
+        $quantity = $detail['quantity'];
+        $order = Order::where('id', $this->orderid)->first();
+        $price = $order['bruto'];
+        $product = Product::where('id', $product_id)->get();
+        // $prodName = $product['name'];
+
         return (new MailMessage)
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->line('Reset code: '.$this->token)
-            ->line('If you did not request a password reset, no further action is required.');
+            ->line('Your order details')
+            ->line('Your order number: ' . $this->orderid)
+            ->line('Price: ' . $price)
+            ->line('Product: ' . $product . ' x ' . $quantity)
+            ->line('Thank you for using our purchase!');
     }
 
     /**

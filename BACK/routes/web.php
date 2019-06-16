@@ -12,8 +12,10 @@
 */
 
 Auth::routes(['verify' => true]);
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/nopermission', ['as' => 'nopermission', 'uses' => 'adminController@noperm']);
 
-Route::middleware('auth')->group(
+Route::middleware('auth', 'admin')->group(
     function () {
         Route::get('/add', ['as' => 'add', 'uses' => 'adminController@add']);
         Route::get('/edit', ['as' => 'edit', 'uses' => 'adminController@edit']);

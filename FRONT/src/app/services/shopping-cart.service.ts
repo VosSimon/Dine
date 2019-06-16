@@ -27,11 +27,11 @@ export class ShoppingCartService {
 
     // check if shopping cart in localstorage
     promise.then((result: CartItem[]) => {
-      console.log('Shopping cart found in localstorage.');
+      // console.log('Shopping cart found in localstorage.');
       result.forEach((item) => {
         this.cartArray.push(new CartItem(item.product, item.quantity));
       })
-      console.log(this.cartArray);
+      // console.log(this.cartArray);
       this.cartChanged.next(this.cartArray);
       this.itemsInShoppingCartChanged.next(this.cartArray.length);
     }).catch((err) => console.log(err));

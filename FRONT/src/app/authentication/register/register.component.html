@@ -8,7 +8,10 @@
 
       <mat-form-field class="full-width">
         <input id="email" matInput formControlName="email" placeholder="Enter your email" />
-        <mat-error *ngIf="f.email.invalid">
+        <mat-error *ngIf="f.email.hasError('required')">
+          Email is <strong>required</strong> !
+        </mat-error>
+        <mat-error *ngIf="f.email.hasError('pattern')">
           Please enter a <strong>valid</strong> email!
         </mat-error>
       </mat-form-field>
@@ -19,8 +22,14 @@
         <mat-icon matSuffix (click)="hide = !hide">
           {{hide ? 'visibility' : 'visibility_off'}}
         </mat-icon>
-        <mat-error *ngIf="f.password.invalid">
+        <mat-error *ngIf="f.password.hasError('required')">
           Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="f.password.hasError('minlength')">
+          Password must be at least <strong>8</strong> characters long!
+        </mat-error>
+        <mat-error *ngIf="f.password.hasError('maxlength')">
+          Password must be maximum <strong>16 characters</strong> long!
         </mat-error>
       </mat-form-field>
 
