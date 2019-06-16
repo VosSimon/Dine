@@ -88,14 +88,15 @@ export class LoginService {
   }
 
   logOut() {
-    return this.http.get('http://dine.test/logout', { headers: {
-      'Accept' : 'application/json',
+    return this.http.get('http://dine.test/apilogout', { headers: {
+      Accept : 'application/json',
       Authorization : 'Bearer ' + this.accessToken,
       }
       }).subscribe(
       (response: any) => {
         this.router.navigate(['']);
         localStorage.removeItem('user');
+        localStorage.removeItem('profile');
         localStorage.removeItem('token');
         localStorage.removeItem('profile');
         localStorage.setItem('loggedIn', 'false');

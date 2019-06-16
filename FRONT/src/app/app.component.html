@@ -8,15 +8,15 @@
       </svg>
     </mat-toolbar>
     <div class="side-menu">
-      <h2>Welcome</h2>
+      <h2>Welkom</h2>
       <mat-divider></mat-divider>
-      <button mat-button routerLink="" (click)="drawer.close()">Home</button>
-      <button mat-button routerLink="/products" (click)="drawer.close()">Products</button>
+      <button mat-button routerLink="" (click)="drawer.close()">Thuis</button>
+      <button mat-button routerLink="/products" (click)="drawer.close()">Producten</button>
       <!-- <button mat-button routerLink="/menu" (click)="drawer.close()">Menu</button> -->
-      <button mat-button routerLink="/contact" (click)="drawer.close()">Contact us</button>
-      <button mat-button routerLink="/about" (click)="drawer.close()">About us</button>
+      <button mat-button routerLink="/contact" (click)="drawer.close()">Contact</button>
+      <button mat-button routerLink="/about" (click)="drawer.close()">Over ons</button>
       <button mat-button routerLink="/profile" *ngIf="loggedIn"
-        (click)="drawer.close()">Profile</button>
+        (click)="drawer.close()">Profiel</button>
       <mat-divider></mat-divider>
       <mat-slide-toggle (click)="toggleColor()">{{colorTrigger}}</mat-slide-toggle>
       <!-- <mat-slide-toggle>EN/NL</mat-slide-toggle> -->

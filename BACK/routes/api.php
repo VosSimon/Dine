@@ -38,7 +38,7 @@ Route::post('contact/message', 'ContactMessageController@sendMessage');
 Route::middleware('auth:api')->group(
     function () {
         Route::get('apiuser', 'PassportController@getUser');
-        Route::get('logout', 'PassportController@logout');
+        Route::get('apilogout', 'PassportController@logout');
     }
 );
 
