@@ -120,6 +120,10 @@ mat-paginator {
   background-color: #FFF;
 }
 
+::ng-deep mat-paginator-page-size-label::content {
+  content: "items per pagina";
+}
+
 @media screen and (min-width : 768px) {
   div.productView {
     margin: 1em;

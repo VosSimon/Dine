@@ -26,7 +26,8 @@ export class ProfileService {
   handleProfile(fd) {
     if (localStorage.getItem('profile') != null) {
       const id = JSON.parse(localStorage.getItem('profile')).id;
-      return this.http.put('http://dine.test/profile/' + id , { headers: this.headers }, fd).subscribe(
+      return new Promise((resolve, reject) => {
+        this.http.put('http://dine.test/profile/' + id , { headers: this.headers }, fd).subscribe(
         (response: any) => {
           console.log(response);
           if (response.error) {
@@ -35,16 +36,20 @@ export class ProfileService {
             this._snackBar.open(response.success, 'x', { duration: 5000 });
             const profile = JSON.stringify(response.profile);
             localStorage.setItem('profile', profile);
+            resolve();
           }
           // this.router.navigate(['/']);
         },
         (error) => {
           console.log(error);
           this._snackBar.open(error, 'x', { duration: 5000 });
+          reject();
         }
       );
+      });
     } else {
-      return this.http.post('http://dine.test/profile', fd).subscribe(
+      return new Promise((resolve, reject) => {
+        this.http.post('http://dine.test/profile', fd).subscribe(
         (response: any) => {
           console.log(response);
           if (response.error) {
@@ -53,14 +58,17 @@ export class ProfileService {
             this._snackBar.open(response.success, 'x', { duration: 5000 });
             const profile = JSON.stringify(response.profile);
             localStorage.setItem('profile', profile);
+            resolve()
           }
           // this.router.navigate(['/']);
         },
         (error) => {
           console.log(error);
           this._snackBar.open(error, 'x', { duration: 5000 });
+          reject();
         }
       );
+      });
     }
   }
 

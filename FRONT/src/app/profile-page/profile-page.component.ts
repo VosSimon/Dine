@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ProfileService } from '../services/profile.service';
 import { Subscription } from 'rxjs';
+import { reject } from 'q';
 
 @Component({
   selector: 'app-profile-page',
@@ -86,9 +87,18 @@ export class ProfilePageComponent implements OnInit {
     // fd.append('btw', this.profileForm.value.btw);
     // fd.append('postcode', this.profileForm.value.postcode);
     // console.log(id);
-    const fd = {userId: id, fname: this.profileForm.value.fname, lname: this.profileForm.value.lname, telephone: this.profileForm.value.telephone,
-    birthdate: this.profileForm.value.birthDate, company: this.profileForm.value.company, btw: this.profileForm.value.btw, postcode: this.profileForm.value.postcode}
-    this.profileService.handleProfile(fd);
+    const fd = {
+      userId: id,
+      fname: this.profileForm.value.fname,
+      lname: this.profileForm.value.lname,
+      telephone: this.profileForm.value.telephone,
+      birthdate: this.profileForm.value.birthDate,
+      company: this.profileForm.value.company,
+      btw: this.profileForm.value.btw, postcode:
+      this.profileForm.value.postcode}
+    this.profileService.handleProfile(fd).then(() => {
+      this.loading = false;
+    })
   }
 
   autocompletePostcode(e) {
