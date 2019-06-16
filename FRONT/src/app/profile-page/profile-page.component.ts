@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ProfileService } from '../services/profile.service';
 import { Subscription } from 'rxjs';
-import { reject } from 'q';
 
 @Component({
   selector: 'app-profile-page',
@@ -18,6 +17,7 @@ export class ProfilePageComponent implements OnInit {
   postcodeOptions: Array<object>;
   subscription: Subscription;
   autofilledGemeente: string = '';
+  profileData: Object;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,6 +57,13 @@ export class ProfilePageComponent implements OnInit {
       ]],
     });
 
+    this.profileService.getProfile().then((data) => {
+      this.profileData = data;
+      console.log(this.profileData);
+    })
+
+
+
     this.subscription = this.profileService.autocompletePost.subscribe((postecodeArray: Array<object>) => {
       this.postcodeOptions = postecodeArray;
     })
@@ -86,18 +93,24 @@ export class ProfilePageComponent implements OnInit {
     fd.append('company', this.profileForm.value.company);
     fd.append('btw', this.profileForm.value.btw);
     fd.append('postcode', this.profileForm.value.postcode);
-    // console.log(id);
-    const fdata = {
+    const birth_date = null
+    if (this.profileForm.value.birthDate != null) {
+      let birthDate = this.profileForm.value.birthDate.toLocaleDateString();
+      console.log(birthDate);
+      let dateArray = birthDate.split("-");
+      birth_date = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+    }
+    const dataObject = {
       userId: id,
       fname: this.profileForm.value.fname,
       lname: this.profileForm.value.lname,
       telephone: this.profileForm.value.telephone,
-      birthdate: this.profileForm.value.birthDate,
+      birth_date: birth_date,
       company: this.profileForm.value.company,
       btw: this.profileForm.value.btw, postcode:
       this.profileForm.value.postcode
     }
-    this.profileService.handleProfile(fd).then(() => {
+    this.profileService.handleProfile(fd, dataObject).then(() => {
       this.loading = false;
     });
 

@@ -12,14 +12,14 @@
         <div class="group1">
           <mat-form-field class="fourtypercent" appearance="outline">
             <mat-label>Voornaam</mat-label>
-            <input id="fname" matInput formControlName="fname" placeholder="Enter your name" />
+            <input id="fname" [value]="profileData?.fname" matInput formControlName="fname" placeholder="Voornaam" />
             <mat-error *ngIf="f.fname.invalid">
               Geef aub een <strong>geldige</strong> voornaam op.
             </mat-error>
           </mat-form-field>
           <mat-form-field class="fourtypercent" appearance="outline">
             <mat-label>Naam</mat-label>
-            <input id="lname" matInput formControlName="lname" placeholder="Enter your family name" />
+            <input id="lname" matInput [value]="profileData?.lname" formControlName="lname" placeholder="Naam" />
             <mat-error *ngIf="f.lname.invalid">
               Geef aub een <strong>geldige</strong> naam op.
             </mat-error>
@@ -29,14 +29,14 @@
         <div class="group2">
           <mat-form-field class="fourtypercent" appearance="outline">
             <mat-label>Telefoon nummer</mat-label>
-            <input id="telephone" matInput formControlName="telephone" placeholder="Enter your telephone" />
+            <input id="telephone" matInput [value]="profileData?.telephone" formControlName="telephone" placeholder="Telefoon nummer" />
             <mat-error *ngIf="f.telephone.invalid">
               Telefoon nummer is <strong>verplicht</strong>.
             </mat-error>
           </mat-form-field>
 
           <mat-form-field class="fourtypercent" appearance="outline">
-            <input matInput [matDatepicker]="picker" placeholder="Your Birth Date" formControlName="birthDate">
+            <input matInput [matDatepicker]="picker" [value]="profileData?.birth_date" placeholder="Geboortedatum" formControlName="birthDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi #picker></mat-datepicker>
           </mat-form-field>
@@ -45,14 +45,14 @@
         <div class="group3">
           <mat-form-field class="fourtypercent" appearance="outline">
             <mat-label>Bedrijf</mat-label>
-            <input id="company" matInput formControlName="company" placeholder="Enter your company" />
+            <input id="company" matInput [value]="profileData?.company" formControlName="company" placeholder="Enter your company" />
             <mat-error *ngIf="f.company.invalid">
               <!-- Company is <strong>required</strong> -->
             </mat-error>
           </mat-form-field>
           <mat-form-field class="fourtypercent" appearance="outline">
             <mat-label>BTW</mat-label>
-            <input id="btw" matInput formControlName="btw" placeholder="Enter your BTW number" />
+            <input id="btw" matInput [value]="profileData?.btw" formControlName="btw" placeholder="Enter your BTW number" />
             <mat-error *ngIf="f.btw.invalid">
               <!-- BTW is <strong>required</strong> -->
             </mat-error>
@@ -62,7 +62,7 @@
         <div class="group4">
           <mat-form-field class="twentypercent" appearance="outline">
             <mat-label>Postcode</mat-label>
-            <input type="text" id="postcode" matInput formControlName="postcode" (input)="autocompletePostcode($event)" [matAutocomplete]="auto" placeholder="Enter your postcode" />
+            <input type="text" id="postcode" matInput [value]="profileData?.postcode" formControlName="postcode" (input)="autocompletePostcode($event)" [matAutocomplete]="auto" placeholder="Enter your postcode" />
             <mat-autocomplete (optionSelected)="autofillGemeente($event)" #auto="matAutocomplete">
               <mat-option [attr.data-gemeente]="option.Postcode.naam_deelgemeente" *ngFor="let option of postcodeOptions" [value]="option.Postcode.postcode_deelgemeente">
                 {{option.Postcode.postcode_deelgemeente}} - {{option.Postcode.naam_deelgemeente}}

@@ -39,8 +39,6 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-
-
         if ($request->birthDate == null) {
             unset($request->birthDate);
         }
@@ -124,40 +122,37 @@ class ProfileController extends Controller
         $request = json_decode($putData);
         $id = $id;
         $profile = Profile::where('id', $id)->first();
-        return response()->json([$request]);
         // validate the form data
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'fname' => 'required|string',
-                'lname' => 'required|string',
-                'telephone' => 'required|string',
-                'postcode' => 'required|string'
-            ]
-        );
+        // $validator = Validator::make(
+        //     $request->all(),
+        //     [
+        //         'fname' => 'required|string',
+        //         'lname' => 'required|string',
+        //         'telephone' => 'required|string',
+        //         'postcode' => 'required|string'
+        //     ]
+        // );
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
-        } else {
-            if ($request->birthDate == null) {
-                unset($request->birthDate);
+        // if ($validator->fails()) {
+        //     return response()->json(['error' => $validator->errors()], 401);
+        // } else {
+            // return response()->json($request->birth_date);
+            if ($request->birth_date != null || $request->birth_date != "") {
+                $profile->birth_date = $request->birth_date;
             }
-            if ($request->company == null) {
-                unset($request->company);
+            if ($request->company != null || $request->company != "") {
+                $profile->company = $request->company;
             }
-            if ($request->btw == null) {
-                unset($request->btw);
+            if ($request->btw != null || $request->btw != "") {
+                $profile->btw = $request->btw;
             }
             //update
             $profile->fname = $request->fname;
             $profile->lname = $request->lname;
             $profile->telephone = $request->telephone;
-            $profile->birth_date = $request->birthDate;
-            $profile->company = $request->company;
-            $profile->btw = $request->btw;
             $profile->postcode = $request->postcode;
             $profile->save();
-        }
+        // }
 
         return response()->json(['success' => 'Profile updated succesfully']);
     }
