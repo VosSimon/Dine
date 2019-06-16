@@ -21,11 +21,13 @@ export class ProfileService {
     private _snackBar: MatSnackBar
   ) { }
 
-  handleProfile(fd) {
-    if (localStorage.getItem('profile') != null) {
+  handleProfile(fd, dataObject) {
+    if (JSON.parse(localStorage.getItem('profile')) != null) {
       const id = JSON.parse(localStorage.getItem('profile')).id;
       return new Promise((resolve) => {
-        this.http.put('http://dine.test/profile/' + id, { headers: this.headers }, fd).subscribe(
+        this.http.put('http://dine.test/profile/' + id, dataObject, {
+          headers: this.accessToken
+        }).subscribe(
           (response: any) => {
             console.log(response);
             if (response.error) {
@@ -83,15 +85,18 @@ export class ProfileService {
   getProfile() {
     const user = JSON.parse(localStorage.getItem('user'));
     const id = user.id;
-    return this.http.get('http://dine.test/profile/' + id, { headers: this.headers }).subscribe(
+    return new Promise(resolve => {
+      this.http.get('http://dine.test/profile/' + id, { headers: this.headers }).subscribe(
       (response: any) => {
         const profile = JSON.stringify(response.data);
         localStorage.setItem('profile', profile);
+        resolve(response.data);
       },
       (error) => {
         console.log(error);
       }
     );
+    });
   }
 
   autocompletePostcode(input: number) {
