@@ -93,12 +93,12 @@ export class ProfilePageComponent implements OnInit {
     fd.append('company', this.profileForm.value.company);
     fd.append('btw', this.profileForm.value.btw);
     fd.append('postcode', this.profileForm.value.postcode);
-    const birth_date = null
+    let birth_date = null
     if (this.profileForm.value.birthDate != null) {
       let birthDate = this.profileForm.value.birthDate.toLocaleDateString();
       console.log(birthDate);
-      let dateArray = birthDate.split("-");
-      birth_date = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+      let dateArray = birthDate.split('/');
+      birth_date = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];
     }
     const dataObject = {
       userId: id,
