@@ -14,18 +14,16 @@ use Illuminate\Http\Request;
 */
 
 // testing email style   remove later
-// use this so you don't have to register or reset password to be able to see how emails look
 
 use Illuminate\Support\Facades\Notification;
-// use App\Notifications\PasswordResetSuccess;
-use App\Notifications\ContactMessage;
+use App\Notifications\OrderConfirmation;
 
 Route::get('/test-mail', function () {
-    Notification::route('mail', 'BestMarvelFanSite@gmail.com')->notify(new ContactMessage("something@lol.co", "I just want to say that the croisants are amazing!!!"));
+    Notification::route('mail', 'BestMarvelFanSite@gmail.com')->notify(new OrderConfirmation('yeah'));
     return 'Sent';
 });
 
-// end test    don't remove yet  :P
+// end test
 
 Route::post('apilogin', 'PassportController@login');
 Route::post('apiregister', 'PassportController@register');
@@ -57,4 +55,3 @@ Route::resource('users', 'UserController', ['parameter' => ['users' => 'users']]
 Route::get('productByCategory/{category}', 'ProductController@productByCategory');
 Route::post('autocompleteProduct', 'ProductController@autocompleteProduct');
 Route::get('searchProductByName', 'ProductController@searchProductByName');
-// Route::put('profile/update', 'ProfileController@update');

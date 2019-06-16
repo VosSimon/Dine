@@ -136,7 +136,10 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>E-mail</mat-label>
             <input id="email" matInput formControlName="email" placeholder="Enter your email" />
-            <mat-error *ngIf="f.email.invalid">
+            <mat-error *ngIf="f.email.hasError('required')">
+              Email is <strong>required</strong> !
+            </mat-error>
+            <mat-error *ngIf="f.email.hasError('pattern')">
               Please enter a <strong>valid</strong> email!
             </mat-error>
           </mat-form-field>
@@ -144,7 +147,10 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Message</mat-label>
             <textarea id="message" matInput formControlName="message" placeholder="Write us a message"></textarea>
-            <mat-error *ngIf="f.message.invalid">
+            <mat-error *ngIf="f.message.hasError('minlength')">
+              Message must be at least <strong>8</strong> characters long!
+            </mat-error>
+            <mat-error *ngIf="f.message.hasError('maxlength')">
               Message cannot be longer than <strong>140 characters</strong> !
             </mat-error>
           </mat-form-field>

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { LoginService } from '../../services/login.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +19,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private router: Router
   ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [
+      email:  ['', [
         Validators.required,
         Validators.pattern('^\\w+[\\w-\\.]*\\@\\w+((-\\w+)|(\\w*))\\.[a-z]{2,3}$')
       ]],
@@ -42,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   onLoginSubmit(event) {
     event.preventDefault();
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     const fd = new FormData();
     fd.append('email', this.loginForm.value.email);
     fd.append('password', this.loginForm.value.password);

@@ -26,7 +26,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-// import { DateAdapter } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
@@ -47,7 +46,6 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductService } from './services/product.service';
 import { ThemeService } from './services/theme.service';
-// import { DatePickerModule } from './date-format';
 
 @NgModule({
   declarations: [
@@ -87,7 +85,6 @@ import { ThemeService } from './services/theme.service';
     MatStepperModule,
     MatRadioModule,
     MatAutocompleteModule,
-    // DatePickerModule
   ],
   providers: [
     LoginService,
@@ -101,8 +98,7 @@ import { ThemeService } from './services/theme.service';
     OrderService,
     ThemeService,
     MatDatepickerModule,
-    MatSnackBar,
-    // { provide: DateAdapter, useClass: DatePickerModule }
+    MatSnackBar
   ],
   bootstrap: [AppComponent]
 })

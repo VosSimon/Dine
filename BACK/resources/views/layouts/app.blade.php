@@ -35,6 +35,10 @@
                 @if(isset($username))
                     <h1>Welkom admin {{$username}}</h1>
                 @endif
+                @if(Auth::user())
+                    <a class="logout" href="{{ url('/logout') }}"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                @endif
+
             </div>
             <ul id="navMenu">
                 <li class="{{ (request()->is('add')) ? 'active' : 'not-active' }}"><a href="/add" title="Voeg producten, categorieën en allergenen toe">ADD</a></li>
