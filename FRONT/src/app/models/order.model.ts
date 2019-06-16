@@ -3,7 +3,7 @@ import { CartItem } from './cart-item.model';
 export class Order {
   public items: CartItem[];
   public totalPrice: number = 0;
-  public pickupDate;
+  public pickupDate: string;
   public paymentMethod: string;
   public userId: number
 

@@ -57,8 +57,10 @@ export class AppComponent implements OnInit, OnDestroy {
   toggleColor() {
     if (this.color == "warn") {
       this.themeService.changeColor("primary");
+      this.colorTrigger = "I'm red!";
     } else {
       this.themeService.changeColor("warn");
+      this.colorTrigger = "I'm blue!";
     }
   }
 
