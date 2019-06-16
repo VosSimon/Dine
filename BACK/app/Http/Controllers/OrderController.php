@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\OrderDetail;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 use App\Notifications\OrderConfirmation;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
+    use Notifiable;
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +43,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $id = $request->userId;
         $order = Order::create(
             [
             'user_id' => $request->userId,
@@ -55,11 +62,19 @@ class OrderController extends Controller
             );
             array_push($orderDetail, $detail);
         }
+
+        // $order = Order::where('user_id', $id)->first();
         $orderid = $order->id;
-        $id = $request->userId;
-        $user = Auth::user()::where('id', $id);
+        $user = User::where('id', $id)->first();
         $user->notify(new OrderConfirmation($orderid));
+
         return [$order, $orderDetail];
+        // return response()->json(
+        //     [
+        //     'orderid' => $orderid,
+        //     'user' => $user
+        //     ]
+        // );
 
         // TODO add payment method and userHasPayed when implementing online payment
     }

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class OrderDetail extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
         'order_id',
         'product_id',

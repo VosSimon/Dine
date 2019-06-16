@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 
@@ -97,6 +97,7 @@ export class LoginService {
         this.router.navigate(['']);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('profile');
         localStorage.setItem('loggedIn', 'false');
         this.setLoggedIn(false);
       }

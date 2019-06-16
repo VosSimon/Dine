@@ -21,9 +21,9 @@ export class OrderService {
   placeOrder(items: CartItem[], pickupDate: string, paymentMethod: string, userId: number) {
 
     this.order = new Order(items, pickupDate, paymentMethod, userId);
-    this.http.post('http://dine.test/orders', this.order).subscribe(() => {
+    return this.http.post('http://dine.test/orders', this.order).subscribe(() => {
       this.scService.removeAllItems();
-      this._snackbar.open("Bestelling verzonden.", "x", {
+      this._snackbar.open('Bestelling verzonden.', 'x', {
         duration: 3000
       });
       this.router.navigate(['/products']);

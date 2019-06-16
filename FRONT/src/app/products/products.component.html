@@ -1,38 +1,40 @@
-<section id="productSection">
-  <h1>Alle producten</h1>
-  <h2>Vind een product</h2>
-  <input id="searchInput" type="search" placeholder="Zoek per naam" (input)="autocomplete($event)" [(ngModel)]="searchInput" (keydown)="searchByName($event)">
-  <select *ngIf="autocompleteList.length > 0" id="autocompleteList" size="3" [(ngModel)]="searchInput" (change)=searchByName($event)>
-    <option *ngFor="let auto of autocompleteList" value="{{auto.name}}">{{auto.name}}</option>
-  </select>
-  <select id="filterProducts" (change)="filterProduct($event)">
-    <option value="" disabled selected hidden>Filter per categorie</option>
-    <option value="0">Alle categorieën</option>
-    <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.name}}</option>
-  </select>
-  <div *ngFor="let product of products" class="productView">
-    <figure>
-      <img src="http://dine.test/img/{{product.image}}" alt="image for {{ product.name }}">
-      <figcaption>
+<div class="container">
+  <section id="productSection">
+    <h1>Alle producten</h1>
+    <h2>Vind een product</h2>
+    <input id="searchInput" type="search" placeholder="Zoek per naam" (input)="autocomplete($event)"
+      [(ngModel)]="searchInput" (keydown)="searchByName($event)">
+    <select *ngIf="autocompleteList.length > 0" id="autocompleteList" size="3" [(ngModel)]="searchInput"
+      (change)=searchByName($event)>
+      <option *ngFor="let auto of autocompleteList" value="{{auto.name}}">{{auto.name}}</option>
+    </select>
+    <select id="filterProducts" (change)="filterProduct($event)">
+      <option value="" disabled selected hidden>Filter per categorie</option>
+      <option value="0">Alle categorieën</option>
+      <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.name}}</option>
+    </select>
+    <div *ngFor="let product of products" class="productView">
+      <figure>
+        <img src="http://dine.test/img/{{product.image}}" alt="image for {{ product.name }}">
+        <figcaption>
           <p>{{ product.name }}</p>
           <p>{{ product.price|currency:'eur' }}</p>
           <input (change)="quantityChanged()" type="number" step="1" value="1" min="1">
           <mat-icon (click)="addToShoppingCart($event, product)">shopping_cart</mat-icon>
-      </figcaption>
-    </figure>
-    <div class="expansionArrow">
-      <mat-icon (click)="expansionPanel(product.id)">keyboard_arrow_down</mat-icon>
+        </figcaption>
+      </figure>
+      <div class="expansionArrow">
+        <mat-icon (click)="expansionPanel(product.id)">keyboard_arrow_down</mat-icon>
+      </div>
+      <div class="expansionDiv" [id]="'expand-'+ product.id" [hidden]="test">
+        <h4>Allergenen</h4>
+        <ul>
+          <li *ngFor="let allergen_id of product.allergens">{{allergenMap.get(allergen_id)}}</li>
+        </ul>
+      </div>
     </div>
-    <div class="expansionDiv" [id]="'expand-'+ product.id" [hidden]="test">
-      <h4>Allergenen</h4>
-      <ul>
-        <li *ngFor="let allergen_id of product.allergens">{{allergenMap.get(allergen_id)}}</li>
-      </ul>
-    </div>
-  </div>
-  <mat-paginator id="paginator" [length]="length"
-              [pageSize]="pageSize"
-              [pageSizeOptions]="pageSizeOptions"
-              (page)="pageEvent($event)">
-</mat-paginator>
-</section>
+    <mat-paginator id="paginator" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent($event)">
+    </mat-paginator>
+  </section>
+</div>
