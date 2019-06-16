@@ -93,9 +93,9 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $profile = Profile::findOrFail($id);
+        $profile = Profile::where('user_id', $id)->first();
 
         return response()->json(['data' => $profile], 200);
     }

@@ -78,6 +78,6 @@ export class CheckoutComponent implements OnInit {
     // combining the date and time and setting it to mysql format yyyy-mm-dd hh:mm:ss
     console.log(this.orderPickupDate);
     let user = JSON.parse(localStorage.getItem('user'));
-    this.orderService.placeOrder(this.cartArray, this.orderPickupDate, "bakery", user.success.id);
+    this.orderService.placeOrder(this.cartArray, this.orderPickupDate, "bakery", user.id);
   }
 }

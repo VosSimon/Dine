@@ -13,15 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-// testing email style   remove later
+// testing email style
 
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrderConfirmation;
 
-Route::get('/test-mail', function () {
-    Notification::route('mail', 'BestMarvelFanSite@gmail.com')->notify(new OrderConfirmation('yeah'));
-    return 'Sent';
-});
+Route::get(
+    '/test-mail', function () {
+        Notification::route('mail', 'BestMarvelFanSite@gmail.com')->notify(new OrderConfirmation('yeah'));
+        return 'Sent';
+    }
+);
 
 // end test
 

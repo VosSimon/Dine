@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Order;
@@ -12,7 +13,7 @@ use App\Product;
 
 class OrderConfirmation extends Notification
 {
-    use Queueable;
+    use Queueable, Notifiable;
 
     protected $orderid;
 
@@ -21,7 +22,7 @@ class OrderConfirmation extends Notification
      *
      * @return void
      */
-    public function __construct( $orderid)
+    public function __construct($orderid)
     {
         $this->orderid = $orderid;
     }
@@ -46,18 +47,22 @@ class OrderConfirmation extends Notification
     public function toMail($notifiable)
     {
         $detail = OrderDetail::where('order_id', $this->orderid)->first();
-        $product_id = $detail['product_id'];
+        $orderNr = $detail['order_id'];
+        $product_id = $detail[ 'product_id'];
         $quantity = $detail['quantity'];
         $order = Order::where('id', $this->orderid)->first();
         $price = $order['bruto'];
-        $product = Product::where('id', $product_id)->get();
-        // $prodName = $product['name'];
+        $product = Product::where('id', $product_id)->first();
+        $prodName = $product['name'];
+        $prodPrice = $product['price'];
 
         return (new MailMessage)
             ->line('Your order details')
-            ->line('Your order number: ' . $this->orderid)
-            ->line('Price: ' . $price)
-            ->line('Product: ' . $product . ' x ' . $quantity)
+            ->line('Your order number: ' . $orderNr)
+            ->line('Product:  ' . $prodName)
+            ->line('Price/piece:  ' . $prodPrice)
+            ->line('Quantity ' . $quantity)
+            ->line('Total to pay: ' . $price)
             ->line('Thank you for using our purchase!');
     }
 
