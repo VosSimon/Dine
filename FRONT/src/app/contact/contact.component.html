@@ -93,7 +93,7 @@
         </mat-form-field>
 
         <div>
-        <button mat-button type="submit" class="mat-raised-button mat-primary" (click)="onMessageSubmit($event)"
+        <button mat-raised-button [color]="color" type="submit" (click)="onMessageSubmit($event)"
           [disabled]="!messageForm.valid">Send Message
         </button>
         <img *ngIf="loading"

@@ -1,6 +1,6 @@
 <mat-drawer-container class="container">
   <mat-drawer #drawer class="sidenav">
-    <mat-toolbar color="primary">
+    <mat-toolbar [color]="color">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="66.8" height="47.8"
         viewBox="0 0 668 478" class="toolbarlogo">
         <image x="35" y="23" width="600" height="438"
@@ -12,14 +12,14 @@
       <mat-divider></mat-divider>
       <button mat-button routerLink="" (click)="drawer.close()">Home</button>
       <button mat-button routerLink="/products" (click)="drawer.close()">Products</button>
-      <button mat-button routerLink="/menu" (click)="drawer.close()">Menu</button>
+      <!-- <button mat-button routerLink="/menu" (click)="drawer.close()">Menu</button> -->
       <button mat-button routerLink="/contact" (click)="drawer.close()">Contact us</button>
       <button mat-button routerLink="/about" (click)="drawer.close()">About us</button>
       <button mat-button routerLink="/profile" *ngIf="loggedIn"
         (click)="drawer.close()">Profile</button>
       <mat-divider></mat-divider>
-      <mat-slide-toggle>Lights On!</mat-slide-toggle>
-      <mat-slide-toggle>EN/NL</mat-slide-toggle>
+      <mat-slide-toggle (click)="toggleColor()">{{colorTrigger}}</mat-slide-toggle>
+      <!-- <mat-slide-toggle>EN/NL</mat-slide-toggle> -->
       <mat-divider [inset]="true"></mat-divider>
       <mat-icon [matMenuTriggerFor]="menu" class="power_icon">power_settings_new</mat-icon>
       <mat-menu #menu="matMenu">
@@ -34,7 +34,7 @@
 
   </mat-drawer>
   <div class="sidenav-content">
-    <mat-toolbar color="primary">
+    <mat-toolbar [color]="color">
       <mat-toolbar-row>
         <button mat-icon-button (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
@@ -55,7 +55,7 @@
           routerLink="/cart"
           class="shopping_icon"
           [matBadge]="itemsInCart"
-          matBadgeColor="accent">shopping_cart
+          [matBadgeColor]="cartColor()">shopping_cart
         </mat-icon>
         <mat-menu #menucart="matMenu" class="shopping_menu">
             <!-- <mat-icon id="closeCart" [matMenuTriggerFor]="menucart">close</mat-icon> -->

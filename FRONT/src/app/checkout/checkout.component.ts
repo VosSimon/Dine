@@ -6,6 +6,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 import { OrderService } from '../services/order.service';
 import { CartItem } from '../models/cart-item.model';
 import { DateAdapter } from '@angular/material';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-checkout',
@@ -30,8 +31,10 @@ export class CheckoutComponent implements OnInit {
     return (date === now) ? 'example-custom-date-class' : undefined;
   }
   minDate: Date;
+  color: string = "warn";
 
   constructor(
+    private themeService: ThemeService,
     private formBuilder: FormBuilder,
     private cartService: ShoppingCartService,
     private orderService: OrderService,
@@ -53,6 +56,10 @@ export class CheckoutComponent implements OnInit {
       orderDate: ['', [Validators.required, this.dateValidator.bind(this)]],
       orderTime: ['', [Validators.required, this.timeValidator.bind(this)]]
     });
+
+    this.subscription = this.themeService.theme.subscribe((color: string) => {
+      this.color = color;
+    })
   }
 
   dateValidator(control: AbstractControl) {

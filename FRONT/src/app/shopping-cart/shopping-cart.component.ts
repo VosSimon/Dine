@@ -4,6 +4,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 import { CartItem } from '../models/cart-item.model';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { ThemeService } from '../services/theme.service';
 
 
 @Component({
@@ -17,9 +18,10 @@ export class ShoppingCartComponent implements OnInit {
   itemsInShoppingCart: number = 0;
   totalAmount: number = 0;
   subscription: Subscription;
-
+  color: string = "warn";
 
   constructor(
+    private themeService: ThemeService,
     private cartService: ShoppingCartService,
     private _snackBar: MatSnackBar ) {  }
 
@@ -40,9 +42,14 @@ export class ShoppingCartComponent implements OnInit {
           })
         }
     );
+    // this.subscription = this.themeService.changeColor.
 
     this.subscription = this.cartService.itemsInShoppingCartChanged.subscribe(number => {
       this.itemsInShoppingCart = number;
+    })
+
+    this.subscription = this.themeService.theme.subscribe((color: string) => {
+      this.color = color;
     })
 
   }

@@ -26,7 +26,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-// import { DateAdapter } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
@@ -46,6 +45,7 @@ import { MenuComponent } from './menu/menu.component';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductService } from './services/product.service';
+import { ThemeService } from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -96,6 +96,7 @@ import { ProductService } from './services/product.service';
     MatDatepickerModule,
     ShoppingCartService,
     OrderService,
+    ThemeService,
     MatDatepickerModule,
     MatSnackBar
   ],

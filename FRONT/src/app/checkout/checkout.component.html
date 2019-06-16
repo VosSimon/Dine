@@ -24,7 +24,7 @@
             <mat-divider></mat-divider>
             <span class="flexSpaceBetween"><p>Te betalen</p><p class="bold">{{totalPrice|currency:'eur'}}</p></span>
 
-            <button class="bigbutton stepper" matStepperNext>Volgende</button>
+            <button mat-raised-button [color]="color" class="bigbutton stepper" matStepperNext>Volgende</button>
         </form>
       </mat-step>
       <mat-step [stepControl]="dateTimeFormGroup">
@@ -42,8 +42,8 @@
             <input matInput type="time" placeholder="Ophaaluur" formControlName="orderTime" required>
           </mat-form-field>
           <div class="stepper">
-            <button class="bigbutton" matStepperNext>Next</button>
-            <button class="bigbutton" matStepperPrevious>Back</button>
+            <button mat-raised-button [color]="color" class="bigbutton" matStepperNext>Next</button>
+            <button mat-raised-button [color]="color" class="bigbutton" matStepperPrevious>Back</button>
           </div>
         </form>
       </mat-step>
@@ -59,8 +59,8 @@
             </mat-card-content>
           </mat-card>
         <div>
-          <button (click)="orderSubmit()" class="bigbutton">Bestelling verzenden</button>
-          <button class="bigbutton" matStepperPrevious>Back</button>
+          <button mat-raised-button [color]="color" (click)="orderSubmit()" class="bigbutton">Bestelling verzenden</button>
+          <button mat-raised-button [color]="color" class="bigbutton" matStepperPrevious>Back</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
