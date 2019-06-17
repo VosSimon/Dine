@@ -41,6 +41,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { CurrencyPipe } from './currency.pipe';
 import { MenuComponent } from './menu/menu.component';
+import { MatRippleModule } from '@angular/material/core';
+
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -85,6 +87,7 @@ import { ThemeService } from './services/theme.service';
     MatStepperModule,
     MatRadioModule,
     MatAutocompleteModule,
+    MatRippleModule
   ],
   providers: [
     LoginService,

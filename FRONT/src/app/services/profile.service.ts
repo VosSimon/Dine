@@ -26,7 +26,7 @@ export class ProfileService {
       const id = JSON.parse(localStorage.getItem('profile')).id;
       return new Promise((resolve) => {
         this.http.put('http://dine.test/profile/' + id, dataObject, {
-          headers: this.accessToken
+          headers: { Authorization: 'Bearer ' + this.accessToken }
         }).subscribe(
           (response: any) => {
             console.log(response);

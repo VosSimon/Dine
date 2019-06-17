@@ -34,10 +34,18 @@
     margin-top: 2em;
     width: 98%;
 
-    // img,
-    // mat-card-content {
-    //   width: 49%;
-    // }
+    mat-card-title {
+      font-style: italic;
+    }
+    
+    p {
+      letter-spacing: .1em;
+      font-weight: 100;
+      font-size: 1.3em;
+      font-style: italic;
+      line-height: 2;
+      text-indent: 2em;
+    }
 
   }
 }
