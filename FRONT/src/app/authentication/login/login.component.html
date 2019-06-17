@@ -20,6 +20,9 @@
         <mat-label>Password</mat-label>
         <input id="password" matInput formControlName="password" placeholder="Enter your password"
           [type]="hide ? 'password':'text'" />
+        <mat-error *ngIf="f.password.hasError('required')">
+          Password is <strong>required</strong> !
+        </mat-error>
         <mat-error *ngIf="f.password.hasError('minlength')">
           Password must be at least <strong>8 characters</strong> long!
         </mat-error>
