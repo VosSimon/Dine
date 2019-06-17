@@ -83,41 +83,41 @@
         <mat-card-title>Wij zijn open op:</mat-card-title>
       </mat-card-header>
       <table class="opening-hours-table">
-        <tr id="Monday" class="openingHours" title="Open Monday at 9am to 6pm">
+        <tr id="Monday" class="openingHours" title="Open Monday at 7:15 to 18:00">
           <td>Maandag</td>
           <td class="opens">07u15</td>
           <td>-</td>
           <td class="closes">18u00</td>
         </tr>
-        <tr id="Tuesday" class="openingHours" title="Open Tuesday at 9am to 6pm">
+        <tr id="Tuesday" class="openingHours" title="Open Tuesday at 7:15 to 18:00">
           <td>Dinsdag</td>
           <td class="opens">07u15</td>
           <td>-</td>
           <td class="closes">18u00</td>
         </tr>
-        <tr id="Wednesday" class="openingHours" title="Open Wednesday at 9am to 6pm">
+        <tr id="Wednesday" class="openingHours" title="Closed on Wednesday">
           <td>Woensdag</td>
           <td class="opens">Gesloten</td>
         </tr>
-        <tr id="Thursday" class="openingHours" title="Open Thursday at 9am to 8pm">
+        <tr id="Thursday" class="openingHours" title="Open Thursday at 7:15 to 18:00">
           <td>Donderdag</td>
           <td class="opens">07u15</td>
           <td>-</td>
           <td class="closes">18u00</td>
         </tr>
-        <tr id="Friday" class="openingHours" title="Open Friday at 9am to 6pm">
+        <tr id="Friday" class="openingHours" title="Open Friday at 7:15 to 18:00">
           <td>Vrijdag</td>
           <td class="opens">07u15</td>
           <td>-</td>
           <td class="closes">18u00</td>
         </tr>
-        <tr id="Saturday" class="openingHours" title="Open Saturday at 10am to 6pm">
+        <tr id="Saturday" class="openingHours" title="Open Saturday at 8:00 to 15:00">
           <td>Zaterdag</td>
           <td class="opens">08u00</td>
           <td>-</td>
           <td class="closes">15u00</td>
         </tr>
-        <tr id="Sunday" class="openingHours" title="Open Sunday at 11am to 4pm">
+        <tr id="Sunday" class="openingHours" title="Open Sunday at 8:00 to 15:00">
           <td>Zondag</td>
           <td class="opens">08u00</td>
           <td>-</td>
@@ -156,10 +156,9 @@
           </mat-form-field>
 
           <button mat-raised-button [color]="color" type="submit" (click)="onMessageSubmit($event)"
-            [disabled]="!messageForm.valid">Bericht verzenden
+            [disabled]="!messageForm.valid">Bericht verzenden <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
           </button>
-          <img *ngIf="loading"
-            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
         </form>
       </mat-card-content>
     </mat-card>

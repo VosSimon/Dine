@@ -42,7 +42,7 @@ import { AboutComponent } from './about/about.component';
 import { CurrencyPipe } from './currency.pipe';
 import { MenuComponent } from './menu/menu.component';
 import { MatRippleModule } from '@angular/material/core';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -87,7 +87,8 @@ import { ThemeService } from './services/theme.service';
     MatStepperModule,
     MatRadioModule,
     MatAutocompleteModule,
-    MatRippleModule
+    MatRippleModule,
+    MatProgressBarModule
   ],
   providers: [
     LoginService,
