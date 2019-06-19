@@ -14,6 +14,7 @@ export class ProfilePageComponent implements OnInit {
   profileForm: FormGroup;
   submitted = false;
   loading = false;
+  loadingDelete = false;
   postcodeOptions: Array<object>;
   subscription: Subscription;
   autofilledGemeente: string = '';
@@ -94,7 +95,7 @@ export class ProfilePageComponent implements OnInit {
     fd.append('btw', this.profileForm.value.btw);
     fd.append('postcode', this.profileForm.value.postcode);
     let birth_date = null
-    if (this.profileForm.value.birthDate != null) {
+    if (this.profileForm.value.birthDate != "") {
       let birthDate = this.profileForm.value.birthDate.toLocaleDateString();
       console.log(birthDate);
       let dateArray = birthDate.split('/');

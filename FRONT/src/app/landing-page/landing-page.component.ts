@@ -85,11 +85,12 @@ export class LandingPageComponent implements OnInit {
     const prom = this.contactMessageService.send(fd);
     prom.then(() => {
       this.loading = false;
+      this.messageForm.reset();
     });
   }
 
   // the slider is a npm package
-  // install it with rh comand below
+  // install it with the comand below
   // or run npm install if you have the code
   // npm i -S ng-simple-slideshow
 }

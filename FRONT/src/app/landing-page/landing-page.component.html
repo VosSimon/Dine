@@ -58,7 +58,7 @@
       <img mat-card-image src="../../assets/FixedImages/broodje.jpg" alt="Broodjes">
       <mat-card-content>
         <span>Broodjes</span>
-        <p>Lekkere broojes gebeuren niet bij toeval.</p>
+        <p>Lekkere broodjes gebeuren niet bij toeval.</p>
       </mat-card-content>
     </mat-card>
   </section>
@@ -140,18 +140,21 @@
               E-mail is <strong>verplicht</strong>.
             </mat-error>
             <mat-error *ngIf="f.email.hasError('pattern')">
-              Vul aub een <strong>echt</strong> e-mail in.
+              Vul alstublieft een <strong>geldig</strong> e-mailadres in!
             </mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Bericht</mat-label>
             <textarea id="message" matInput formControlName="message" placeholder="Write us a message"></textarea>
+            <mat-error *ngIf="f.message.hasError('required')">
+              Bericht is <strong>verplicht</strong> !
+            </mat-error>
             <mat-error *ngIf="f.message.hasError('minlength')">
               Het bericht moet minstens <strong>8</strong> karakters lang zijn.
             </mat-error>
             <mat-error *ngIf="f.message.hasError('maxlength')">
-              Het bericht moet langer zijn dan <strong>140</strong> karkaters!
+              Het bericht moet niet langer zijn dan <strong>140</strong> karakters!
             </mat-error>
           </mat-form-field>
 

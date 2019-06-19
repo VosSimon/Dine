@@ -181,7 +181,7 @@ class ProductController extends Controller
             $product->description = $request->description;
         }
 
-        if (!$product->isDirty()){
+        if (!$product->isDirty()) {
             return redirect('/edit')->with(array('message' => 'Er is geen gewijzigde waarde gevonden.', 'code' => 'red'));
         }
             $product->save();

@@ -154,7 +154,12 @@ class ProfileController extends Controller
             $profile->save();
         // }
 
-        return response()->json(['success' => 'Profile updated succesfully']);
+        return response()->json(
+            [
+                'success' => 'Profile updated succesfully',
+                'profile' => $profile
+            ]
+        );
     }
 
     /**

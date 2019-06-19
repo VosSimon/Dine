@@ -55,6 +55,7 @@ export class ContactComponent implements OnInit {
     const prom = this.contactMessageService.send(fd);
     prom.then(() => {
       this.loading = false;
+      this.messageForm.reset();
     });
   }
 }

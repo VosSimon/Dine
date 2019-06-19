@@ -2,49 +2,49 @@
     <h1>Contact page</h1>
   <mat-card>
     <mat-card-header>
-       <mat-card-title>We are open between these hours</mat-card-title>
+       <mat-card-title>Wij zijn open op:</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <table class="opening-hours-table">
-        <tr id="Monday" class="openingHours" title="Open Monday at 9am to 6pm">
-          <td>Monday</td>
-          <td class="opens">07:15</td>
+        <tr id="Monday" class="openingHours" title="Open Monday at 7:15 to 18:00">
+          <td>Maandag</td>
+          <td class="opens">07u15</td>
           <td>-</td>
-          <td class="closes">18:00</td>
+          <td class="closes">18u00</td>
         </tr>
-        <tr id="Tuesday" class="openingHours" title="Open Tuesday at 9am to 6pm">
-          <td>Tuesday</td>
-          <td class="opens">07:15</td>
+        <tr id="Tuesday" class="openingHours" title="Open Tuesday at 7:15 to 18:00">
+          <td>Dinsdag</td>
+          <td class="opens">07u15</td>
           <td>-</td>
-          <td class="closes">18:00</td>
+          <td class="closes">18u00</td>
         </tr>
-        <tr id="Wednesday" class="openingHours" title="Open Wednesday at 9am to 6pm">
-          <td>Wednesday</td>
-          <td class="opens">Closed</td>
+        <tr id="Wednesday" class="openingHours" title="Closed on Wednesday">
+          <td>Woensdag</td>
+          <td class="opens">Gesloten</td>
         </tr>
-        <tr id="Thursday" class="openingHours" title="Open Thursday at 9am to 8pm">
-          <td>Thursday</td>
-          <td class="opens">07:15</td>
+        <tr id="Thursday" class="openingHours" title="Open Thursday at 7:15 to 18:00">
+          <td>Donderdag</td>
+          <td class="opens">07u15</td>
           <td>-</td>
-          <td class="closes">18:00</td>
+          <td class="closes">18u00</td>
         </tr>
-        <tr id="Friday" class="openingHours" title="Open Friday at 9am to 6pm">
-          <td>Friday</td>
-          <td class="opens">07:15</td>
+        <tr id="Friday" class="openingHours" title="Open Friday at 7:15 to 18:00">
+          <td>Vrijdag</td>
+          <td class="opens">07u15</td>
           <td>-</td>
-          <td class="closes">18:00</td>
+          <td class="closes">18u00</td>
         </tr>
-        <tr id="Saturday" class="openingHours" title="Open Saturday at 10am to 6pm">
-          <td>Saturday</td>
-          <td class="opens">08:00</td>
+        <tr id="Saturday" class="openingHours" title="Open Saturday at 8:00 to 15:00">
+          <td>Zaterdag</td>
+          <td class="opens">08u00</td>
           <td>-</td>
-          <td class="closes">15:00</td>
+          <td class="closes">15u00</td>
         </tr>
-        <tr id="Sunday" class="openingHours" title="Open Sunday at 11am to 4pm">
-          <td>Sunday</td>
-          <td class="opens">08:00</td>
+        <tr id="Sunday" class="openingHours" title="Open Sunday at 8:00 to 15:00">
+          <td>Zondag</td>
+          <td class="opens">08u00</td>
           <td>-</td>
-          <td class="closes">15:00</td>
+          <td class="closes">15u00</td>
         </tr>
       </table>
     </mat-card-content>
@@ -53,7 +53,7 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Here is where wyou can find us: Kaasbrug 2, 2000 Antwerpen</mat-card-title>
+      <mat-card-title>Here is where you can find us: Kaasbrug 2, 2000 Antwerpen</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <iframe
@@ -65,7 +65,7 @@
 
   <mat-card class="message">
     <mat-card-header>
-      <mat-card-title>Leave us a message</mat-card-title>
+      <mat-card-title>Stuur ons een bericht:</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
@@ -74,27 +74,30 @@
           <mat-label>E-mail</mat-label>
           <input id="email" matInput formControlName="email" placeholder="Enter your email" />
           <mat-error *ngIf="f.email.hasError('required')">
-            Email is <strong>required</strong> !
+            E-mail is <strong>verplicht</strong> !
           </mat-error>
           <mat-error *ngIf="f.email.hasError('pattern')">
-            Please enter a <strong>valid</strong> email!
+            Vul alstublieft een <strong>geldig</strong> e-mailadres in!
           </mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Message</mat-label>
           <textarea id="message" matInput formControlName="message" placeholder="Write us a message"></textarea>
+          <mat-error *ngIf="f.message.hasError('required')">
+            Bericht is <strong>verplicht</strong> !
+          </mat-error>
           <mat-error *ngIf="f.message.hasError('minlength')">
-            Message must be at least <strong>8</strong> characters long!
+            Het bericht moet minstens <strong>8</strong> karakters lang zijn.
           </mat-error>
           <mat-error *ngIf="f.message.hasError('maxlength')">
-            Message cannot be longer than <strong>140 characters</strong> !
+            Het bericht moet niet langer zijn dan <strong>140</strong> karakters!
           </mat-error>
         </mat-form-field>
 
         <div>
         <button mat-raised-button [color]="color" type="submit" (click)="onMessageSubmit($event)"
-          [disabled]="!messageForm.valid">Send Message <mat-progress-bar mode="indeterminate" *ngIf="loading">
+          [disabled]="!messageForm.valid">Bericht verzenden <mat-progress-bar mode="indeterminate" *ngIf="loading">
           </mat-progress-bar>
         </button>
         <!-- <img *ngIf="loading"
